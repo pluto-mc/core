@@ -28,7 +28,9 @@ public class CoreItems
 	public static enum Items
 	{
 		COPPER_INGOT("copper_ingot", CreativeTabs.MATERIALS),
-		TIN_INGOT("tin_ingot", CreativeTabs.MATERIALS);
+		COPPER_NUGGET("copper_nugget", CreativeTabs.MATERIALS),
+		TIN_INGOT("tin_ingot", CreativeTabs.MATERIALS),
+		TIN_NUGGET("tin_nugget", CreativeTabs.MATERIALS);
 
 		private final String name;
 		private final CreativeTabs tab;
@@ -56,18 +58,24 @@ public class CoreItems
 	}
 
 	public static Item copperIngot;
+	public static Item copperNugget;
 	public static Item tinIngot;
+	public static Item tinNugget;
 
 	public static void init()
 	{
 		GameRegistry.register(copperIngot = new ItemCopperIngot());
+		GameRegistry.register(copperNugget = new ItemCopperNugget());
 		GameRegistry.register(tinIngot = new ItemTinIngot());
+		GameRegistry.register(tinNugget = new ItemTinNugget());
 	}
 
 	public static void registerRenders()
 	{
 		registerRender(copperIngot);
+		registerRender(copperNugget);
 		registerRender(tinIngot);
+		registerRender(tinNugget);
 	}
 
 	private static void registerRender(Item item)
