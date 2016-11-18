@@ -54,7 +54,14 @@ public class Core
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		// miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
+
+		// metals
+		GameRegistry.addRecipe(new ItemStack(CoreItems.copperIngot), "NNN", "NNN", "NNN", 'N', CoreItems.copperNugget);
+		GameRegistry.addRecipe(new ItemStack(CoreItems.tinIngot), "NNN", "NNN", "NNN", 'N', CoreItems.tinNugget);
+		GameRegistry.addShapelessRecipe(new ItemStack(CoreItems.copperNugget, 9), CoreItems.copperIngot);
+		GameRegistry.addShapelessRecipe(new ItemStack(CoreItems.tinNugget, 9), CoreItems.tinIngot);
 
 		proxy.init();
 	}
