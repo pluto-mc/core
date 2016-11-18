@@ -2,6 +2,7 @@ package com.plutomc.core.client;
 
 import com.plutomc.core.common.CommonProxy;
 import com.plutomc.core.init.ItemRegistry;
+import com.plutomc.core.init.RecipeRegistry;
 
 /**
  * plutomc_core
@@ -31,7 +32,7 @@ public class ClientProxy implements CommonProxy
 	@Override
 	public void init()
 	{
-
+		RecipeRegistry.init();
 	}
 
 	@Override

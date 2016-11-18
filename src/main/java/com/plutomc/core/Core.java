@@ -2,16 +2,12 @@ package com.plutomc.core;
 
 import com.plutomc.core.common.CommonProxy;
 import com.plutomc.core.init.ItemRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * plutomc_core
@@ -54,15 +50,6 @@ public class Core
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		// Miscellaneous
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
-
-		// Metals
-		GameRegistry.addRecipe(new ItemStack(ItemRegistry.COPPER_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.COPPER_NUGGET);
-		GameRegistry.addRecipe(new ItemStack(ItemRegistry.TIN_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET);
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9), ItemRegistry.COPPER_INGOT);
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9), ItemRegistry.TIN_INGOT);
-
 		proxy.init();
 	}
 
