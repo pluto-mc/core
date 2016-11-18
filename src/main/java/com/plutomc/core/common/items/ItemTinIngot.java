@@ -1,5 +1,7 @@
 package com.plutomc.core.common.items;
 
+import com.plutomc.core.init.ItemRegistry;
+
 /**
  * plutomc_core
  * Copyright (C) 2016  Kevin Boxhoorn
@@ -21,6 +23,6 @@ public class ItemTinIngot extends BaseItem
 {
 	public ItemTinIngot()
 	{
-		super(CoreItems.Items.TIN_INGOT);
+		super(ItemRegistry.Data.TIN_INGOT);
 	}
 }

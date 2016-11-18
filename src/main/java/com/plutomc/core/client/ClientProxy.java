@@ -1,7 +1,7 @@
 package com.plutomc.core.client;
 
 import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.common.items.CoreItems;
+import com.plutomc.core.init.ItemRegistry;
 
 /**
  * plutomc_core
@@ -25,7 +25,7 @@ public class ClientProxy implements CommonProxy
 	@Override
 	public void preInit()
 	{
-		CoreItems.registerRenders();
+		ItemRegistry.registerRenders();
 	}
 
 	@Override

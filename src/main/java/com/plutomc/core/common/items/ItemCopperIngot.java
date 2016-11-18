@@ -1,5 +1,7 @@
 package com.plutomc.core.common.items;
 
+import com.plutomc.core.init.ItemRegistry;
+
 /**
  * plutomc_core
  * Copyright (C) 2016  Kevin Boxhoorn
@@ -21,6 +23,6 @@ public class ItemCopperIngot extends BaseItem
 {
 	public ItemCopperIngot()
 	{
-		super(CoreItems.Items.COPPER_INGOT);
+		super(ItemRegistry.Data.COPPER_INGOT);
 	}
 }

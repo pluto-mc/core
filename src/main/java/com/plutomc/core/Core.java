@@ -1,7 +1,7 @@
 package com.plutomc.core;
 
 import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.common.items.CoreItems;
+import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -46,7 +46,7 @@ public class Core
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		CoreItems.init();
+		ItemRegistry.preInit();
 
 		proxy.preInit();
 	}
@@ -54,14 +54,14 @@ public class Core
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		// miscellaneous
+		// Miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
 
-		// metals
-		GameRegistry.addRecipe(new ItemStack(CoreItems.copperIngot), "NNN", "NNN", "NNN", 'N', CoreItems.copperNugget);
-		GameRegistry.addRecipe(new ItemStack(CoreItems.tinIngot), "NNN", "NNN", "NNN", 'N', CoreItems.tinNugget);
-		GameRegistry.addShapelessRecipe(new ItemStack(CoreItems.copperNugget, 9), CoreItems.copperIngot);
-		GameRegistry.addShapelessRecipe(new ItemStack(CoreItems.tinNugget, 9), CoreItems.tinIngot);
+		// Metals
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.COPPER_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.COPPER_NUGGET);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.TIN_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET);
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9), ItemRegistry.COPPER_INGOT);
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9), ItemRegistry.TIN_INGOT);
 
 		proxy.init();
 	}

@@ -1,5 +1,9 @@
-package com.plutomc.core.common.items;
+package com.plutomc.core.init;
 
+import com.plutomc.core.common.items.ItemCopperIngot;
+import com.plutomc.core.common.items.ItemCopperNugget;
+import com.plutomc.core.common.items.ItemTinIngot;
+import com.plutomc.core.common.items.ItemTinNugget;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -23,9 +27,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class CoreItems
+public class ItemRegistry
 {
-	public static enum Items
+	public static enum Data
 	{
 		COPPER_INGOT("copper_ingot", CreativeTabs.MATERIALS),
 		COPPER_NUGGET("copper_nugget", CreativeTabs.MATERIALS),
@@ -35,7 +39,7 @@ public class CoreItems
 		private final String name;
 		private final CreativeTabs tab;
 
-		Items(String name, CreativeTabs tab)
+		Data(String name, CreativeTabs tab)
 		{
 			this.name = name;
 			this.tab = tab;
@@ -57,25 +61,25 @@ public class CoreItems
 		}
 	}
 
-	public static Item copperIngot;
-	public static Item copperNugget;
-	public static Item tinIngot;
-	public static Item tinNugget;
+	public static final Item COPPER_INGOT = new ItemCopperIngot();
+	public static final Item COPPER_NUGGET = new ItemCopperNugget();
+	public static final Item TIN_INGOT = new ItemTinIngot();
+	public static final Item TIN_NUGGET = new ItemTinNugget();
 
-	public static void init()
+	public static void preInit()
 	{
-		GameRegistry.register(copperIngot = new ItemCopperIngot());
-		GameRegistry.register(copperNugget = new ItemCopperNugget());
-		GameRegistry.register(tinIngot = new ItemTinIngot());
-		GameRegistry.register(tinNugget = new ItemTinNugget());
+		GameRegistry.register(COPPER_INGOT);
+		GameRegistry.register(COPPER_NUGGET);
+		GameRegistry.register(TIN_INGOT);
+		GameRegistry.register(TIN_NUGGET);
 	}
 
 	public static void registerRenders()
 	{
-		registerRender(copperIngot);
-		registerRender(copperNugget);
-		registerRender(tinIngot);
-		registerRender(tinNugget);
+		registerRender(COPPER_INGOT);
+		registerRender(COPPER_NUGGET);
+		registerRender(TIN_INGOT);
+		registerRender(TIN_NUGGET);
 	}
 
 	private static void registerRender(Item item)
