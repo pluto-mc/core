@@ -1,6 +1,6 @@
 [
 {
-  "modid": "plutomc-core",
+  "modid": "plutomc_core",
   "name": "PlutoMC Core",
   "description": "Core mod.",
   "version": "${version}",
