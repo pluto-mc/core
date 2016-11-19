@@ -1,9 +1,8 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.common.CommonProxy;
 import com.plutomc.core.init.BlockRegistry;
-import com.plutomc.core.init.ItemRegistry;
-import com.plutomc.core.init.RecipeRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 
 /**
  * plutomc_core
@@ -22,24 +21,13 @@ import com.plutomc.core.init.RecipeRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class BaseBlock extends Block
 {
-	@Override
-	public void preInit()
+	public BaseBlock(BlockRegistry.Data blockData)
 	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-	}
-
-	@Override
-	public void init()
-	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(Material.ROCK);
+		setUnlocalizedName(blockData.getUnlocalizedName());
+		setRegistryName(blockData.getRegistryName());
+		setCreativeTab(blockData.getCreativeTab());
 	}
 }

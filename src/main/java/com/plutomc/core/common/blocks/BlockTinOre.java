@@ -1,9 +1,6 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.common.CommonProxy;
 import com.plutomc.core.init.BlockRegistry;
-import com.plutomc.core.init.ItemRegistry;
-import com.plutomc.core.init.RecipeRegistry;
 
 /**
  * plutomc_core
@@ -22,24 +19,12 @@ import com.plutomc.core.init.RecipeRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class BlockTinOre extends BaseBlock
 {
-	@Override
-	public void preInit()
+	public BlockTinOre()
 	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-	}
-
-	@Override
-	public void init()
-	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(BlockRegistry.Data.TIN_ORE);
+		setHardness(3);
+		setHarvestLevel("pickaxe", 1);
 	}
 }

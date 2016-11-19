@@ -1,12 +1,11 @@
 package com.plutomc.core.init;
 
-import com.plutomc.core.common.items.ItemCopperIngot;
-import com.plutomc.core.common.items.ItemCopperNugget;
-import com.plutomc.core.common.items.ItemTinIngot;
-import com.plutomc.core.common.items.ItemTinNugget;
+import com.plutomc.core.common.blocks.BaseItemBlock;
+import com.plutomc.core.common.blocks.BlockCopperOre;
+import com.plutomc.core.common.blocks.BlockTinOre;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -27,14 +26,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ItemRegistry
+public class BlockRegistry
 {
 	public enum Data
 	{
-		COPPER_INGOT("copper_ingot", CreativeTabs.MATERIALS),
-		COPPER_NUGGET("copper_nugget", CreativeTabs.MATERIALS),
-		TIN_INGOT("tin_ingot", CreativeTabs.MATERIALS),
-		TIN_NUGGET("tin_nugget", CreativeTabs.MATERIALS);
+		COPPER_ORE("copper_ore", CreativeTabs.BUILDING_BLOCKS),
+		TIN_ORE("tin_ore", CreativeTabs.BUILDING_BLOCKS);
 
 		private final String name;
 		private final CreativeTabs tab;
@@ -61,29 +58,29 @@ public class ItemRegistry
 		}
 	}
 
-	public static final Item COPPER_INGOT = new ItemCopperIngot();
-	public static final Item COPPER_NUGGET = new ItemCopperNugget();
-	public static final Item TIN_INGOT = new ItemTinIngot();
-	public static final Item TIN_NUGGET = new ItemTinNugget();
+	public static final ItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
+	public static final ItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
 
 	public static void preInit()
 	{
-		GameRegistry.register(COPPER_INGOT);
-		GameRegistry.register(COPPER_NUGGET);
-		GameRegistry.register(TIN_INGOT);
-		GameRegistry.register(TIN_NUGGET);
+		register(COPPER_ORE);
+		register(TIN_ORE);
+	}
+
+	private static void register(ItemBlock block)
+	{
+		GameRegistry.register(block);
+		GameRegistry.register(block.block);
 	}
 
 	public static void registerRenders()
 	{
-		registerRender(COPPER_INGOT);
-		registerRender(COPPER_NUGGET);
-		registerRender(TIN_INGOT);
-		registerRender(TIN_NUGGET);
+		registerRender(COPPER_ORE);
+		registerRender(TIN_ORE);
 	}
 
-	private static void registerRender(Item item)
+	private static void registerRender(ItemBlock block)
 	{
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(block, 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
 }

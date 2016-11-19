@@ -1,6 +1,7 @@
 package com.plutomc.core;
 
 import com.plutomc.core.common.CommonProxy;
+import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -42,6 +43,7 @@ public class Core
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		BlockRegistry.preInit();
 		ItemRegistry.preInit();
 
 		proxy.preInit();
