@@ -3,6 +3,7 @@ package com.plutomc.core;
 import com.plutomc.core.common.CommonProxy;
 import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
+import com.plutomc.core.init.WorldRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -52,6 +53,8 @@ public class Core
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		WorldRegistry.init();
+
 		proxy.init();
 	}
 
