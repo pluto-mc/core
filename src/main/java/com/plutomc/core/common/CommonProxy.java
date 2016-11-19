@@ -19,7 +19,7 @@ package com.plutomc.core.common;
  */
 public interface CommonProxy
 {
-	public void preInit();
-	public void init();
-	public void postInit();
+	void preInit();
+	void init();
+	void postInit();
 }
