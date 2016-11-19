@@ -14,9 +14,12 @@ out
 .idea
 
 # gradle
-build
 .gradle
 
 # other
 eclipse
 run
+
+# build
+build/*
+!build/libs
