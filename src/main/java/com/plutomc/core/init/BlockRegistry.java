@@ -5,9 +5,9 @@ import com.plutomc.core.common.blocks.BlockCopperOre;
 import com.plutomc.core.common.blocks.BlockTinOre;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * plutomc_core
@@ -30,15 +30,17 @@ public class BlockRegistry
 {
 	public enum Data
 	{
-		COPPER_ORE("copper_ore", CreativeTabs.BUILDING_BLOCKS),
-		TIN_ORE("tin_ore", CreativeTabs.BUILDING_BLOCKS);
+		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS),
+		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS);
 
 		private final String name;
+		private final String oreDictName;
 		private final CreativeTabs tab;
 
-		Data(String name, CreativeTabs tab)
+		Data(String name, String oreDictName, CreativeTabs tab)
 		{
 			this.name = name;
+			this.oreDictName = oreDictName;
 			this.tab = tab;
 		}
 
@@ -52,25 +54,36 @@ public class BlockRegistry
 			return name;
 		}
 
+		public String getOreDictName()
+		{
+			return oreDictName;
+		}
+
 		public CreativeTabs getCreativeTab()
 		{
 			return tab;
 		}
 	}
 
-	public static final ItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
-	public static final ItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
+	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
+	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
 
 	public static void preInit()
 	{
-		register(COPPER_ORE);
-		register(TIN_ORE);
+		register(COPPER_ORE, true);
+		register(TIN_ORE, true);
 	}
 
-	private static void register(ItemBlock block)
+	private static void register(BaseItemBlock block, boolean addToDict)
 	{
 		GameRegistry.register(block);
 		GameRegistry.register(block.block);
+
+		String oreDictName = block.block.data.getOreDictName();
+		if (oreDictName.length() > 0)
+		{
+			OreDictionary.registerOre(oreDictName, block.block);
+		}
 	}
 
 	public static void registerRenders()
@@ -79,7 +92,7 @@ public class BlockRegistry
 		registerRender(TIN_ORE);
 	}
 
-	private static void registerRender(ItemBlock block)
+	private static void registerRender(BaseItemBlock block)
 	{
 		ModelLoader.setCustomModelResourceLocation(block, 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}

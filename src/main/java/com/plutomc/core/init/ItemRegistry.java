@@ -1,12 +1,8 @@
 package com.plutomc.core.init;
 
-import com.plutomc.core.common.items.ItemCopperIngot;
-import com.plutomc.core.common.items.ItemCopperNugget;
-import com.plutomc.core.common.items.ItemTinIngot;
-import com.plutomc.core.common.items.ItemTinNugget;
+import com.plutomc.core.common.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -61,10 +57,10 @@ public class ItemRegistry
 		}
 	}
 
-	public static final Item COPPER_INGOT = new ItemCopperIngot();
-	public static final Item COPPER_NUGGET = new ItemCopperNugget();
-	public static final Item TIN_INGOT = new ItemTinIngot();
-	public static final Item TIN_NUGGET = new ItemTinNugget();
+	public static final BaseItem COPPER_INGOT = new ItemCopperIngot();
+	public static final BaseItem COPPER_NUGGET = new ItemCopperNugget();
+	public static final BaseItem TIN_INGOT = new ItemTinIngot();
+	public static final BaseItem TIN_NUGGET = new ItemTinNugget();
 
 	public static void preInit()
 	{
@@ -82,7 +78,7 @@ public class ItemRegistry
 		registerRender(TIN_NUGGET);
 	}
 
-	private static void registerRender(Item item)
+	private static void registerRender(BaseItem item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

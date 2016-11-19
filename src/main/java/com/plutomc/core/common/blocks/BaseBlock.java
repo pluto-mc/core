@@ -23,11 +23,14 @@ import net.minecraft.block.material.Material;
  */
 public class BaseBlock extends Block
 {
-	public BaseBlock(BlockRegistry.Data blockData)
+	public final BlockRegistry.Data data;
+
+	public BaseBlock(BlockRegistry.Data data)
 	{
 		super(Material.ROCK);
-		setUnlocalizedName(blockData.getUnlocalizedName());
-		setRegistryName(blockData.getRegistryName());
-		setCreativeTab(blockData.getCreativeTab());
+		setUnlocalizedName(data.getUnlocalizedName());
+		setRegistryName(data.getRegistryName());
+		setCreativeTab(data.getCreativeTab());
+		this.data = data;
 	}
 }
