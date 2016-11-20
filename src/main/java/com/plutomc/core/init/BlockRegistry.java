@@ -1,8 +1,6 @@
 package com.plutomc.core.init;
 
-import com.plutomc.core.common.blocks.BaseItemBlock;
-import com.plutomc.core.common.blocks.BlockCopperOre;
-import com.plutomc.core.common.blocks.BlockTinOre;
+import com.plutomc.core.common.blocks.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.ModelLoader;
@@ -30,7 +28,9 @@ public class BlockRegistry
 {
 	public enum Data
 	{
+		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS),
+		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS),
 		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS);
 
 		private final String name;
@@ -65,12 +65,16 @@ public class BlockRegistry
 		}
 	}
 
+	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockCopperBlock());
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
+	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockTinBlock());
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
 
 	public static void preInit()
 	{
+		register(COPPER_BLOCK);
 		register(COPPER_ORE);
+		register(TIN_BLOCK);
 		register(TIN_ORE);
 	}
 
@@ -88,7 +92,9 @@ public class BlockRegistry
 
 	public static void registerRenders()
 	{
+		registerRender(COPPER_BLOCK);
 		registerRender(COPPER_ORE);
+		registerRender(TIN_BLOCK);
 		registerRender(TIN_ORE);
 	}
 
