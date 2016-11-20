@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "plutomc_core:items/tin_sword"
+    }
+}

@@ -1,10 +1,7 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.items.tools;
 
-import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
-import com.plutomc.core.init.RecipeRegistry;
-import com.plutomc.core.init.ToolRegistry;
+import net.minecraft.item.ItemSword;
 
 /**
  * plutomc_core
@@ -23,25 +20,16 @@ import com.plutomc.core.init.ToolRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class BaseItemSword extends ItemSword
 {
-	@Override
-	public void preInit()
-	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-		ToolRegistry.registerRenders();
-	}
+	public final ItemRegistry.Data data;
 
-	@Override
-	public void init()
+	public BaseItemSword(ItemRegistry.Data data, ToolMaterial material)
 	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(material);
+		setUnlocalizedName(data.getUnlocalizedName());
+		setRegistryName(data.getRegistryName());
+		setCreativeTab(data.getCreativeTab());
+		this.data = data;
 	}
 }

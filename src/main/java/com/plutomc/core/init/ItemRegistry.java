@@ -30,8 +30,10 @@ public class ItemRegistry
 	{
 		COPPER_INGOT("copper_ingot", "ingotCopper", CreativeTabs.MATERIALS),
 		COPPER_NUGGET("copper_nugget", "nuggetCopper", CreativeTabs.MATERIALS),
+		COPPER_SWORD("copper_sword", "swordCopper", CreativeTabs.COMBAT),
 		TIN_INGOT("tin_ingot", "ingotTin", CreativeTabs.MATERIALS),
-		TIN_NUGGET("tin_nugget", "nuggetTin", CreativeTabs.MATERIALS);
+		TIN_NUGGET("tin_nugget", "nuggetTin", CreativeTabs.MATERIALS),
+		TIN_SWORD("tin_sword", "swordTin", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

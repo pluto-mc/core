@@ -1,7 +1,9 @@
 item.copper_ingot.name=Copper Ingot
 item.copper_nugget.name=Copper Nugget
+item.copper_sword.name=Copper Sword
 item.tin_ingot.name=Tin Ingot
 item.tin_nugget.name=Tin Nugget
+item.tin_sword.name=Tin Sword
 
 tile.copper_block.name=Block of Copper
 tile.copper_ore.name=Copper Ore

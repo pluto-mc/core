@@ -1,9 +1,6 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.items.tools;
 
-import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
-import com.plutomc.core.init.RecipeRegistry;
 import com.plutomc.core.init.ToolRegistry;
 
 /**
@@ -23,25 +20,10 @@ import com.plutomc.core.init.ToolRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class ItemTinSword extends BaseItemSword
 {
-	@Override
-	public void preInit()
+	public ItemTinSword()
 	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-		ToolRegistry.registerRenders();
-	}
-
-	@Override
-	public void init()
-	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(ItemRegistry.Data.TIN_SWORD, ToolRegistry.TIN);
 	}
 }

@@ -54,6 +54,12 @@ public class RecipeRegistry
 				ItemRegistry.COPPER_INGOT.data.getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9),
 				ItemRegistry.TIN_INGOT.data.getOreDictName()));
+
+		// Tools
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_SWORD,
+				" I ", " I ", " S ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_SWORD,
+				" I ", " I ", " S ", 'I', ItemRegistry.TIN_INGOT.data.getOreDictName(), 'S', Items.STICK));
 	}
 
 	private static void registerSmelting()
