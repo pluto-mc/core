@@ -70,17 +70,17 @@ public class BlockRegistry
 
 	public static void preInit()
 	{
-		register(COPPER_ORE, true);
-		register(TIN_ORE, true);
+		register(COPPER_ORE);
+		register(TIN_ORE);
 	}
 
-	private static void register(BaseItemBlock block, boolean addToDict)
+	private static void register(BaseItemBlock block)
 	{
 		GameRegistry.register(block);
 		GameRegistry.register(block.block);
 
 		String oreDictName = block.block.data.getOreDictName();
-		if (oreDictName.length() > 0)
+		if (oreDictName != null && oreDictName.length() > 0)
 		{
 			OreDictionary.registerOre(oreDictName, block.block);
 		}

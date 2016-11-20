@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * plutomc_core
@@ -27,17 +28,19 @@ public class ItemRegistry
 {
 	public enum Data
 	{
-		COPPER_INGOT("copper_ingot", CreativeTabs.MATERIALS),
-		COPPER_NUGGET("copper_nugget", CreativeTabs.MATERIALS),
-		TIN_INGOT("tin_ingot", CreativeTabs.MATERIALS),
-		TIN_NUGGET("tin_nugget", CreativeTabs.MATERIALS);
+		COPPER_INGOT("copper_ingot", "ingotCopper", CreativeTabs.MATERIALS),
+		COPPER_NUGGET("copper_nugget", "nuggetCopper", CreativeTabs.MATERIALS),
+		TIN_INGOT("tin_ingot", "ingotTin", CreativeTabs.MATERIALS),
+		TIN_NUGGET("tin_nugget", "nuggetTin", CreativeTabs.MATERIALS);
 
 		private final String name;
+		private final String oreDictName;
 		private final CreativeTabs tab;
 
-		Data(String name, CreativeTabs tab)
+		Data(String name, String oreDictName, CreativeTabs tab)
 		{
 			this.name = name;
+			this.oreDictName = oreDictName;
 			this.tab = tab;
 		}
 
@@ -49,6 +52,11 @@ public class ItemRegistry
 		public String getRegistryName()
 		{
 			return name;
+		}
+
+		public String getOreDictName()
+		{
+			return oreDictName;
 		}
 
 		public CreativeTabs getCreativeTab()
@@ -64,10 +72,21 @@ public class ItemRegistry
 
 	public static void preInit()
 	{
-		GameRegistry.register(COPPER_INGOT);
-		GameRegistry.register(COPPER_NUGGET);
-		GameRegistry.register(TIN_INGOT);
-		GameRegistry.register(TIN_NUGGET);
+		register(COPPER_INGOT);
+		register(COPPER_NUGGET);
+		register(TIN_INGOT);
+		register(TIN_NUGGET);
+	}
+
+	private static void register(BaseItem item)
+	{
+		GameRegistry.register(item);
+
+		String oreDictName = item.data.getOreDictName();
+		if (oreDictName != null && oreDictName.length() > 0)
+		{
+			OreDictionary.registerOre(oreDictName, item);
+		}
 	}
 
 	public static void registerRenders()

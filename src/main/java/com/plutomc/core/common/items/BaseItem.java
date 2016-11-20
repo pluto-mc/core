@@ -22,11 +22,13 @@ import net.minecraft.item.Item;
  */
 public class BaseItem extends Item
 {
+	public final ItemRegistry.Data data;
 
-	public BaseItem(ItemRegistry.Data itemData)
+	public BaseItem(ItemRegistry.Data data)
 	{
-		setUnlocalizedName(itemData.getUnlocalizedName());
-		setRegistryName(itemData.getRegistryName());
-		setCreativeTab(itemData.getCreativeTab());
+		setUnlocalizedName(data.getUnlocalizedName());
+		setRegistryName(data.getRegistryName());
+		setCreativeTab(data.getCreativeTab());
+		this.data = data;
 	}
 }

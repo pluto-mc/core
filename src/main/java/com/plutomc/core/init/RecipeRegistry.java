@@ -4,6 +4,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 /**
  * plutomc_core
@@ -36,10 +38,14 @@ public class RecipeRegistry
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
 
 		// Metals
-		GameRegistry.addRecipe(new ItemStack(ItemRegistry.COPPER_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.COPPER_NUGGET);
-		GameRegistry.addRecipe(new ItemStack(ItemRegistry.TIN_INGOT), "NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET);
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9), ItemRegistry.COPPER_INGOT);
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9), ItemRegistry.TIN_INGOT);
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.COPPER_INGOT,
+				"NNN", "NNN", "NNN", 'N', ItemRegistry.COPPER_NUGGET.data.getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.TIN_INGOT,
+				"NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET.data.getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9),
+				ItemRegistry.COPPER_INGOT.data.getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9),
+				ItemRegistry.TIN_INGOT.data.getOreDictName()));
 	}
 
 	private static void registerSmelting()
