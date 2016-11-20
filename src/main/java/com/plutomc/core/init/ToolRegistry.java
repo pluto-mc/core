@@ -30,15 +30,19 @@ public class ToolRegistry
 	public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 132, 4, 1.5f, 14);
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
 
+	public static final BaseItemAxe COPPER_AXE = new ItemCopperAxe();
 	public static final BaseItemPickaxe COPPER_PICKAXE = new ItemCopperPickaxe();
 	public static final BaseItemSword COPPER_SWORD = new ItemCopperSword();
+	public static final BaseItemAxe TIN_AXE = new ItemTinAxe();
 	public static final BaseItemPickaxe TIN_PICKAXE = new ItemTinPickaxe();
 	public static final BaseItemSword TIN_SWORD = new ItemTinSword();
 
 	public static void preInit()
 	{
+		register(COPPER_AXE.data, COPPER_AXE);
 		register(COPPER_PICKAXE.data, COPPER_PICKAXE);
 		register(COPPER_SWORD.data, COPPER_SWORD);
+		register(TIN_AXE.data, TIN_AXE);
 		register(TIN_PICKAXE.data, TIN_PICKAXE);
 		register(TIN_SWORD.data, TIN_SWORD);
 	}
@@ -56,8 +60,10 @@ public class ToolRegistry
 
 	public static void registerRenders()
 	{
+		registerRender(COPPER_AXE);
 		registerRender(COPPER_PICKAXE);
 		registerRender(COPPER_SWORD);
+		registerRender(TIN_AXE);
 		registerRender(TIN_PICKAXE);
 		registerRender(TIN_SWORD);
 	}
