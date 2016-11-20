@@ -31,11 +31,13 @@ public class ItemRegistry
 		COPPER_INGOT("copper_ingot", "ingotCopper", CreativeTabs.MATERIALS),
 		COPPER_NUGGET("copper_nugget", "nuggetCopper", CreativeTabs.MATERIALS),
 		COPPER_AXE("copper_axe", "axeCopper", CreativeTabs.TOOLS),
+		COPPER_HOE("copper_hoe", "hoeCopper", CreativeTabs.TOOLS),
 		COPPER_PICKAXE("copper_pickaxe", "pickaxeCopper", CreativeTabs.TOOLS),
 		COPPER_SWORD("copper_sword", "swordCopper", CreativeTabs.COMBAT),
 		TIN_INGOT("tin_ingot", "ingotTin", CreativeTabs.MATERIALS),
 		TIN_NUGGET("tin_nugget", "nuggetTin", CreativeTabs.MATERIALS),
 		TIN_AXE("tin_axe", "axeTin", CreativeTabs.TOOLS),
+		TIN_HOE("tin_hoe", "hoeTin", CreativeTabs.TOOLS),
 		TIN_PICKAXE("tin_pickaxe", "pickaxeTin", CreativeTabs.TOOLS),
 		TIN_SWORD("tin_sword", "swordTin", CreativeTabs.COMBAT);
 

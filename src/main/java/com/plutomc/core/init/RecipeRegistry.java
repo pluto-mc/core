@@ -60,6 +60,10 @@ public class RecipeRegistry
 				" II", " SI", " S ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_AXE,
 				" II", " SI", " S ", 'I', ItemRegistry.TIN_INGOT.data.getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_HOE,
+				" II", " S ", " S ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_HOE,
+				" II", " S ", " S ", 'I', ItemRegistry.TIN_INGOT.data.getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_PICKAXE,
 				"III", " S ", " S ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_PICKAXE,
