@@ -1,7 +1,7 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.items.armor;
 
-import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.init.*;
+import com.plutomc.core.init.ArmorRegistry;
+import com.plutomc.core.init.ItemRegistry;
 
 /**
  * plutomc_core
@@ -20,26 +20,10 @@ import com.plutomc.core.init.*;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class ItemTinHelmet extends BaseItemHelmet
 {
-	@Override
-	public void preInit()
+	public ItemTinHelmet()
 	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-		ArmorRegistry.registerRenders();
-		ToolRegistry.registerRenders();
-	}
-
-	@Override
-	public void init()
-	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(ItemRegistry.Data.TIN_HELMET, ArmorRegistry.TIN);
 	}
 }

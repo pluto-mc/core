@@ -1,7 +1,8 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.items.armor;
 
-import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.init.*;
+import com.plutomc.core.init.ItemRegistry;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
 
 /**
  * plutomc_core
@@ -20,26 +21,16 @@ import com.plutomc.core.init.*;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements CommonProxy
+public class BaseItemHelmet extends ItemArmor
 {
-	@Override
-	public void preInit()
-	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-		ArmorRegistry.registerRenders();
-		ToolRegistry.registerRenders();
-	}
+	public final ItemRegistry.Data data;
 
-	@Override
-	public void init()
+	public BaseItemHelmet(ItemRegistry.Data data, ArmorMaterial materialIn)
 	{
-		RecipeRegistry.init();
-	}
-
-	@Override
-	public void postInit()
-	{
-
+		super(materialIn, 1, EntityEquipmentSlot.HEAD);
+		setUnlocalizedName(data.getUnlocalizedName());
+		setRegistryName(data.getRegistryName());
+		setCreativeTab(data.getCreativeTab());
+		this.data = data;
 	}
 }

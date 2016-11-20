@@ -72,6 +72,12 @@ public class RecipeRegistry
 				" I ", " I ", " S ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_SWORD,
 				" I ", " I ", " S ", 'I', ItemRegistry.TIN_INGOT.data.getOreDictName(), 'S', Items.STICK));
+
+		// Armor
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.COPPER_HELMET,
+				"III", "I I", "   ", 'I', ItemRegistry.COPPER_INGOT.data.getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.TIN_HELMET,
+				"III", "I I", "   ", 'I', ItemRegistry.TIN_INGOT.data.getOreDictName()));
 	}
 
 	private static void registerSmelting()

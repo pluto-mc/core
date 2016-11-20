@@ -1,10 +1,7 @@
 package com.plutomc.core;
 
 import com.plutomc.core.common.CommonProxy;
-import com.plutomc.core.init.BlockRegistry;
-import com.plutomc.core.init.ItemRegistry;
-import com.plutomc.core.init.ToolRegistry;
-import com.plutomc.core.init.WorldRegistry;
+import com.plutomc.core.init.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -47,6 +44,7 @@ public class Core
 	{
 		BlockRegistry.preInit();
 		ItemRegistry.preInit();
+		ArmorRegistry.preInit();
 		ToolRegistry.preInit();
 
 		proxy.preInit();
