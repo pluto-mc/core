@@ -1,8 +1,6 @@
 package com.plutomc.core.init;
 
-import com.plutomc.core.common.items.tools.BaseItemSword;
-import com.plutomc.core.common.items.tools.ItemCopperSword;
-import com.plutomc.core.common.items.tools.ItemTinSword;
+import com.plutomc.core.common.items.tools.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -32,20 +30,24 @@ public class ToolRegistry
 	public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 132, 4, 1.5f, 14);
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
 
+	public static final BaseItemPickaxe COPPER_PICKAXE = new ItemCopperPickaxe();
 	public static final BaseItemSword COPPER_SWORD = new ItemCopperSword();
+	public static final BaseItemPickaxe TIN_PICKAXE = new ItemTinPickaxe();
 	public static final BaseItemSword TIN_SWORD = new ItemTinSword();
 
 	public static void preInit()
 	{
-		registerSword(COPPER_SWORD);
-		registerSword(TIN_SWORD);
+		register(COPPER_PICKAXE.data, COPPER_PICKAXE);
+		register(COPPER_SWORD.data, COPPER_SWORD);
+		register(TIN_PICKAXE.data, TIN_PICKAXE);
+		register(TIN_SWORD.data, TIN_SWORD);
 	}
 
-	private static void registerSword(BaseItemSword item)
+	private static void register(ItemRegistry.Data data, Item item)
 	{
 		GameRegistry.register(item);
 
-		String oreDictName = item.data.getOreDictName();
+		String oreDictName = data.getOreDictName();
 		if (oreDictName != null && oreDictName.length() > 0)
 		{
 			OreDictionary.registerOre(oreDictName, item);
@@ -54,11 +56,13 @@ public class ToolRegistry
 
 	public static void registerRenders()
 	{
-		registerSwordRender(COPPER_SWORD);
-		registerSwordRender(TIN_SWORD);
+		registerRender(COPPER_PICKAXE);
+		registerRender(COPPER_SWORD);
+		registerRender(TIN_PICKAXE);
+		registerRender(TIN_SWORD);
 	}
 
-	private static void registerSwordRender(BaseItemSword item)
+	private static void registerRender(Item item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
