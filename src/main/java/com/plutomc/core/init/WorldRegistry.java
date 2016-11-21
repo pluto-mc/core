@@ -24,8 +24,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class WorldRegistry
 {
 	public enum OreData {
-		COPPER_ORE(BlockRegistry.COPPER_ORE.block, 1, 63, 8, 8),
-		TIN_ORE(BlockRegistry.TIN_ORE.block, 1, 63, 8, 8);
+		COPPER_ORE(BlockRegistry.COPPER_ORE.block, 1, 63, 8, 10),
+		TIN_ORE(BlockRegistry.TIN_ORE.block, 1, 63, 8, 6);
 
 		private final BaseBlock block;
 		private final int minY;
