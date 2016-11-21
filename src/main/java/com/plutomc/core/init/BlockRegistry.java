@@ -30,6 +30,7 @@ public class BlockRegistry
 	{
 		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS),
+
 		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS),
 		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS);
 

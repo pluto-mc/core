@@ -34,23 +34,23 @@ public class ArmorRegistry
 	public static final ItemArmor.ArmorMaterial TIN = EnumHelper.addArmorMaterial("TIN", Core.MOD_ID + ":tin", 13, new int[] { 2, 4, 5, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
 
 	public static final BaseItemBoots COPPER_BOOTS = new ItemCopperBoots();
-	public static final BaseItemBoots TIN_BOOTS = new ItemTinBoots();
 	public static final BaseItemChestplate COPPER_CHESTPLATE = new ItemCopperChestplate();
-	public static final BaseItemChestplate TIN_CHESTPLATE = new ItemTinChestplate();
 	public static final BaseItemHelmet COPPER_HELMET = new ItemCopperHelmet();
-	public static final BaseItemHelmet TIN_HELMET = new ItemTinHelmet();
 	public static final BaseItemLeggings COPPER_LEGGINGS = new ItemCopperLeggings();
+	public static final BaseItemBoots TIN_BOOTS = new ItemTinBoots();
+	public static final BaseItemChestplate TIN_CHESTPLATE = new ItemTinChestplate();
+	public static final BaseItemHelmet TIN_HELMET = new ItemTinHelmet();
 	public static final BaseItemLeggings TIN_LEGGINGS = new ItemTinLeggings();
 
 	public static void preInit()
 	{
 		register(COPPER_BOOTS.data, COPPER_BOOTS);
-		register(TIN_BOOTS.data, TIN_BOOTS);
 		register(COPPER_CHESTPLATE.data, COPPER_CHESTPLATE);
-		register(TIN_CHESTPLATE.data, TIN_CHESTPLATE);
 		register(COPPER_HELMET.data, COPPER_HELMET);
-		register(TIN_HELMET.data, TIN_HELMET);
 		register(COPPER_LEGGINGS.data, COPPER_LEGGINGS);
+		register(TIN_BOOTS.data, TIN_BOOTS);
+		register(TIN_CHESTPLATE.data, TIN_CHESTPLATE);
+		register(TIN_HELMET.data, TIN_HELMET);
 		register(TIN_LEGGINGS.data, TIN_LEGGINGS);
 	}
 
@@ -68,12 +68,12 @@ public class ArmorRegistry
 	public static void registerRenders()
 	{
 		registerRender(COPPER_BOOTS);
-		registerRender(TIN_BOOTS);
 		registerRender(COPPER_CHESTPLATE);
-		registerRender(TIN_CHESTPLATE);
 		registerRender(COPPER_HELMET);
-		registerRender(TIN_HELMET);
 		registerRender(COPPER_LEGGINGS);
+		registerRender(TIN_BOOTS);
+		registerRender(TIN_CHESTPLATE);
+		registerRender(TIN_HELMET);
 		registerRender(TIN_LEGGINGS);
 	}
 
