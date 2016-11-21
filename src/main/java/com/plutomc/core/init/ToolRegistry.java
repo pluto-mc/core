@@ -33,10 +33,12 @@ public class ToolRegistry
 	public static final BaseItemAxe COPPER_AXE = new ItemCopperAxe();
 	public static final BaseItemHoe COPPER_HOE = new ItemCopperHoe();
 	public static final BaseItemPickaxe COPPER_PICKAXE = new ItemCopperPickaxe();
+	public static final BaseItemShovel COPPER_SHOVEL = new ItemCopperShovel();
 	public static final BaseItemSword COPPER_SWORD = new ItemCopperSword();
 	public static final BaseItemAxe TIN_AXE = new ItemTinAxe();
 	public static final BaseItemHoe TIN_HOE = new ItemTinHoe();
 	public static final BaseItemPickaxe TIN_PICKAXE = new ItemTinPickaxe();
+	public static final BaseItemShovel TIN_SHOVEL = new ItemTinShovel();
 	public static final BaseItemSword TIN_SWORD = new ItemTinSword();
 
 	public static void preInit()
@@ -44,10 +46,12 @@ public class ToolRegistry
 		register(COPPER_AXE.data, COPPER_AXE);
 		register(COPPER_HOE.data, COPPER_HOE);
 		register(COPPER_PICKAXE.data, COPPER_PICKAXE);
+		register(COPPER_SHOVEL.data, COPPER_SHOVEL);
 		register(COPPER_SWORD.data, COPPER_SWORD);
 		register(TIN_AXE.data, TIN_AXE);
 		register(TIN_HOE.data, TIN_HOE);
 		register(TIN_PICKAXE.data, TIN_PICKAXE);
+		register(TIN_SHOVEL.data, TIN_SHOVEL);
 		register(TIN_SWORD.data, TIN_SWORD);
 	}
 
@@ -67,10 +71,12 @@ public class ToolRegistry
 		registerRender(COPPER_AXE);
 		registerRender(COPPER_HOE);
 		registerRender(COPPER_PICKAXE);
+		registerRender(COPPER_SHOVEL);
 		registerRender(COPPER_SWORD);
 		registerRender(TIN_AXE);
 		registerRender(TIN_HOE);
 		registerRender(TIN_PICKAXE);
+		registerRender(TIN_SHOVEL);
 		registerRender(TIN_SWORD);
 	}
 
