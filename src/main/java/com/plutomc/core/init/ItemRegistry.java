@@ -34,14 +34,21 @@ public class ItemRegistry
 		COPPER_HOE("copper_hoe", "hoeCopper", CreativeTabs.TOOLS),
 		COPPER_PICKAXE("copper_pickaxe", "pickaxeCopper", CreativeTabs.TOOLS),
 		COPPER_SWORD("copper_sword", "swordCopper", CreativeTabs.COMBAT),
+		COPPER_BOOTS("copper_boots", "bootsCopper", CreativeTabs.COMBAT),
+		COPPER_CHESTPLATE("copper_chestplate", "chestplateCopper", CreativeTabs.COMBAT),
 		COPPER_HELMET("copper_helmet", "helmetCopper", CreativeTabs.COMBAT),
+		COPPER_LEGGINGS("copper_leggings", "leggingsCopper", CreativeTabs.COMBAT),
+
 		TIN_INGOT("tin_ingot", "ingotTin", CreativeTabs.MATERIALS),
 		TIN_NUGGET("tin_nugget", "nuggetTin", CreativeTabs.MATERIALS),
 		TIN_AXE("tin_axe", "axeTin", CreativeTabs.TOOLS),
 		TIN_HOE("tin_hoe", "hoeTin", CreativeTabs.TOOLS),
 		TIN_PICKAXE("tin_pickaxe", "pickaxeTin", CreativeTabs.TOOLS),
 		TIN_SWORD("tin_sword", "swordTin", CreativeTabs.COMBAT),
-		TIN_HELMET("tin_helmet", "helmetTin", CreativeTabs.COMBAT);
+		TIN_BOOTS("tin_boots", "bootsTin", CreativeTabs.COMBAT),
+		TIN_CHESTPLATE("tin_chestplate", "chestplateTin", CreativeTabs.COMBAT),
+		TIN_HELMET("tin_helmet", "helmetTin", CreativeTabs.COMBAT),
+		TIN_LEGGINGS("tin_leggings", "leggingsTin", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

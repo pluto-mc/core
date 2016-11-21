@@ -4,16 +4,25 @@ item.copper_axe.name=Copper Axe
 item.copper_hoe.name=Copper Hoe
 item.copper_pickaxe.name=Copper Pickaxe
 item.copper_sword.name=Copper Sword
+item.copper_boots.name=Copper Boots
+item.copper_chestplate.name=Copper Chestplate
 item.copper_helmet.name=Copper Helmet
+item.copper_leggings.name=Copper Leggings
+
 item.tin_ingot.name=Tin Ingot
 item.tin_nugget.name=Tin Nugget
 item.tin_axe.name=Tin Axe
 item.tin_hoe.name=Tin Hoe
 item.tin_pickaxe.name=Tin Pickaxe
 item.tin_sword.name=Tin Sword
+item.tin_boots.name=Tin Boots
+item.tin_chestplate.name=Tin Chestplate
 item.tin_helmet.name=Tin Helmet
+item.tin_leggings.name=Tin Leggings
+
 
 tile.copper_block.name=Block of Copper
 tile.copper_ore.name=Copper Ore
+
 tile.tin_block.name=Block of Tin
 tile.tin_ore.name=Tin Ore
