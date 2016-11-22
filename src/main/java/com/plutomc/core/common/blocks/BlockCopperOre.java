@@ -1,6 +1,7 @@
 package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.init.BlockRegistry;
+import net.minecraft.block.SoundType;
 
 /**
  * plutomc_core
@@ -26,5 +27,7 @@ public class BlockCopperOre extends BaseBlock
 		super(BlockRegistry.Data.COPPER_ORE);
 		setHardness(3);
 		setHarvestLevel("pickaxe", 1);
+		setResistance(5);
+		setSoundType(SoundType.STONE);
 	}
 }
