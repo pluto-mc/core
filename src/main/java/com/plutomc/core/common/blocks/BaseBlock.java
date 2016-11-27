@@ -2,7 +2,6 @@ package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 
 /**
  * plutomc_core
@@ -27,7 +26,7 @@ public class BaseBlock extends Block
 
 	public BaseBlock(BlockRegistry.Data data)
 	{
-		super(Material.ROCK);
+		super(data.getMaterial());
 		setUnlocalizedName(data.getUnlocalizedName());
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());

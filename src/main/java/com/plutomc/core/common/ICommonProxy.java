@@ -17,7 +17,7 @@ package com.plutomc.core.common;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public interface CommonProxy
+public interface ICommonProxy
 {
 	void preInit();
 	void init();

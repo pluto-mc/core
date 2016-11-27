@@ -1,6 +1,6 @@
 package com.plutomc.core.server;
 
-import com.plutomc.core.common.CommonProxy;
+import com.plutomc.core.common.ICommonProxy;
 
 /**
  * plutomc_core
@@ -19,7 +19,7 @@ import com.plutomc.core.common.CommonProxy;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ServerProxy implements CommonProxy
+public class ServerProxy implements ICommonProxy
 {
 	@Override
 	public void preInit()

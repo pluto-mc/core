@@ -1,8 +1,6 @@
-package com.plutomc.core.common.blocks;
+package com.plutomc.core.common.tileentities;
 
-import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * plutomc_core
@@ -21,25 +19,7 @@ import net.minecraft.item.ItemBlock;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BaseItemBlock extends ItemBlock
+public class TileEntityAlloyFurnace extends TileEntity
 {
-	public final BaseBlock block;
 
-	public BaseItemBlock(BaseBlock block)
-	{
-		super(block);
-		setUnlocalizedName(block.getUnlocalizedName());
-		setRegistryName(block.getRegistryName());
-		setCreativeTab(block.getCreativeTabToDisplayOn());
-		this.block = block;
-	}
-
-	public BaseItemBlock(BlockRegistry.Data data, Block block)
-	{
-		super(block);
-		setUnlocalizedName(data.getUnlocalizedName());
-		setRegistryName(data.getRegistryName());
-		setCreativeTab(data.getCreativeTab());
-		this.block = new BaseBlock(data);
-	}
 }

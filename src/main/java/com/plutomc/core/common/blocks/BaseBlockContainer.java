@@ -1,8 +1,13 @@
 package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * plutomc_core
@@ -21,25 +26,22 @@ import net.minecraft.item.ItemBlock;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BaseItemBlock extends ItemBlock
+public abstract class BaseBlockContainer extends BlockContainer
 {
-	public final BaseBlock block;
+	public final BlockRegistry.Data data;
 
-	public BaseItemBlock(BaseBlock block)
+	public BaseBlockContainer(BlockRegistry.Data data)
 	{
-		super(block);
-		setUnlocalizedName(block.getUnlocalizedName());
-		setRegistryName(block.getRegistryName());
-		setCreativeTab(block.getCreativeTabToDisplayOn());
-		this.block = block;
-	}
-
-	public BaseItemBlock(BlockRegistry.Data data, Block block)
-	{
-		super(block);
+		super(data.getMaterial());
 		setUnlocalizedName(data.getUnlocalizedName());
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
-		this.block = new BaseBlock(data);
+		this.data = data;
 	}
+
+	@Override
+	public abstract Item getItemDropped(IBlockState state, Random rand, int fortune);
+
+	@Override
+	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
 }

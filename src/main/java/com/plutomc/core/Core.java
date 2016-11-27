@@ -1,6 +1,6 @@
 package com.plutomc.core;
 
-import com.plutomc.core.common.CommonProxy;
+import com.plutomc.core.common.ICommonProxy;
 import com.plutomc.core.init.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -37,7 +37,7 @@ public class Core
 	public static final String SERVER_PROXY_CLASS = "com.plutomc.core.server.ServerProxy";
 
 	@SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
-	public static CommonProxy proxy;
+	public static ICommonProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)

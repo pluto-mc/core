@@ -1,6 +1,8 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.common.blocks.*;
+import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.ModelLoader;
@@ -28,21 +30,25 @@ public class BlockRegistry
 {
 	public enum Data
 	{
-		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS),
-		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS),
+		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK),
 
-		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS),
-		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS);
+		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK),
+		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK),
+
+		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS, Material.ROCK),
+		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS, Material.ROCK);
 
 		private final String name;
 		private final String oreDictName;
 		private final CreativeTabs tab;
+		private final Material material;
 
-		Data(String name, String oreDictName, CreativeTabs tab)
+		Data(String name, String oreDictName, CreativeTabs tab, Material material)
 		{
 			this.name = name;
 			this.oreDictName = oreDictName;
 			this.tab = tab;
+			this.material = material;
 		}
 
 		public String getUnlocalizedName()
@@ -64,8 +70,14 @@ public class BlockRegistry
 		{
 			return tab;
 		}
+
+		public Material getMaterial()
+		{
+			return material;
+		}
 	}
 
+	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(Data.ALLOY_FURNACE, new BlockAlloyFurnace());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockCopperBlock());
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockTinBlock());
@@ -73,10 +85,13 @@ public class BlockRegistry
 
 	public static void preInit()
 	{
+		register(ALLOY_FURNACE);
 		register(COPPER_BLOCK);
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
 		register(TIN_ORE);
+
+		GameRegistry.registerTileEntity(TileEntityAlloyFurnace.class, Data.ALLOY_FURNACE.getRegistryName() + "_tileentity");
 	}
 
 	private static void register(BaseItemBlock block)
@@ -93,6 +108,7 @@ public class BlockRegistry
 
 	public static void registerRenders()
 	{
+		registerRender(ALLOY_FURNACE);
 		registerRender(COPPER_BLOCK);
 		registerRender(COPPER_ORE);
 		registerRender(TIN_BLOCK);

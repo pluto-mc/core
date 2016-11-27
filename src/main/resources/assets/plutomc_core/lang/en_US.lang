@@ -23,6 +23,8 @@ item.tin_helmet.name=Tin Helmet
 item.tin_leggings.name=Tin Leggings
 
 
+tile.alloy_furnace.name=Alloy Furnace
+
 tile.copper_block.name=Block of Copper
 tile.copper_ore.name=Copper Ore
 
