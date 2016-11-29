@@ -22,7 +22,7 @@ import net.minecraft.block.Block;
  */
 public class BaseBlock extends Block
 {
-	public final BlockRegistry.Data data;
+	private final BlockRegistry.Data data;
 
 	public BaseBlock(BlockRegistry.Data data)
 	{
@@ -31,5 +31,10 @@ public class BaseBlock extends Block
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public BlockRegistry.Data getData()
+	{
+		return data;
 	}
 }

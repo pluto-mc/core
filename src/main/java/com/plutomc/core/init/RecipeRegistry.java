@@ -47,9 +47,9 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.TIN_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET.data.getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_INGOT, 9),
-				BlockRegistry.COPPER_BLOCK.block.data.getOreDictName()));
+				BlockRegistry.COPPER_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_INGOT, 9),
-				BlockRegistry.TIN_BLOCK.block.data.getOreDictName()));
+				BlockRegistry.TIN_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9),
 				ItemRegistry.COPPER_INGOT.data.getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9),
@@ -98,7 +98,7 @@ public class RecipeRegistry
 
 	private static void registerSmelting()
 	{
-		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.block, new ItemStack(ItemRegistry.COPPER_INGOT), 0.7F);
-		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.block, new ItemStack(ItemRegistry.TIN_INGOT), 0.7F);
+		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7F);
+		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7F);
 	}
 }

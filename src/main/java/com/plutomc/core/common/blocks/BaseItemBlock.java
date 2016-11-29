@@ -1,8 +1,8 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+
+import javax.annotation.Nonnull;
 
 /**
  * plutomc_core
@@ -23,7 +23,7 @@ import net.minecraft.item.ItemBlock;
  */
 public class BaseItemBlock extends ItemBlock
 {
-	public final BaseBlock block;
+	private final BaseBlock block;
 
 	public BaseItemBlock(BaseBlock block)
 	{
@@ -34,12 +34,10 @@ public class BaseItemBlock extends ItemBlock
 		this.block = block;
 	}
 
-	public BaseItemBlock(BlockRegistry.Data data, Block block)
+	@Override
+	@Nonnull
+	public BaseBlock getBlock()
 	{
-		super(block);
-		setUnlocalizedName(data.getUnlocalizedName());
-		setRegistryName(data.getRegistryName());
-		setCreativeTab(data.getCreativeTab());
-		this.block = new BaseBlock(data);
+		return block;
 	}
 }

@@ -77,7 +77,7 @@ public class BlockRegistry
 		}
 	}
 
-	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(Data.ALLOY_FURNACE, new BlockAlloyFurnace());
+	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockCopperBlock());
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockTinBlock());
@@ -97,12 +97,12 @@ public class BlockRegistry
 	private static void register(BaseItemBlock block)
 	{
 		GameRegistry.register(block);
-		GameRegistry.register(block.block);
+		GameRegistry.register(block.getBlock());
 
-		String oreDictName = block.block.data.getOreDictName();
+		String oreDictName = block.getBlock().getData().getOreDictName();
 		if (oreDictName != null && oreDictName.length() > 0)
 		{
-			OreDictionary.registerOre(oreDictName, block.block);
+			OreDictionary.registerOre(oreDictName, block.getBlock());
 		}
 	}
 
