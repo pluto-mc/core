@@ -22,7 +22,7 @@ import net.minecraft.item.ItemPickaxe;
  */
 public class BaseItemPickaxe extends ItemPickaxe
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItemPickaxe(ItemRegistry.Data data, ToolMaterial material)
 	{
@@ -31,5 +31,10 @@ public class BaseItemPickaxe extends ItemPickaxe
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }

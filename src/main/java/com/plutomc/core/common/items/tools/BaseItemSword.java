@@ -22,7 +22,7 @@ import net.minecraft.item.ItemSword;
  */
 public class BaseItemSword extends ItemSword
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItemSword(ItemRegistry.Data data, ToolMaterial material)
 	{
@@ -31,5 +31,10 @@ public class BaseItemSword extends ItemSword
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }

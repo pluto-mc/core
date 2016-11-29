@@ -43,16 +43,16 @@ public class ToolRegistry
 
 	public static void preInit()
 	{
-		register(COPPER_AXE.data, COPPER_AXE);
-		register(COPPER_HOE.data, COPPER_HOE);
-		register(COPPER_PICKAXE.data, COPPER_PICKAXE);
-		register(COPPER_SHOVEL.data, COPPER_SHOVEL);
-		register(COPPER_SWORD.data, COPPER_SWORD);
-		register(TIN_AXE.data, TIN_AXE);
-		register(TIN_HOE.data, TIN_HOE);
-		register(TIN_PICKAXE.data, TIN_PICKAXE);
-		register(TIN_SHOVEL.data, TIN_SHOVEL);
-		register(TIN_SWORD.data, TIN_SWORD);
+		register(COPPER_AXE.getData(), COPPER_AXE);
+		register(COPPER_HOE.getData(), COPPER_HOE);
+		register(COPPER_PICKAXE.getData(), COPPER_PICKAXE);
+		register(COPPER_SHOVEL.getData(), COPPER_SHOVEL);
+		register(COPPER_SWORD.getData(), COPPER_SWORD);
+		register(TIN_AXE.getData(), TIN_AXE);
+		register(TIN_HOE.getData(), TIN_HOE);
+		register(TIN_PICKAXE.getData(), TIN_PICKAXE);
+		register(TIN_SHOVEL.getData(), TIN_SHOVEL);
+		register(TIN_SWORD.getData(), TIN_SWORD);
 	}
 
 	private static void register(ItemRegistry.Data data, Item item)

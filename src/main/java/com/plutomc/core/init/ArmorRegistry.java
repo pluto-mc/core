@@ -44,14 +44,14 @@ public class ArmorRegistry
 
 	public static void preInit()
 	{
-		register(COPPER_BOOTS.data, COPPER_BOOTS);
-		register(COPPER_CHESTPLATE.data, COPPER_CHESTPLATE);
-		register(COPPER_HELMET.data, COPPER_HELMET);
-		register(COPPER_LEGGINGS.data, COPPER_LEGGINGS);
-		register(TIN_BOOTS.data, TIN_BOOTS);
-		register(TIN_CHESTPLATE.data, TIN_CHESTPLATE);
-		register(TIN_HELMET.data, TIN_HELMET);
-		register(TIN_LEGGINGS.data, TIN_LEGGINGS);
+		register(COPPER_BOOTS.getData(), COPPER_BOOTS);
+		register(COPPER_CHESTPLATE.getData(), COPPER_CHESTPLATE);
+		register(COPPER_HELMET.getData(), COPPER_HELMET);
+		register(COPPER_LEGGINGS.getData(), COPPER_LEGGINGS);
+		register(TIN_BOOTS.getData(), TIN_BOOTS);
+		register(TIN_CHESTPLATE.getData(), TIN_CHESTPLATE);
+		register(TIN_HELMET.getData(), TIN_HELMET);
+		register(TIN_LEGGINGS.getData(), TIN_LEGGINGS);
 	}
 
 	private static void register(ItemRegistry.Data data, Item item)

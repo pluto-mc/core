@@ -22,7 +22,7 @@ import net.minecraft.item.ItemHoe;
  */
 public class BaseItemHoe extends ItemHoe
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItemHoe(ItemRegistry.Data data, ToolMaterial material)
 	{
@@ -31,5 +31,10 @@ public class BaseItemHoe extends ItemHoe
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }

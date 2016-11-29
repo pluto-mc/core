@@ -101,7 +101,7 @@ public class ItemRegistry
 	{
 		GameRegistry.register(item);
 
-		String oreDictName = item.data.getOreDictName();
+		String oreDictName = item.getData().getOreDictName();
 		if (oreDictName != null && oreDictName.length() > 0)
 		{
 			OreDictionary.registerOre(oreDictName, item);

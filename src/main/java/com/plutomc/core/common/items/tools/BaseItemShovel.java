@@ -22,7 +22,7 @@ import net.minecraft.item.ItemSpade;
  */
 public class BaseItemShovel extends ItemSpade
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItemShovel(ItemRegistry.Data data, ToolMaterial material)
 	{
@@ -31,5 +31,10 @@ public class BaseItemShovel extends ItemSpade
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }

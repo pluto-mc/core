@@ -22,7 +22,7 @@ import net.minecraft.item.Item;
  */
 public class BaseItem extends Item
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItem(ItemRegistry.Data data)
 	{
@@ -30,5 +30,10 @@ public class BaseItem extends Item
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }

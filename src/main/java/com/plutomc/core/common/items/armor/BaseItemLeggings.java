@@ -23,7 +23,7 @@ import net.minecraft.item.ItemArmor;
  */
 public class BaseItemLeggings extends ItemArmor
 {
-	public final ItemRegistry.Data data;
+	private final ItemRegistry.Data data;
 
 	public BaseItemLeggings(ItemRegistry.Data data, ArmorMaterial materialIn)
 	{
@@ -32,5 +32,10 @@ public class BaseItemLeggings extends ItemArmor
 		setRegistryName(data.getRegistryName());
 		setCreativeTab(data.getCreativeTab());
 		this.data = data;
+	}
+
+	public ItemRegistry.Data getData()
+	{
+		return data;
 	}
 }
