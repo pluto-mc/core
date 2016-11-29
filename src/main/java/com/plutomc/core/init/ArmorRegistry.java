@@ -33,14 +33,14 @@ public class ArmorRegistry
 	public static final ItemArmor.ArmorMaterial COPPER = EnumHelper.addArmorMaterial("COPPER", Core.MOD_ID + ":copper", 10, new int[] { 2, 3, 4, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
 	public static final ItemArmor.ArmorMaterial TIN = EnumHelper.addArmorMaterial("TIN", Core.MOD_ID + ":tin", 13, new int[] { 2, 4, 5, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
 
-	public static final BaseItemBoots COPPER_BOOTS = new ItemCopperBoots();
-	public static final BaseItemChestplate COPPER_CHESTPLATE = new ItemCopperChestplate();
-	public static final BaseItemHelmet COPPER_HELMET = new ItemCopperHelmet();
-	public static final BaseItemLeggings COPPER_LEGGINGS = new ItemCopperLeggings();
-	public static final BaseItemBoots TIN_BOOTS = new ItemTinBoots();
-	public static final BaseItemChestplate TIN_CHESTPLATE = new ItemTinChestplate();
-	public static final BaseItemHelmet TIN_HELMET = new ItemTinHelmet();
-	public static final BaseItemLeggings TIN_LEGGINGS = new ItemTinLeggings();
+	public static final BaseItemBoots COPPER_BOOTS = new BaseItemBoots(ItemRegistry.Data.COPPER_BOOTS, COPPER);
+	public static final BaseItemChestplate COPPER_CHESTPLATE = new BaseItemChestplate(ItemRegistry.Data.COPPER_CHESTPLATE, COPPER);
+	public static final BaseItemHelmet COPPER_HELMET = new BaseItemHelmet(ItemRegistry.Data.COPPER_HELMET, COPPER);
+	public static final BaseItemLeggings COPPER_LEGGINGS = new BaseItemLeggings(ItemRegistry.Data.COPPER_LEGGINGS, COPPER);
+	public static final BaseItemBoots TIN_BOOTS = new BaseItemBoots(ItemRegistry.Data.TIN_BOOTS, TIN);
+	public static final BaseItemChestplate TIN_CHESTPLATE = new BaseItemChestplate(ItemRegistry.Data.TIN_CHESTPLATE, TIN);
+	public static final BaseItemHelmet TIN_HELMET = new BaseItemHelmet(ItemRegistry.Data.TIN_HELMET, TIN);
+	public static final BaseItemLeggings TIN_LEGGINGS = new BaseItemLeggings(ItemRegistry.Data.TIN_LEGGINGS, TIN);
 
 	public static void preInit()
 	{
