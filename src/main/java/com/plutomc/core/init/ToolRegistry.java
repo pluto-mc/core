@@ -30,16 +30,16 @@ public class ToolRegistry
 	public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 132, 4, 1.5f, 14);
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
 
-	public static final BaseItemAxe COPPER_AXE = new ItemCopperAxe();
-	public static final BaseItemHoe COPPER_HOE = new ItemCopperHoe();
-	public static final BaseItemPickaxe COPPER_PICKAXE = new ItemCopperPickaxe();
-	public static final BaseItemShovel COPPER_SHOVEL = new ItemCopperShovel();
-	public static final BaseItemSword COPPER_SWORD = new ItemCopperSword();
-	public static final BaseItemAxe TIN_AXE = new ItemTinAxe();
-	public static final BaseItemHoe TIN_HOE = new ItemTinHoe();
-	public static final BaseItemPickaxe TIN_PICKAXE = new ItemTinPickaxe();
-	public static final BaseItemShovel TIN_SHOVEL = new ItemTinShovel();
-	public static final BaseItemSword TIN_SWORD = new ItemTinSword();
+	public static final BaseItemAxe COPPER_AXE = new BaseItemAxe(ItemRegistry.Data.COPPER_AXE, COPPER, -3.1f);
+	public static final BaseItemHoe COPPER_HOE = new BaseItemHoe(ItemRegistry.Data.COPPER_HOE, COPPER);
+	public static final BaseItemPickaxe COPPER_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.COPPER_PICKAXE, COPPER);
+	public static final BaseItemShovel COPPER_SHOVEL = new BaseItemShovel(ItemRegistry.Data.COPPER_SHOVEL, COPPER);
+	public static final BaseItemSword COPPER_SWORD = new BaseItemSword(ItemRegistry.Data.COPPER_SWORD, COPPER);
+	public static final BaseItemAxe TIN_AXE = new BaseItemAxe(ItemRegistry.Data.TIN_AXE, TIN, -3.1f);
+	public static final BaseItemHoe TIN_HOE = new BaseItemHoe(ItemRegistry.Data.TIN_HOE, TIN);
+	public static final BaseItemPickaxe TIN_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.TIN_PICKAXE, TIN);
+	public static final BaseItemShovel TIN_SHOVEL = new BaseItemShovel(ItemRegistry.Data.TIN_SHOVEL, TIN);
+	public static final BaseItemSword TIN_SWORD = new BaseItemSword(ItemRegistry.Data.TIN_SWORD, TIN);
 
 	public static void preInit()
 	{
