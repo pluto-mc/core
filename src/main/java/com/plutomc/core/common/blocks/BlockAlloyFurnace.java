@@ -2,7 +2,6 @@ package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -11,12 +10,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 /**
@@ -36,7 +36,7 @@ import java.util.Random;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
+public class BlockAlloyFurnace extends BaseBlock
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
@@ -49,11 +49,18 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		setSoundType(SoundType.STONE);
 	}
 
-	@Override
 	@Nonnull
+	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, FACING, BURNING);
+	}
+
+	@Nonnull
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
+	{
+		return getDefaultState().withProperty(FACING, EnumFacing.fromAngle(placer.getRotationYawHead()).getOpposite()).withProperty(BURNING, false);
 	}
 
 	@Override
@@ -74,10 +81,17 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		return i;
 	}
 
+	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
 		return new TileEntityAlloyFurnace();
+	}
+
+	@Override
+	public boolean hasTileEntity(IBlockState state)
+	{
+		return true;
 	}
 
 	@Override
@@ -87,22 +101,10 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		worldIn.removeTileEntity(pos);
 	}
 
-	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
-		return getDefaultState().withProperty(FACING, EnumFacing.fromAngle(placer.getRotationYawHead())).withProperty(BURNING, false);
-	}
-
-	@Override
 	@Nonnull
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return BlockRegistry.ALLOY_FURNACE;
-	}
-
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
-	{
-		return EnumBlockRenderType.MODEL;
 	}
 }
