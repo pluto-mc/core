@@ -84,10 +84,10 @@ public class ItemRegistry
 		}
 	}
 
-	public static final BaseItem COPPER_INGOT = new ItemCopperIngot();
-	public static final BaseItem COPPER_NUGGET = new ItemCopperNugget();
-	public static final BaseItem TIN_INGOT = new ItemTinIngot();
-	public static final BaseItem TIN_NUGGET = new ItemTinNugget();
+	public static final BaseItem COPPER_INGOT = new BaseItem(Data.COPPER_INGOT);
+	public static final BaseItem COPPER_NUGGET = new BaseItem(Data.COPPER_NUGGET);
+	public static final BaseItem TIN_INGOT = new BaseItem(Data.TIN_INGOT);
+	public static final BaseItem TIN_NUGGET = new BaseItem(Data.TIN_NUGGET);
 
 	public static void preInit()
 	{
