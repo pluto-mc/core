@@ -8,6 +8,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -99,6 +100,13 @@ public class BlockAlloyFurnace extends BaseBlock
 	{
 		super.breakBlock(worldIn, pos, state);
 		worldIn.removeTileEntity(pos);
+
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof TileEntityAlloyFurnace)
+		{
+			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace) tileEntity);
+			worldIn.updateComparatorOutputLevel(pos, this);
+		}
 	}
 
 	@Nonnull
@@ -106,5 +114,19 @@ public class BlockAlloyFurnace extends BaseBlock
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return BlockRegistry.ALLOY_FURNACE;
+	}
+
+	public static void setBurningAtPos(World worldIn, BlockPos pos, boolean burning)
+	{
+		IBlockState blockState = worldIn.getBlockState(pos);
+		IBlockState defaultState = BlockRegistry.ALLOY_FURNACE.getBlock().getDefaultState();
+		worldIn.setBlockState(pos, defaultState.withProperty(FACING, blockState.getValue(FACING)).withProperty(BURNING, burning), 3);
+
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity != null)
+		{
+			tileEntity.validate();
+			worldIn.setTileEntity(pos, tileEntity);
+		}
 	}
 }
