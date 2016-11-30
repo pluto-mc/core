@@ -1,10 +1,10 @@
 package com.plutomc.core.client.gui;
 
 import com.plutomc.core.Core;
+import com.plutomc.core.common.gui.ContainerAlloyFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
@@ -37,7 +37,7 @@ public class GuiAlloyFurnace extends GuiContainer
 
 	public GuiAlloyFurnace(InventoryPlayer playerInventory, IInventory furnaceInventory)
 	{
-		super(new ContainerFurnace(playerInventory, furnaceInventory));
+		super(new ContainerAlloyFurnace(playerInventory, furnaceInventory));
 		this.playerInventory = playerInventory;
 		this.tileFurnace = furnaceInventory;
 	}
