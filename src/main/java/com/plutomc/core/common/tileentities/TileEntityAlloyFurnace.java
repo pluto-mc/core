@@ -359,6 +359,11 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return customName != null && customName.length() > 0;
 	}
 
+	public void setCustomName(String customName)
+	{
+		this.customName = customName;
+	}
+
 	@Nonnull
 	@Override
 	public ITextComponent getDisplayName()
