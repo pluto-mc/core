@@ -14,14 +14,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * plutomc_core
@@ -46,7 +45,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	private static final int[] SLOTS_BOTTOM = new int[] { 2, 1 };
 	private static final int[] SLOTS_SIDES = new int[] { 1 };
 
-	private List<ItemStack> furnaceItemStacks;
+	private NonNullList<ItemStack> furnaceItemStacks;
 	private int furnaceBurnTime;
 	private int currentItemBurnTime;
 	private int cookTime;
@@ -55,7 +54,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 	public TileEntityAlloyFurnace()
 	{
-		furnaceItemStacks = new ArrayList<ItemStack>(getSizeInventory());
+		furnaceItemStacks = NonNullList.func_191197_a(getSizeInventory(), ItemStack.field_190927_a);
 	}
 
 	@Override

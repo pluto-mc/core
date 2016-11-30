@@ -48,6 +48,7 @@ public class BlockAlloyFurnace extends BaseBlock
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
 		setHardness(3.5f);
 		setSoundType(SoundType.STONE);
+		isBlockContainer = true;
 	}
 
 	@Nonnull
