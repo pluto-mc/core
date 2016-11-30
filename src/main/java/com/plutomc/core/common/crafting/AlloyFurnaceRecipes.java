@@ -63,24 +63,24 @@ public class AlloyFurnaceRecipes
 		addSmeltingRecipe(new ItemStack[] { new ItemStack(ItemRegistry.COPPER_INGOT, 8), new ItemStack(ItemRegistry.TIN_INGOT) }, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 	}
 
-	public void addSmeltingRecipeForBlock(Block[] input, ItemStack stack, float experience)
+	public void addSmeltingRecipeForBlock(Block[] inputs, ItemStack stack, float experience)
 	{
-		addSmelting(new Item[] { Item.getItemFromBlock(input[0]), Item.getItemFromBlock(input[1]) }, stack, experience);
+		addSmelting(new Item[] { Item.getItemFromBlock(inputs[0]), Item.getItemFromBlock(inputs[1]) }, stack, experience);
 	}
 
-	public void addSmelting(Item[] input, ItemStack stack, float experience)
+	public void addSmelting(Item[] inputs, ItemStack stack, float experience)
 	{
-		addSmeltingRecipe(new ItemStack[] { new ItemStack(input[0], 1, 32767), new ItemStack(input[1], 1, 32767) }, stack, experience);
+		addSmeltingRecipe(new ItemStack[] { new ItemStack(inputs[0], 1, 32767), new ItemStack(inputs[1], 1, 32767) }, stack, experience);
 	}
 
-	public void addSmeltingRecipe(ItemStack[] input, ItemStack stack, float experience)
+	public void addSmeltingRecipe(ItemStack[] inputs, ItemStack stack, float experience)
 	{
-		if (!getSmeltingResult(input).getOutput().isEmpty())
+		if (!getSmeltingResult(inputs).getOutput().isEmpty())
 		{
 			return;
 		}
-		smeltingList.put(input, stack);
-		experienceList.put(input, experience);
+		smeltingList.put(inputs, stack);
+		experienceList.put(inputs, experience);
 	}
 
 	public AlloySmeltingResult getSmeltingResult(ItemStack[] inputs)
@@ -113,11 +113,11 @@ public class AlloyFurnaceRecipes
 		return smeltingList;
 	}
 
-	public float getSmeltingExperience(ItemStack[] input)
+	public float getSmeltingExperience(ItemStack[] inputs)
 	{
 		for (Map.Entry<ItemStack[], Float> entry : experienceList.entrySet())
 		{
-			if (compareItemInputs(input, entry.getKey()))
+			if (compareItemInputs(inputs, entry.getKey()))
 			{
 				return entry.getValue();
 			}

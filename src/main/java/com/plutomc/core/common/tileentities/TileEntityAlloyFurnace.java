@@ -74,7 +74,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 			ItemStack[] inputs = getInputItemStacks();
 			ItemStack fuel = getFuelItemStack();
 
-			if (isBurning() || !fuel.isEmpty() && !(inputs[0].isEmpty() && inputs[1].isEmpty()))
+			if (isBurning() || !fuel.isEmpty() && !inputs[0].isEmpty() && !inputs[1].isEmpty())
 			{
 				if (!isBurning() && canSmelt())
 				{
@@ -309,12 +309,12 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		furnaceItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(compound, furnaceItemStacks);
 		burnTime = compound.getInteger("BurnTime");
 		cookTime = compound.getInteger("CookTime");
 		totalCookTime = compound.getInteger("CookTimeTotal");
 		currentItemBurnTime = TileEntityFurnace.getItemBurnTime(getFuelItemStack());
+		furnaceItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(compound, furnaceItemStacks);
 
 		if (compound.hasKey("CustomName", 8))
 		{

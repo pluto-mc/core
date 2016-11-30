@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 /**
@@ -34,6 +35,7 @@ public class GuiHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tileEntity = getTileInventory(world, x, y, z);
+		FMLLog.info("server: %s", tileEntity.getDisplayName().getUnformattedText());
 
 		switch (ID)
 		{
@@ -48,6 +50,7 @@ public class GuiHandler implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tileEntity = getTileInventory(world, x, y, z);
+		FMLLog.info("client: %s", tileEntity.getDisplayName().getUnformattedText());
 
 		switch (ID)
 		{
