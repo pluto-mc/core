@@ -27,6 +27,28 @@ import java.util.Map;
  */
 public class AlloyFurnaceRecipes
 {
+	public class AlloySmeltingResult
+	{
+		private final ItemStack[] inputs;
+		private final ItemStack output;
+
+		public AlloySmeltingResult(ItemStack[] inputs, ItemStack output)
+		{
+			this.inputs = inputs;
+			this.output = output;
+		}
+
+		public ItemStack[] getInputs()
+		{
+			return inputs;
+		}
+
+		public ItemStack getOutput()
+		{
+			return output;
+		}
+	}
+
 	private static final AlloyFurnaceRecipes SMELTING_BASE = new AlloyFurnaceRecipes();
 	private final Map<ItemStack[], ItemStack> smeltingList = Maps.newHashMap();
 	private final Map<ItemStack[], Float> experienceList = Maps.newHashMap();
@@ -53,7 +75,7 @@ public class AlloyFurnaceRecipes
 
 	public void addSmeltingRecipe(ItemStack[] input, ItemStack stack, float experience)
 	{
-		if (getSmeltingResult(input) != ItemStack.field_190927_a)
+		if (getSmeltingResult(input).getOutput() != ItemStack.field_190927_a)
 		{
 			return;
 		}
@@ -61,17 +83,19 @@ public class AlloyFurnaceRecipes
 		experienceList.put(input, experience);
 	}
 
-	public ItemStack getSmeltingResult(ItemStack[] input)
+	public AlloySmeltingResult getSmeltingResult(ItemStack[] inputs)
 	{
+		ItemStack output = ItemStack.field_190927_a;
 		for (Map.Entry<ItemStack[], ItemStack> entry : smeltingList.entrySet())
 		{
-			if (compareItemInputs(input, entry.getKey()))
+			if (compareItemInputs(inputs, entry.getKey()))
 			{
-				return entry.getValue();
+				output = entry.getValue();
+				break;
 			}
 		}
 
-		return ItemStack.field_190927_a;
+		return new AlloySmeltingResult(inputs, output);
 	}
 
 	private boolean compareItemInputs(ItemStack[] input1, ItemStack[] input2)
@@ -81,7 +105,7 @@ public class AlloyFurnaceRecipes
 
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
+		return stack1.getItem() == stack2.getItem() && (stack1.getMetadata() == 32767 || stack1.getMetadata() == stack2.getMetadata());
 	}
 
 	public Map<ItemStack[], ItemStack> getSmeltingList()

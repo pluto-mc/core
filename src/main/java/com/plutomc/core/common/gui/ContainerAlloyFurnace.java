@@ -1,5 +1,6 @@
 package com.plutomc.core.common.gui;
 
+import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
@@ -27,19 +28,19 @@ import javax.annotation.Nonnull;
  */
 public class ContainerAlloyFurnace extends Container
 {
-	private IInventory tileFurnace;
+	private TileEntityAlloyFurnace tileFurnace;
 	private int burnTime;
 	private int currentItemBurnTime;
 	private int cookTime;
 	private int totalCookTime;
 
-	public ContainerAlloyFurnace(InventoryPlayer playerInventory, IInventory furnaceInventory)
+	public ContainerAlloyFurnace(InventoryPlayer playerInventory, TileEntityAlloyFurnace tileFurnace)
 	{
-		this.tileFurnace = furnaceInventory;
-		addSlotToContainer(new SlotFurnaceFuel(furnaceInventory, 0, 51, 53));
-		addSlotToContainer(new Slot(furnaceInventory, 1, 41, 17));
-		addSlotToContainer(new Slot(furnaceInventory, 2, 59, 17));
-		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 3, 114, 35));
+		this.tileFurnace = tileFurnace;
+		addSlotToContainer(new SlotFurnaceFuel(tileFurnace, 0, 51, 53));
+		addSlotToContainer(new Slot(tileFurnace, 1, 41, 17));
+		addSlotToContainer(new Slot(tileFurnace, 2, 59, 17));
+		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, tileFurnace, 3, 114, 35));
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -122,35 +123,35 @@ public class ContainerAlloyFurnace extends Container
 
 			if (index == 3)
 			{
-				if (!this.mergeItemStack(stack, 3, 39, true))
+				if (!mergeItemStack(stack, 4, 40, true))
 				{
 					return ItemStack.field_190927_a;
 				}
 
 				slot.onSlotChange(stack, defaultStack);
 			}
-			else if (index != 0 && index != 1 && index != 2)
+			else if (index > 3)
 			{
 				if (TileEntityFurnace.isItemFuel(stack))
 				{
-					if (!this.mergeItemStack(stack, 1, 2, false))
+					if (!mergeItemStack(stack, 0, 1, false))
 					{
 						return ItemStack.field_190927_a;
 					}
 				}
-				else if (index >= 3 && index < 30)
+				else if (index >= 4 && index < 31)
 				{
-					if (!this.mergeItemStack(stack, 30, 39, false))
+					if (!mergeItemStack(stack, 31, 40, false))
 					{
 						return ItemStack.field_190927_a;
 					}
 				}
-				else if (index >= 30 && index < 39 && !this.mergeItemStack(stack, 3, 30, false))
+				else if (index >= 31 && index < 40 && !mergeItemStack(stack, 4, 31, false))
 				{
 					return ItemStack.field_190927_a;
 				}
 			}
-			else if (!this.mergeItemStack(stack, 3, 39, false))
+			else if (!mergeItemStack(stack, 4, 40, false))
 			{
 				return ItemStack.field_190927_a;
 			}
@@ -174,4 +175,6 @@ public class ContainerAlloyFurnace extends Container
 
 		return defaultStack;
 	}
+
+
 }

@@ -74,6 +74,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 			ItemStack[] inputs = getInputItemStacks();
 			ItemStack fuel = getFuelItemStack();
 
+			// if burning or the fuel slot is not empty and neither of the input slots are empty
 			if (isBurning() || !fuel.func_190926_b() && !(inputs[0].func_190926_b() && inputs[1].func_190926_b()))
 			{
 				if (!isBurning() && canSmelt())
@@ -85,11 +86,14 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 					{
 						flagDirty = true;
 
+						// if the fuel slot is not empty
 						if (!fuel.func_190926_b())
 						{
 							Item fuelItem = fuel.getItem();
+							// decrease the fuel slot size by 1
 							fuel.func_190918_g(1);
 
+							// if the fuel slot is empty
 							if (fuel.func_190926_b())
 							{
 								ItemStack fuelStack = fuelItem.getContainerItem(fuel);
@@ -310,7 +314,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		furnaceItemStacks = NonNullList.<ItemStack>func_191197_a(getSizeInventory(), ItemStack.field_190927_a);
+		furnaceItemStacks = NonNullList.func_191197_a(getSizeInventory(), ItemStack.field_190927_a);
 		ItemStackHelper.func_191283_b(compound, furnaceItemStacks);
 		burnTime = compound.getInteger("BurnTime");
 		cookTime = compound.getInteger("CookTime");
@@ -319,7 +323,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 		if (compound.hasKey("CustomName", 8))
 		{
-			customName = compound.getString("CustomName");
+			setCustomInventoryName(compound.getString("CustomName"));
 		}
 	}
 
@@ -356,10 +360,10 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	@Override
 	public boolean hasCustomName()
 	{
-		return customName != null && customName.length() > 0;
+		return customName != null && !customName.isEmpty();
 	}
 
-	public void setCustomName(String customName)
+	public void setCustomInventoryName(String customName)
 	{
 		this.customName = customName;
 	}
@@ -371,29 +375,36 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
 	}
 
-
 	private boolean canSmelt()
 	{
 		ItemStack[] inputs = getInputItemStacks();
+		// if either inputs stacks are empty
 		if (inputs[0].func_190926_b() || inputs[1].func_190926_b())
 		{
 			return false;
 		}
 		else
 		{
-			ItemStack expectedResultStack = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
+			AlloyFurnaceRecipes.AlloySmeltingResult result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
+			ItemStack resultOutput = result.getOutput();
 
-			if (expectedResultStack.func_190926_b())
+			// if there would be no resulting output stack
+			if (resultOutput.func_190926_b())
 			{
 				return false;
 			}
 			else
 			{
-				ItemStack resultStack = getStackInSlot(3);
-				if (resultStack.func_190926_b()) return true;
-				if (!resultStack.isItemEqual(expectedResultStack)) return false;
-				int result = resultStack.func_190916_E() + expectedResultStack.func_190916_E();
-				return result <= getInventoryStackLimit() && result <= resultStack.getMaxStackSize();
+				ItemStack output = getOutputItemStack();
+				// if the output slot is empty
+				if (output.func_190926_b()) return true;
+				if (!output.isItemEqual(resultOutput)) return false;
+				// get the size of the resulting output stack
+				int resultSize = output.func_190916_E() + resultOutput.func_190916_E();
+				return resultSize <= getInventoryStackLimit() && resultSize <= output.getMaxStackSize()
+						// check that the size of the input slots are large enough to smelt the output
+						&& result.getInputs()[0].func_190916_E() <= inputs[0].func_190916_E()
+						&& result.getInputs()[1].func_190916_E() <= inputs[1].func_190916_E();
 			}
 		}
 	}
@@ -413,6 +424,11 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return new ItemStack[] { getStackInSlot(1), getStackInSlot(2) };
 	}
 
+	public ItemStack getOutputItemStack()
+	{
+		return getStackInSlot(3);
+	}
+
 	public boolean isBurning() {
 		return burnTime > 0;
 	}
@@ -423,16 +439,19 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		{
 			ItemStack fuel = getFuelItemStack();
 			ItemStack[] inputs = getInputItemStacks();
-			ItemStack result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
-			ItemStack output = getStackInSlot(3);
+			AlloyFurnaceRecipes.AlloySmeltingResult result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
+			ItemStack resultOutput = result.getOutput();
+			ItemStack output = getOutputItemStack();
 
+			// if the output slot is empty
 			if (output.func_190926_b())
 			{
-				furnaceItemStacks.set(3, result.copy());
+				furnaceItemStacks.set(3, resultOutput.copy());
 			}
-			else if (output.getItem() == result.getItem())
+			else if (output.getItem() == resultOutput.getItem())
 			{
-				output.func_190917_f(result.func_190916_E());
+				// increase the size of the output slot by the size of the output stack
+				output.func_190917_f(resultOutput.func_190916_E());
 			}
 
 			if (((inputs[0].getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs[0].getMetadata() == 1)
@@ -442,7 +461,9 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 				furnaceItemStacks.set(0, new ItemStack(Items.WATER_BUCKET));
 			}
 
-			inputs[0].func_190918_g(1); inputs[1].func_190918_g(1);
+			// decrease the input slot sizes by the size of the input stacks
+			inputs[0].func_190918_g(result.getInputs()[0].func_190916_E());
+			inputs[1].func_190918_g(result.getInputs()[1].func_190916_E());
 		}
 	}
 }

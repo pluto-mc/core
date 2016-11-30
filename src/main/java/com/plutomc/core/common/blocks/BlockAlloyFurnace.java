@@ -72,7 +72,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.fromAngle(placer.getRotationYawHead()).getOpposite()).withProperty(BURNING, false);
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(BURNING, false);
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileEntityAlloyFurnace)
 		{
-			((TileEntityAlloyFurnace) tileEntity).setCustomName(stack.getDisplayName());
+			((TileEntityAlloyFurnace) tileEntity).setCustomInventoryName(stack.getDisplayName());
 		}
 	}
 

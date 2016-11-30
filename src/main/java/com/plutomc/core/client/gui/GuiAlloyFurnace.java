@@ -2,11 +2,10 @@ package com.plutomc.core.client.gui;
 
 import com.plutomc.core.Core;
 import com.plutomc.core.common.gui.ContainerAlloyFurnace;
+import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,15 +30,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyFurnace extends GuiContainer
 {
-	private static final ResourceLocation FURNACE_GUI_TEXTURES = new ResourceLocation(Core.MOD_ID + ":textures/gui/container/alloy_furnace.png");
+	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Core.MOD_ID + ":textures/gui/container/alloy_furnace.png");
 	private final InventoryPlayer playerInventory;
-	private final IInventory tileFurnace;
+	private final TileEntityAlloyFurnace tileFurnace;
 
-	public GuiAlloyFurnace(InventoryPlayer playerInventory, IInventory furnaceInventory)
+	public GuiAlloyFurnace(InventoryPlayer playerInventory, TileEntityAlloyFurnace tileFurnace)
 	{
-		super(new ContainerAlloyFurnace(playerInventory, furnaceInventory));
+		super(new ContainerAlloyFurnace(playerInventory, tileFurnace));
 		this.playerInventory = playerInventory;
-		this.tileFurnace = furnaceInventory;
+		this.tileFurnace = tileFurnace;
 	}
 
 	@Override
@@ -54,19 +53,19 @@ public class GuiAlloyFurnace extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		GlStateManager.color(1, 1, 1, 1);
-		mc.getTextureManager().bindTexture(FURNACE_GUI_TEXTURES);
+		mc.getTextureManager().bindTexture(GUI_TEXTURE);
 		int i = (width - xSize) / 2;
 		int j = (height - ySize) / 2;
 		drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
 
-		if (TileEntityFurnace.isBurning(tileFurnace))
+		if (tileFurnace.isBurning())
 		{
 			int k = getBurnLeftScaled(13);
-			drawTexturedModalRect(i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
+			drawTexturedModalRect(i + 52, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
 		}
 
 		int l = getCookProgressScaled(24);
-		drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
+		drawTexturedModalRect(i + 77, j + 34, 176, 14, l + 1, 16);
 	}
 
 	private int getCookProgressScaled(int pixels)

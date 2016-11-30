@@ -2,8 +2,9 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.client.gui.GuiAlloyFurnace;
 import com.plutomc.core.common.gui.ContainerAlloyFurnace;
+import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -32,10 +33,12 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
+		TileEntity tileEntity = getTileInventory(world, x, y, z);
+
 		switch (ID)
 		{
 			case ALLOY_FURNACE:
-				return new ContainerAlloyFurnace(player.inventory, getTileInventory(world, x, y, z));
+				return tileEntity instanceof TileEntityAlloyFurnace ? new ContainerAlloyFurnace(player.inventory, (TileEntityAlloyFurnace) tileEntity) : null;
 			default:
 				return null;
 		}
@@ -44,17 +47,19 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
+		TileEntity tileEntity = getTileInventory(world, x, y, z);
+
 		switch (ID)
 		{
 			case ALLOY_FURNACE:
-				return new GuiAlloyFurnace(player.inventory, getTileInventory(world, x, y, z));
+				return tileEntity instanceof TileEntityAlloyFurnace ? new GuiAlloyFurnace(player.inventory, (TileEntityAlloyFurnace) tileEntity) : null;
 			default:
 				return null;
 		}
 	}
 
-	private IInventory getTileInventory(World world, int x, int y, int z)
+	private TileEntity getTileInventory(World world, int x, int y, int z)
 	{
-		return (IInventory) world.getTileEntity(new BlockPos(x, y, z));
+		return world.getTileEntity(new BlockPos(x, y, z));
 	}
 }
