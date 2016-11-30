@@ -100,7 +100,6 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.breakBlock(worldIn, pos, state);
-		worldIn.removeTileEntity(pos);
 
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileEntityAlloyFurnace)
@@ -108,6 +107,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace) tileEntity);
 			worldIn.updateComparatorOutputLevel(pos, this);
 		}
+		worldIn.removeTileEntity(pos);
 	}
 
 	@Nonnull
