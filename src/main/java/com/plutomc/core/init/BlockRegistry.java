@@ -1,10 +1,12 @@
 package com.plutomc.core.init;
 
+import com.plutomc.core.Core;
 import com.plutomc.core.common.blocks.*;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -30,25 +32,27 @@ public class BlockRegistry
 {
 	public enum Data
 	{
-		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK),
+		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
 
-		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK),
-		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK),
+		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK, null),
+		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 
-		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS, Material.ROCK),
-		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS, Material.ROCK);
+		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS, Material.ROCK, null),
+		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null);
 
 		private final String name;
 		private final String oreDictName;
 		private final CreativeTabs tab;
 		private final Material material;
+		private final Class<? extends TileEntity> tileEntity;
 
-		Data(String name, String oreDictName, CreativeTabs tab, Material material)
+		Data(String name, String oreDictName, CreativeTabs tab, Material material, Class<? extends TileEntity> tileEntity)
 		{
 			this.name = name;
 			this.oreDictName = oreDictName;
 			this.tab = tab;
 			this.material = material;
+			this.tileEntity = tileEntity;
 		}
 
 		public String getUnlocalizedName()
@@ -75,6 +79,16 @@ public class BlockRegistry
 		{
 			return material;
 		}
+
+		public Class<? extends TileEntity> getTileEntityClass()
+		{
+			return tileEntity;
+		}
+
+		public String getTileEntityName()
+		{
+			return Core.MOD_ID + ":" + getRegistryName() + "_tileentity";
+		}
 	}
 
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
@@ -90,14 +104,18 @@ public class BlockRegistry
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
 		register(TIN_ORE);
-
-		GameRegistry.registerTileEntity(TileEntityAlloyFurnace.class, Data.ALLOY_FURNACE.getRegistryName() + "_tileentity");
 	}
 
 	private static void register(BaseItemBlock block)
 	{
+		Data data = block.getBlock().getData();
+
 		GameRegistry.register(block);
 		GameRegistry.register(block.getBlock());
+		if (data.getTileEntityClass() != null)
+		{
+			GameRegistry.registerTileEntity(data.getTileEntityClass(), data.getTileEntityName());
+		}
 
 		String oreDictName = block.getBlock().getData().getOreDictName();
 		if (oreDictName != null && oreDictName.length() > 0)

@@ -10,6 +10,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
@@ -43,10 +44,10 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 	private static final int[] SLOTS_BOTTOM = new int[] { 2, 1 };
-	private static final int[] SLOTS_SIDES = new int[] { 1 };
+	private static final int[] SLOTS_SIDES = new int[] { 3 };
 
 	private NonNullList<ItemStack> furnaceItemStacks;
-	private int furnaceBurnTime;
+	private int burnTime;
 	private int currentItemBurnTime;
 	private int cookTime;
 	private int totalCookTime;
@@ -65,20 +66,20 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 		if (isBurning())
 		{
-			--furnaceBurnTime;
+			--burnTime;
 		}
 
 		if (!worldObj.isRemote)
 		{
 			ItemStack[] inputs = getInputItemStacks();
-			ItemStack fuel = getStackInSlot(0);
+			ItemStack fuel = getFuelItemStack();
 
 			if (isBurning() || !fuel.func_190926_b() && !(inputs[0].func_190926_b() && inputs[1].func_190926_b()))
 			{
 				if (!isBurning() && canSmelt())
 				{
-					furnaceBurnTime = TileEntityFurnace.getItemBurnTime(fuel);
-					currentItemBurnTime = furnaceBurnTime;
+					burnTime = TileEntityFurnace.getItemBurnTime(fuel);
+					currentItemBurnTime = burnTime;
 
 					if (isBurning())
 					{
@@ -105,7 +106,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 					if (cookTime == totalCookTime)
 					{
 						cookTime = 0;
-						totalCookTime = getCookTime(getStackInSlot(0));
+						totalCookTime = getCookTime(getFuelItemStack());
 						smeltItem();
 						flagDirty = true;
 					}
@@ -256,7 +257,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		}
 		else
 		{
-			ItemStack itemStack = getStackInSlot(0);
+			ItemStack itemStack = getFuelItemStack();
 			return TileEntityFurnace.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && itemStack.getItem() != Items.BUCKET;
 		}
 	}
@@ -267,7 +268,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		switch (id)
 		{
 			case 0:
-				return furnaceBurnTime;
+				return burnTime;
 			case 1:
 				return currentItemBurnTime;
 			case 2:
@@ -285,7 +286,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		switch (id)
 		{
 			case 0:
-				furnaceBurnTime = value;
+				burnTime = value;
 				break;
 			case 1:
 				currentItemBurnTime = value;
@@ -303,6 +304,40 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	public int getFieldCount()
 	{
 		return 4;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound)
+	{
+		super.readFromNBT(compound);
+		furnaceItemStacks = NonNullList.<ItemStack>func_191197_a(getSizeInventory(), ItemStack.field_190927_a);
+		ItemStackHelper.func_191283_b(compound, furnaceItemStacks);
+		burnTime = compound.getInteger("BurnTime");
+		cookTime = compound.getInteger("CookTime");
+		totalCookTime = compound.getInteger("CookTimeTotal");
+		currentItemBurnTime = TileEntityFurnace.getItemBurnTime(getFuelItemStack());
+
+		if (compound.hasKey("CustomName", 8))
+		{
+			customName = compound.getString("CustomName");
+		}
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	{
+		super.writeToNBT(compound);
+		compound.setInteger("BurnTime", (short) burnTime);
+		compound.setInteger("CookTime", (short) cookTime);
+		compound.setInteger("CookTimeTotal", (short) totalCookTime);
+		ItemStackHelper.func_191282_a(compound, furnaceItemStacks);
+
+		if (hasCustomName())
+		{
+			compound.setString("CustomName", customName);
+		}
+
+		return compound;
 	}
 
 	@Override
@@ -363,20 +398,25 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return 200;
 	}
 
+	public ItemStack getFuelItemStack()
+	{
+		return getStackInSlot(0);
+	}
+
 	public ItemStack[] getInputItemStacks()
 	{
 		return new ItemStack[] { getStackInSlot(1), getStackInSlot(2) };
 	}
 
 	public boolean isBurning() {
-		return furnaceBurnTime > 0;
+		return burnTime > 0;
 	}
 
 	public void smeltItem()
 	{
 		if (canSmelt())
 		{
-			ItemStack fuel = getStackInSlot(0);
+			ItemStack fuel = getFuelItemStack();
 			ItemStack[] inputs = getInputItemStacks();
 			ItemStack result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
 			ItemStack output = getStackInSlot(3);
