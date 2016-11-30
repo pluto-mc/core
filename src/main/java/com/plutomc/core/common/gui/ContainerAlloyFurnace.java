@@ -36,10 +36,10 @@ public class ContainerAlloyFurnace extends Container
 	public ContainerAlloyFurnace(InventoryPlayer playerInventory, IInventory furnaceInventory)
 	{
 		this.tileFurnace = furnaceInventory;
-		addSlotToContainer(new SlotFurnaceFuel(furnaceInventory, 0, 56, 53));
-		addSlotToContainer(new Slot(furnaceInventory, 1, 47, 17));
-		addSlotToContainer(new Slot(furnaceInventory, 2, 65, 17));
-		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 3, 116, 35));
+		addSlotToContainer(new SlotFurnaceFuel(furnaceInventory, 0, 51, 53));
+		addSlotToContainer(new Slot(furnaceInventory, 1, 41, 17));
+		addSlotToContainer(new Slot(furnaceInventory, 2, 59, 17));
+		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 3, 114, 35));
 
 		for (int i = 0; i < 3; ++i)
 		{
