@@ -1,6 +1,7 @@
 package com.plutomc.core.common.crafting;
 
 import com.google.common.collect.Maps;
+import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,7 +38,7 @@ public class AlloyFurnaceRecipes
 
 	private AlloyFurnaceRecipes()
 	{
-
+		addSmeltingRecipe(new ItemStack[] { new ItemStack(ItemRegistry.COPPER_INGOT, 8), new ItemStack(ItemRegistry.TIN_INGOT) }, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 	}
 
 	public void addSmeltingRecipeForBlock(Block[] input, ItemStack stack, float experience)

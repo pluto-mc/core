@@ -50,7 +50,9 @@ public class ItemRegistry
 		TIN_BOOTS("tin_boots", "bootsTin", CreativeTabs.COMBAT),
 		TIN_CHESTPLATE("tin_chestplate", "chestplateTin", CreativeTabs.COMBAT),
 		TIN_HELMET("tin_helmet", "helmetTin", CreativeTabs.COMBAT),
-		TIN_LEGGINGS("tin_leggings", "leggingsTin", CreativeTabs.COMBAT);
+		TIN_LEGGINGS("tin_leggings", "leggingsTin", CreativeTabs.COMBAT),
+
+		BRONZE_INGOT("bronze_ingot", "ingotBronze", CreativeTabs.MATERIALS);
 
 		private final String name;
 		private final String oreDictName;
@@ -88,6 +90,7 @@ public class ItemRegistry
 	public static final BaseItem COPPER_NUGGET = new BaseItem(Data.COPPER_NUGGET);
 	public static final BaseItem TIN_INGOT = new BaseItem(Data.TIN_INGOT);
 	public static final BaseItem TIN_NUGGET = new BaseItem(Data.TIN_NUGGET);
+	public static final BaseItem BRONZE_INGOT = new BaseItem(Data.BRONZE_INGOT);
 
 	public static void preInit()
 	{
@@ -95,6 +98,7 @@ public class ItemRegistry
 		register(COPPER_NUGGET);
 		register(TIN_INGOT);
 		register(TIN_NUGGET);
+		register(BRONZE_INGOT);
 	}
 
 	private static void register(BaseItem item)
@@ -114,6 +118,7 @@ public class ItemRegistry
 		registerRender(COPPER_NUGGET);
 		registerRender(TIN_INGOT);
 		registerRender(TIN_NUGGET);
+		registerRender(BRONZE_INGOT);
 	}
 
 	private static void registerRender(BaseItem item)

@@ -25,6 +25,8 @@ item.tin_chestplate.name=Tin Chestplate
 item.tin_helmet.name=Tin Helmet
 item.tin_leggings.name=Tin Leggings
 
+item.bronze_ingot.name=Bronze Ingot
+
 
 tile.alloy_furnace.name=Alloy Furnace
 
