@@ -99,15 +99,14 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		super.breakBlock(worldIn, pos, state);
-
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileEntityAlloyFurnace)
 		{
 			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace) tileEntity);
 			worldIn.updateComparatorOutputLevel(pos, this);
 		}
-		worldIn.removeTileEntity(pos);
+
+		super.breakBlock(worldIn, pos, state);
 	}
 
 	@Nonnull

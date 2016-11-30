@@ -43,8 +43,8 @@ import javax.annotation.Nonnull;
 public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISidedInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
-	private static final int[] SLOTS_BOTTOM = new int[] { 2, 1 };
-	private static final int[] SLOTS_SIDES = new int[] { 3 };
+	private static final int[] SLOTS_SIDES = new int[] { 1, 2 };
+	private static final int[] SLOTS_BOTTOM = new int[] { 3 };
 
 	private NonNullList<ItemStack> furnaceItemStacks;
 	private int burnTime;
