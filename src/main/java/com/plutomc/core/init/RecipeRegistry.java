@@ -38,6 +38,8 @@ public class RecipeRegistry
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.CRUCIBLE_UNFIRED),
 				"   ", "C C", "CCC", 'C', Items.CLAY_BALL);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ALLOY_FURNACE),
+				"SSS", "FCF", "SSS", 'S', Blocks.COBBLESTONE, 'F', Blocks.FURNACE, 'C', ItemRegistry.CRUCIBLE);
 
 		// Metals
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.COPPER_BLOCK,
