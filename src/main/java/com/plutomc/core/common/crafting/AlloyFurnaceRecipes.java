@@ -75,7 +75,7 @@ public class AlloyFurnaceRecipes
 
 	public void addSmeltingRecipe(ItemStack[] input, ItemStack stack, float experience)
 	{
-		if (getSmeltingResult(input).getOutput() != ItemStack.field_190927_a)
+		if (!getSmeltingResult(input).getOutput().isEmpty())
 		{
 			return;
 		}
@@ -85,7 +85,7 @@ public class AlloyFurnaceRecipes
 
 	public AlloySmeltingResult getSmeltingResult(ItemStack[] inputs)
 	{
-		ItemStack output = ItemStack.field_190927_a;
+		ItemStack output = ItemStack.EMPTY;
 		for (Map.Entry<ItemStack[], ItemStack> entry : smeltingList.entrySet())
 		{
 			if (compareItemInputs(inputs, entry.getKey()))

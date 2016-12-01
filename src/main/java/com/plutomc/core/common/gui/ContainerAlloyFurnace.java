@@ -66,7 +66,7 @@ public class ContainerAlloyFurnace extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return tileFurnace.isUseableByPlayer(playerIn);
+		return tileFurnace.isUsableByPlayer(playerIn);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class ContainerAlloyFurnace extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
-		ItemStack defaultStack = ItemStack.field_190927_a;
+		ItemStack defaultStack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
@@ -125,7 +125,7 @@ public class ContainerAlloyFurnace extends Container
 			{
 				if (!mergeItemStack(stack, 4, 40, true))
 				{
-					return ItemStack.field_190927_a;
+					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(stack, defaultStack);
@@ -136,41 +136,41 @@ public class ContainerAlloyFurnace extends Container
 				{
 					if (!mergeItemStack(stack, 0, 1, false))
 					{
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				}
 				else if (index >= 4 && index < 31)
 				{
 					if (!mergeItemStack(stack, 31, 40, false))
 					{
-						return ItemStack.field_190927_a;
+						return ItemStack.EMPTY;
 					}
 				}
 				else if (index >= 31 && index < 40 && !mergeItemStack(stack, 4, 31, false))
 				{
-					return ItemStack.field_190927_a;
+					return ItemStack.EMPTY;
 				}
 			}
 			else if (!mergeItemStack(stack, 4, 40, false))
 			{
-				return ItemStack.field_190927_a;
+				return ItemStack.EMPTY;
 			}
 
-			if (stack.func_190926_b())
+			if (stack.isEmpty())
 			{
-				slot.putStack(ItemStack.field_190927_a);
+				slot.putStack(ItemStack.EMPTY);
 			}
 			else
 			{
 				slot.onSlotChanged();
 			}
 
-			if (stack.func_190916_E() == defaultStack.func_190916_E())
+			if (stack.getCount() == defaultStack.getCount())
 			{
-				return ItemStack.field_190927_a;
+				return ItemStack.EMPTY;
 			}
 
-			slot.func_190901_a(playerIn, stack);
+			slot.onTake(playerIn, stack);
 		}
 
 		return defaultStack;
