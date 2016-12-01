@@ -28,6 +28,9 @@ public class ItemRegistry
 {
 	public enum Data
 	{
+		CRUCIBLE("crucible", null, CreativeTabs.MATERIALS),
+		CRUCIBLE_UNFIRED("crucible_unfired", null, CreativeTabs.MATERIALS),
+
 		COPPER_INGOT("copper_ingot", "ingotCopper", CreativeTabs.MATERIALS),
 		COPPER_NUGGET("copper_nugget", "nuggetCopper", CreativeTabs.MATERIALS),
 		COPPER_AXE("copper_axe", "axeCopper", CreativeTabs.TOOLS),
@@ -86,6 +89,8 @@ public class ItemRegistry
 		}
 	}
 
+	public static final BaseItem CRUCIBLE = new BaseItem(Data.CRUCIBLE);
+	public static final BaseItem CRUCIBLE_UNFIRED = new BaseItem(Data.CRUCIBLE_UNFIRED);
 	public static final BaseItem COPPER_INGOT = new BaseItem(Data.COPPER_INGOT);
 	public static final BaseItem COPPER_NUGGET = new BaseItem(Data.COPPER_NUGGET);
 	public static final BaseItem TIN_INGOT = new BaseItem(Data.TIN_INGOT);
@@ -94,6 +99,8 @@ public class ItemRegistry
 
 	public static void preInit()
 	{
+		register(CRUCIBLE);
+		register(CRUCIBLE_UNFIRED);
 		register(COPPER_INGOT);
 		register(COPPER_NUGGET);
 		register(TIN_INGOT);
@@ -114,6 +121,8 @@ public class ItemRegistry
 
 	public static void registerRenders()
 	{
+		registerRender(CRUCIBLE);
+		registerRender(CRUCIBLE_UNFIRED);
 		registerRender(COPPER_INGOT);
 		registerRender(COPPER_NUGGET);
 		registerRender(TIN_INGOT);

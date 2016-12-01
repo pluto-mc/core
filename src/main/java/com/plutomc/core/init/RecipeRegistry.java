@@ -36,6 +36,8 @@ public class RecipeRegistry
 	{
 		// Miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.CRUCIBLE_UNFIRED),
+				"   ", "C C", "CCC", 'C', Items.CLAY_BALL);
 
 		// Metals
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.COPPER_BLOCK,
@@ -98,7 +100,8 @@ public class RecipeRegistry
 
 	private static void registerSmelting()
 	{
-		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7F);
-		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7F);
+		GameRegistry.addSmelting(ItemRegistry.CRUCIBLE_UNFIRED, new ItemStack(ItemRegistry.CRUCIBLE), 0.4f);
+		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7f);
+		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7f);
 	}
 }

@@ -1,6 +1,9 @@
 container.alloy_furnace.name=Alloy Furnace
 
 
+item.crucible.name=Crucible
+item.crucible_unfired.name=Unfired Crucible
+
 item.copper_ingot.name=Copper Ingot
 item.copper_nugget.name=Copper Nugget
 item.copper_axe.name=Copper Axe
