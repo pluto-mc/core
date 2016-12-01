@@ -118,7 +118,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	{
 		if (!worldIn.isRemote)
 		{
-			playerIn.openGui(Core.instance, GuiHandler.ALLOY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Core.instance(), GuiHandler.ALLOY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;

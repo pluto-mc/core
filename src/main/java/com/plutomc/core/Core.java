@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 public class Core
 {
 	@Mod.Instance(Core.MOD_ID)
-	public static Object instance;
+	private static Object instance;
 
 	public static final String MOD_ID = "plutomc_core";
 	public static final String NAME = "PlutoMC Core";
@@ -67,5 +67,10 @@ public class Core
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		proxy.postInit();
+	}
+
+	public static Object instance()
+	{
+		return instance;
 	}
 }

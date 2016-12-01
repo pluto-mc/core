@@ -1,12 +1,12 @@
 package com.plutomc.core.common.crafting;
 
-import com.google.common.collect.Maps;
 import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * plutomc_core
@@ -27,102 +27,89 @@ import java.util.Map;
  */
 public class AlloyFurnaceRecipes
 {
-	public class AlloySmeltingResult
-	{
-		private final ItemStack[] inputs;
-		private final ItemStack output;
-
-		public AlloySmeltingResult(ItemStack[] inputs, ItemStack output)
-		{
-			this.inputs = inputs;
-			this.output = output;
-		}
-
-		public ItemStack[] getInputs()
-		{
-			return inputs;
-		}
-
-		public ItemStack getOutput()
-		{
-			return output;
-		}
-	}
-
-	private static final AlloyFurnaceRecipes SMELTING_BASE = new AlloyFurnaceRecipes();
-	private final Map<ItemStack[], ItemStack> smeltingList = Maps.newHashMap();
-	private final Map<ItemStack[], Float> experienceList = Maps.newHashMap();
+	private static final AlloyFurnaceRecipes INSTANCE = new AlloyFurnaceRecipes();
+	private final List<AlloySmeltingRecipe> smeltingList = new ArrayList<AlloySmeltingRecipe>();
 
 	public static AlloyFurnaceRecipes instance()
 	{
-		return SMELTING_BASE;
+		return INSTANCE;
 	}
 
 	private AlloyFurnaceRecipes()
 	{
-		addSmeltingRecipe(new ItemStack[] { new ItemStack(ItemRegistry.COPPER_INGOT, 8), new ItemStack(ItemRegistry.TIN_INGOT) }, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
+		addSmeltingRecipe(new ArrayList<ItemStack>() {{
+			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
+			add(new ItemStack(ItemRegistry.TIN_INGOT));
+		}}, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 	}
 
-	public void addSmeltingRecipeForBlock(Block[] inputs, ItemStack stack, float experience)
+	public void addSmeltingRecipeForBlock(final List<Block> inputs, ItemStack stack, float experience)
 	{
-		addSmelting(new Item[] { Item.getItemFromBlock(inputs[0]), Item.getItemFromBlock(inputs[1]) }, stack, experience);
+		addSmelting(new ArrayList<Item>() {{
+			add(Item.getItemFromBlock(inputs.get(0)));
+			add(Item.getItemFromBlock(inputs.get(1)));
+		}}, stack, experience);
 	}
 
-	public void addSmelting(Item[] inputs, ItemStack stack, float experience)
+	public void addSmelting(final List<Item> inputs, final ItemStack stack, final float experience)
 	{
-		addSmeltingRecipe(new ItemStack[] { new ItemStack(inputs[0], 1, 32767), new ItemStack(inputs[1], 1, 32767) }, stack, experience);
+		addSmeltingRecipe(new ArrayList<ItemStack>() {{
+			add(new ItemStack(inputs.get(0), 1, 32767));
+			add(new ItemStack(inputs.get(1), 1, 32767));
+		}}, stack, experience);
 	}
 
-	public void addSmeltingRecipe(ItemStack[] inputs, ItemStack stack, float experience)
+	public void addSmeltingRecipe(List<ItemStack> inputs, ItemStack output, float experience)
 	{
-		if (!getSmeltingResult(inputs).getOutput().isEmpty())
+		if (!getSmeltingRecipe(inputs).getOutput().isEmpty())
 		{
 			return;
 		}
-		smeltingList.put(inputs, stack);
-		experienceList.put(inputs, experience);
+		smeltingList.add(new AlloySmeltingRecipe(inputs, output, experience));
 	}
 
-	public AlloySmeltingResult getSmeltingResult(ItemStack[] inputs)
+	public AlloySmeltingRecipe getSmeltingRecipe(List<ItemStack> inputs)
 	{
-		ItemStack output = ItemStack.EMPTY;
-		for (Map.Entry<ItemStack[], ItemStack> entry : smeltingList.entrySet())
+		for (AlloySmeltingRecipe entry : smeltingList)
 		{
-			if (compareItemInputs(inputs, entry.getKey()))
+			if (compareItemInputs(inputs, entry.getInputs()))
 			{
-				output = entry.getValue();
-				break;
+				return entry;
 			}
 		}
 
-		return new AlloySmeltingResult(inputs, output);
+		return AlloySmeltingRecipe.EMPTY;
 	}
 
-	private boolean compareItemInputs(ItemStack[] input1, ItemStack[] input2)
+	public float getSmeltingExperience(List<ItemStack> inputs)
 	{
-		return input1.length == 2 && input2.length == 2 && compareItemStacks(input1[0], input2[0]) && compareItemStacks(input1[1], input2[1]);
-	}
-
-	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
-	{
-		return stack1.getItem() == stack2.getItem() && (stack1.getMetadata() == 32767 || stack1.getMetadata() == stack2.getMetadata());
-	}
-
-	public Map<ItemStack[], ItemStack> getSmeltingList()
-	{
-		return smeltingList;
-	}
-
-	public float getSmeltingExperience(ItemStack[] inputs)
-	{
-		for (Map.Entry<ItemStack[], Float> entry : experienceList.entrySet())
+		for (AlloySmeltingRecipe entry : smeltingList)
 		{
-			if (compareItemInputs(inputs, entry.getKey()))
+			if (compareItemInputs(inputs, entry.getInputs()))
 			{
-				return entry.getValue();
+				return entry.getExperience();
 			}
 		}
 
 		return 0;
+	}
+
+	private boolean compareItemInputs(List<ItemStack> input1, List<ItemStack> input2)
+	{
+		return input1.size() == 2 && input2.size() == 2
+				&& compareItemStacks(input1.get(0), input2.get(0))
+				&& compareItemStacks(input1.get(1), input2.get(1));
+	}
+
+	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
+	{
+		return stack1.getItem() == stack2.getItem()
+				&& (stack1.getMetadata() == 32767 && stack2.getMetadata() == 32767
+				|| stack1.getMetadata() == stack2.getMetadata());
+	}
+
+	public List<AlloySmeltingRecipe> getSmeltingList()
+	{
+		return smeltingList;
 	}
 }

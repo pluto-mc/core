@@ -2,6 +2,7 @@ package com.plutomc.core.common.tileentities;
 
 import com.plutomc.core.common.blocks.BlockAlloyFurnace;
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
+import com.plutomc.core.common.crafting.AlloySmeltingRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -22,6 +23,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * plutomc_core
@@ -71,10 +74,10 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 		if (!world.isRemote)
 		{
-			ItemStack[] inputs = getInputItemStacks();
+			List<ItemStack> inputs = getInputItemStacks();
 			ItemStack fuel = getFuelItemStack();
 
-			if (isBurning() || !fuel.isEmpty() && !inputs[0].isEmpty() && !inputs[1].isEmpty())
+			if (isBurning() || !fuel.isEmpty() && !inputs.get(0).isEmpty() && !inputs.get(1).isEmpty())
 			{
 				if (!isBurning() && canSmelt())
 				{
@@ -372,32 +375,23 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 	private boolean canSmelt()
 	{
-		ItemStack[] inputs = getInputItemStacks();
-
-		if (inputs[0].isEmpty() || inputs[1].isEmpty())
+		List<ItemStack> inputs = getInputItemStacks();
+		if (inputs.get(0).isEmpty() || inputs.get(1).isEmpty())
 		{
 			return false;
 		}
-		else
-		{
-			AlloyFurnaceRecipes.AlloySmeltingResult result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
-			ItemStack resultOutput = result.getOutput();
 
-			if (resultOutput.isEmpty())
-			{
-				return false;
-			}
-			else
-			{
-				ItemStack output = getOutputItemStack();
-				if (output.isEmpty()) return true;
-				if (!output.isItemEqual(resultOutput)) return false;
-				int resultSize = output.getCount() + resultOutput.getCount();
-				return resultSize <= getInventoryStackLimit() && resultSize <= output.getMaxStackSize()
-						&& result.getInputs()[0].getCount() <= inputs[0].getCount()
-						&& result.getInputs()[1].getCount() <= inputs[1].getCount();
-			}
+		AlloySmeltingRecipe recipe = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
+		if (!recipe.canSmelt(inputs))
+		{
+			return false;
 		}
+
+		ItemStack output = getOutputItemStack();
+		ItemStack recipeOutput = recipe.getOutput();
+		boolean outputReady = output.isEmpty() || output.isItemEqual(recipeOutput);
+		int resultSize = output.getCount() + recipeOutput.getCount();
+		return outputReady && resultSize <= getInventoryStackLimit() && resultSize <= output.getMaxStackSize();
 	}
 
 	public int getCookTime(ItemStack stack)
@@ -410,9 +404,12 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return getStackInSlot(0);
 	}
 
-	public ItemStack[] getInputItemStacks()
+	public List<ItemStack> getInputItemStacks()
 	{
-		return new ItemStack[] { getStackInSlot(1), getStackInSlot(2) };
+		return new ArrayList<ItemStack>() {{
+			add(getStackInSlot(1));
+			add(getStackInSlot(2));
+		}};
 	}
 
 	public ItemStack getOutputItemStack()
@@ -429,8 +426,8 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		if (canSmelt())
 		{
 			ItemStack fuel = getFuelItemStack();
-			ItemStack[] inputs = getInputItemStacks();
-			AlloyFurnaceRecipes.AlloySmeltingResult result = AlloyFurnaceRecipes.instance().getSmeltingResult(inputs);
+			List<ItemStack> inputs = getInputItemStacks();
+			AlloySmeltingRecipe result = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
 			ItemStack resultOutput = result.getOutput();
 			ItemStack output = getOutputItemStack();
 
@@ -443,15 +440,15 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 				output.grow(resultOutput.getCount());
 			}
 
-			if (((inputs[0].getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs[0].getMetadata() == 1)
-					|| (inputs[1].getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs[1].getMetadata() == 1))
+			if (((inputs.get(0).getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs.get(0).getMetadata() == 1)
+					|| (inputs.get(1).getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs.get(1).getMetadata() == 1))
 					&& !fuel.isEmpty() && fuel.getItem() == Items.BUCKET)
 			{
 				furnaceItemStacks.set(0, new ItemStack(Items.WATER_BUCKET));
 			}
 
-			inputs[0].shrink(result.getInputs()[0].getCount());
-			inputs[1].shrink(result.getInputs()[1].getCount());
+			inputs.get(0).shrink(result.getInputs().get(0).getCount());
+			inputs.get(1).shrink(result.getInputs().get(1).getCount());
 		}
 	}
 }
