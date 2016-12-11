@@ -118,7 +118,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	{
 		if (!worldIn.isRemote)
 		{
-			playerIn.openGui(Core.instance, GuiHandler.ALLOY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Core.instance(), GuiHandler.ALLOY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;
@@ -185,8 +185,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	public static void setBurningAtPos(World worldIn, BlockPos pos, boolean burning)
 	{
 		IBlockState blockState = worldIn.getBlockState(pos);
-		IBlockState defaultState = BlockRegistry.ALLOY_FURNACE.getBlock().getDefaultState();
-		worldIn.setBlockState(pos, defaultState.withProperty(FACING, blockState.getValue(FACING)).withProperty(BURNING, burning), 3);
+		worldIn.setBlockState(pos, blockState.withProperty(BURNING, burning), 3);
 
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity != null)
