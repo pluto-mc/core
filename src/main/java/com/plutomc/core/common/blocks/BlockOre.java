@@ -20,14 +20,14 @@ import net.minecraft.block.SoundType;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BlockTinBlock extends BaseBlock
+public class BlockOre extends BaseBlock
 {
-	public BlockTinBlock()
+	public BlockOre(BlockRegistry.Data data)
 	{
-		super(BlockRegistry.Data.TIN_BLOCK);
-		setHardness(5);
+		super(data);
+		setHardness(3);
 		setHarvestLevel("pickaxe", 1);
-		setResistance(10);
-		setSoundType(SoundType.METAL);
+		setResistance(5);
+		setSoundType(SoundType.STONE);
 	}
 }

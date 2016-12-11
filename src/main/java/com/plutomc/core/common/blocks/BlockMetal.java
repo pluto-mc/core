@@ -1,8 +1,7 @@
 package com.plutomc.core.common.blocks;
 
-import net.minecraft.item.ItemBlock;
-
-import javax.annotation.Nonnull;
+import com.plutomc.core.init.BlockRegistry;
+import net.minecraft.block.SoundType;
 
 /**
  * plutomc_core
@@ -21,23 +20,14 @@ import javax.annotation.Nonnull;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BaseItemBlock extends ItemBlock
+public class BlockMetal extends BaseBlock
 {
-	private final BaseBlock block;
-
-	public BaseItemBlock(BaseBlock block)
+	public BlockMetal(BlockRegistry.Data data)
 	{
-		super(block);
-		setUnlocalizedName(block.getUnlocalizedName());
-		setRegistryName(block.getRegistryName());
-		setCreativeTab(block.getCreativeTabToDisplayOn());
-		this.block = block;
-	}
-
-	@Override
-	@Nonnull
-	public BaseBlock getBlock()
-	{
-		return block;
+		super(data);
+		setHardness(5);
+		setHarvestLevel("pickaxe", 1);
+		setResistance(10);
+		setSoundType(SoundType.METAL);
 	}
 }

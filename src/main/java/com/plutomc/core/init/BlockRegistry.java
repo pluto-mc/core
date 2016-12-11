@@ -2,6 +2,7 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.Core;
 import com.plutomc.core.common.blocks.*;
+import com.plutomc.core.common.items.BaseItemBlock;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -92,10 +93,10 @@ public class BlockRegistry
 	}
 
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
-	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockCopperBlock());
-	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
-	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockTinBlock());
-	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
+	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockMetal(Data.COPPER_BLOCK));
+	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockOre(Data.COPPER_ORE));
+	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
+	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockOre(Data.TIN_ORE));
 
 	public static void preInit()
 	{
