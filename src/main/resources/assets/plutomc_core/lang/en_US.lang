@@ -30,6 +30,11 @@ item.tin_leggings.name=Tin Leggings
 
 item.bronze_ingot.name=Bronze Ingot
 item.bronze_nugget.name=Bronze Nugget
+item.bronze_axe.name=Bronze Axe
+item.bronze_hoe.name=Bronze Hoe
+item.bronze_pickaxe.name=Bronze Pickaxe
+item.bronze_shovel.name=Bronze Shovel
+item.bronze_sword.name=Bronze Sword
 
 
 tile.alloy_furnace.name=Alloy Furnace

@@ -56,7 +56,12 @@ public class ItemRegistry
 		TIN_LEGGINGS("tin_leggings", "leggingsTin", CreativeTabs.COMBAT),
 
 		BRONZE_INGOT("bronze_ingot", "ingotBronze", CreativeTabs.MATERIALS),
-		BRONZE_NUGGET("bronze_nugget", "nuggetBronze", CreativeTabs.MATERIALS);
+		BRONZE_NUGGET("bronze_nugget", "nuggetBronze", CreativeTabs.MATERIALS),
+		BRONZE_AXE("bronze_axe", "axeBronze", CreativeTabs.TOOLS),
+		BRONZE_HOE("bronze_hoe", "hoeBronze", CreativeTabs.TOOLS),
+		BRONZE_PICKAXE("bronze_pickaxe", "pickaxeBronze", CreativeTabs.TOOLS),
+		BRONZE_SHOVEL("bronze_shovel", "shovelBronze", CreativeTabs.TOOLS),
+		BRONZE_SWORD("bronze_sword", "swordBronze", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

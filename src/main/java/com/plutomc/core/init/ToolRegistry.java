@@ -29,6 +29,7 @@ public class ToolRegistry
 {
 	public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 132, 4, 1.5f, 14);
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
+	public static final Item.ToolMaterial BRONZE = EnumHelper.addToolMaterial("BRONZE", 2, 364, 6.5f, 2.5f, 14);
 
 	public static final BaseItemAxe COPPER_AXE = new BaseItemAxe(ItemRegistry.Data.COPPER_AXE, COPPER, -3.1f);
 	public static final BaseItemHoe COPPER_HOE = new BaseItemHoe(ItemRegistry.Data.COPPER_HOE, COPPER);
@@ -40,6 +41,11 @@ public class ToolRegistry
 	public static final BaseItemPickaxe TIN_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.TIN_PICKAXE, TIN);
 	public static final BaseItemShovel TIN_SHOVEL = new BaseItemShovel(ItemRegistry.Data.TIN_SHOVEL, TIN);
 	public static final BaseItemSword TIN_SWORD = new BaseItemSword(ItemRegistry.Data.TIN_SWORD, TIN);
+	public static final BaseItemAxe BRONZE_AXE = new BaseItemAxe(ItemRegistry.Data.BRONZE_AXE, BRONZE, -2.9f);
+	public static final BaseItemHoe BRONZE_HOE = new BaseItemHoe(ItemRegistry.Data.BRONZE_HOE, BRONZE);
+	public static final BaseItemPickaxe BRONZE_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.BRONZE_PICKAXE, BRONZE);
+	public static final BaseItemShovel BRONZE_SHOVEL = new BaseItemShovel(ItemRegistry.Data.BRONZE_SHOVEL, BRONZE);
+	public static final BaseItemSword BRONZE_SWORD = new BaseItemSword(ItemRegistry.Data.BRONZE_SWORD, BRONZE);
 
 	public static void preInit()
 	{
@@ -53,6 +59,11 @@ public class ToolRegistry
 		register(TIN_PICKAXE.getData(), TIN_PICKAXE);
 		register(TIN_SHOVEL.getData(), TIN_SHOVEL);
 		register(TIN_SWORD.getData(), TIN_SWORD);
+		register(BRONZE_AXE.getData(), BRONZE_AXE);
+		register(BRONZE_HOE.getData(), BRONZE_HOE);
+		register(BRONZE_PICKAXE.getData(), BRONZE_PICKAXE);
+		register(BRONZE_SHOVEL.getData(), BRONZE_SHOVEL);
+		register(BRONZE_SWORD.getData(), BRONZE_SWORD);
 	}
 
 	private static void register(ItemRegistry.Data data, Item item)
@@ -78,6 +89,11 @@ public class ToolRegistry
 		registerRender(TIN_PICKAXE);
 		registerRender(TIN_SHOVEL);
 		registerRender(TIN_SWORD);
+		registerRender(BRONZE_AXE);
+		registerRender(BRONZE_HOE);
+		registerRender(BRONZE_PICKAXE);
+		registerRender(BRONZE_SHOVEL);
+		registerRender(BRONZE_SWORD);
 	}
 
 	private static void registerRender(Item item)
