@@ -67,7 +67,8 @@ public class ItemRegistry
 		BRONZE_HELMET("bronze_helmet", "helmetBronze", CreativeTabs.COMBAT),
 		BRONZE_LEGGINGS("bronze_leggings", "leggingsBronze", CreativeTabs.COMBAT),
 
-		STEEL_INGOT("steel_ingot", "ingotSteel", CreativeTabs.MATERIALS);
+		STEEL_INGOT("steel_ingot", "ingotSteel", CreativeTabs.MATERIALS),
+		STEEL_NUGGET("steel_nugget", "nuggetSteel", CreativeTabs.MATERIALS);
 
 		private final String name;
 		private final String oreDictName;
@@ -110,6 +111,7 @@ public class ItemRegistry
 	public static final BaseItem BRONZE_INGOT = new BaseItem(Data.BRONZE_INGOT);
 	public static final BaseItem BRONZE_NUGGET = new BaseItem(Data.BRONZE_NUGGET);
 	public static final BaseItem STEEL_INGOT = new BaseItem(Data.STEEL_INGOT);
+	public static final BaseItem STEEL_NUGGET = new BaseItem(Data.STEEL_NUGGET);
 
 	public static void preInit()
 	{
@@ -122,6 +124,7 @@ public class ItemRegistry
 		register(BRONZE_INGOT);
 		register(BRONZE_NUGGET);
 		register(STEEL_INGOT);
+		register(STEEL_NUGGET);
 	}
 
 	private static void register(BaseItem item)
@@ -146,6 +149,7 @@ public class ItemRegistry
 		registerRender(BRONZE_INGOT);
 		registerRender(BRONZE_NUGGET);
 		registerRender(STEEL_INGOT);
+		registerRender(STEEL_NUGGET);
 	}
 
 	private static void registerRender(BaseItem item)
