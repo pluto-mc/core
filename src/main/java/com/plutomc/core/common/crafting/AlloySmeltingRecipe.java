@@ -1,7 +1,6 @@
 package com.plutomc.core.common.crafting;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +82,6 @@ public class AlloySmeltingRecipe
 	{
 		if (isEmpty()) return false;
 		ListSizeException.checkList(inputs);
-		FMLLog.info("canSmelt: getInputs().get(0).getCount() → %d", getInputs().get(0).getCount());
-		FMLLog.info("canSmelt: inputs.get(0).getCount() → %d", inputs.get(0).getCount());
 		return getInputs().get(0).getCount() <= inputs.get(0).getCount()
 				&& getInputs().get(1).getCount() <= inputs.get(1).getCount();
 	}
