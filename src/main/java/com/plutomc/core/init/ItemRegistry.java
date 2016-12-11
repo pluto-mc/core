@@ -28,6 +28,7 @@ public class ItemRegistry
 {
 	public enum Data
 	{
+		CROCOITE("crocoite", null, CreativeTabs.MATERIALS),
 		CRUCIBLE("crucible", null, CreativeTabs.MATERIALS),
 		CRUCIBLE_UNFIRED("crucible_unfired", null, CreativeTabs.MATERIALS),
 
@@ -102,6 +103,7 @@ public class ItemRegistry
 		}
 	}
 
+	public static final BaseItem CROCOITE = new BaseItem(Data.CROCOITE);
 	public static final BaseItem CRUCIBLE = new BaseItem(Data.CRUCIBLE);
 	public static final BaseItem CRUCIBLE_UNFIRED = new BaseItem(Data.CRUCIBLE_UNFIRED);
 	public static final BaseItem COPPER_INGOT = new BaseItem(Data.COPPER_INGOT);
@@ -115,6 +117,7 @@ public class ItemRegistry
 
 	public static void preInit()
 	{
+		register(CROCOITE);
 		register(CRUCIBLE);
 		register(CRUCIBLE_UNFIRED);
 		register(COPPER_INGOT);
@@ -140,6 +143,7 @@ public class ItemRegistry
 
 	public static void registerRenders()
 	{
+		registerRender(CROCOITE);
 		registerRender(CRUCIBLE);
 		registerRender(CRUCIBLE_UNFIRED);
 		registerRender(COPPER_INGOT);
