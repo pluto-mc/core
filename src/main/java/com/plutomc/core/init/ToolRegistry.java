@@ -31,17 +31,17 @@ public class ToolRegistry
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
 	public static final Item.ToolMaterial BRONZE = EnumHelper.addToolMaterial("BRONZE", 2, 364, 6.5f, 2.5f, 14);
 
-	public static final BaseItemAxe COPPER_AXE = new BaseItemAxe(ItemRegistry.Data.COPPER_AXE, COPPER, -3.1f);
+	public static final BaseItemAxe COPPER_AXE = new BaseItemAxe(ItemRegistry.Data.COPPER_AXE, COPPER);
 	public static final BaseItemHoe COPPER_HOE = new BaseItemHoe(ItemRegistry.Data.COPPER_HOE, COPPER);
 	public static final BaseItemPickaxe COPPER_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.COPPER_PICKAXE, COPPER);
 	public static final BaseItemShovel COPPER_SHOVEL = new BaseItemShovel(ItemRegistry.Data.COPPER_SHOVEL, COPPER);
 	public static final BaseItemSword COPPER_SWORD = new BaseItemSword(ItemRegistry.Data.COPPER_SWORD, COPPER);
-	public static final BaseItemAxe TIN_AXE = new BaseItemAxe(ItemRegistry.Data.TIN_AXE, TIN, -3.1f);
+	public static final BaseItemAxe TIN_AXE = new BaseItemAxe(ItemRegistry.Data.TIN_AXE, TIN);
 	public static final BaseItemHoe TIN_HOE = new BaseItemHoe(ItemRegistry.Data.TIN_HOE, TIN);
 	public static final BaseItemPickaxe TIN_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.TIN_PICKAXE, TIN);
 	public static final BaseItemShovel TIN_SHOVEL = new BaseItemShovel(ItemRegistry.Data.TIN_SHOVEL, TIN);
 	public static final BaseItemSword TIN_SWORD = new BaseItemSword(ItemRegistry.Data.TIN_SWORD, TIN);
-	public static final BaseItemAxe BRONZE_AXE = new BaseItemAxe(ItemRegistry.Data.BRONZE_AXE, BRONZE, -2.9f);
+	public static final BaseItemAxe BRONZE_AXE = new BaseItemAxe(ItemRegistry.Data.BRONZE_AXE, BRONZE);
 	public static final BaseItemHoe BRONZE_HOE = new BaseItemHoe(ItemRegistry.Data.BRONZE_HOE, BRONZE);
 	public static final BaseItemPickaxe BRONZE_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.BRONZE_PICKAXE, BRONZE);
 	public static final BaseItemShovel BRONZE_SHOVEL = new BaseItemShovel(ItemRegistry.Data.BRONZE_SHOVEL, BRONZE);
