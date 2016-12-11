@@ -61,7 +61,11 @@ public class ItemRegistry
 		BRONZE_HOE("bronze_hoe", "hoeBronze", CreativeTabs.TOOLS),
 		BRONZE_PICKAXE("bronze_pickaxe", "pickaxeBronze", CreativeTabs.TOOLS),
 		BRONZE_SHOVEL("bronze_shovel", "shovelBronze", CreativeTabs.TOOLS),
-		BRONZE_SWORD("bronze_sword", "swordBronze", CreativeTabs.COMBAT);
+		BRONZE_SWORD("bronze_sword", "swordBronze", CreativeTabs.COMBAT),
+		BRONZE_BOOTS("bronze_boots", "bootsBronze", CreativeTabs.COMBAT),
+		BRONZE_CHESTPLATE("bronze_chestplate", "chestplateBronze", CreativeTabs.COMBAT),
+		BRONZE_HELMET("bronze_helmet", "helmetBronze", CreativeTabs.COMBAT),
+		BRONZE_LEGGINGS("bronze_leggings", "leggingsBronze", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

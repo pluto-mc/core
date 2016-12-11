@@ -104,18 +104,26 @@ public class RecipeRegistry
 				"   ", "I I", "I I", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.TIN_BOOTS,
 				"   ", "I I", "I I", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.BRONZE_BOOTS,
+				"   ", "I I", "I I", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.COPPER_CHESTPLATE,
 				"I I", "III", "III", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.TIN_CHESTPLATE,
 				"I I", "III", "III", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.BRONZE_CHESTPLATE,
+				"I I", "III", "III", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.COPPER_HELMET,
 				"III", "I I", "   ", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.TIN_HELMET,
 				"III", "I I", "   ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.BRONZE_HELMET,
+				"III", "I I", "   ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.COPPER_LEGGINGS,
 				"III", "I I", "I I", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.TIN_LEGGINGS,
 				"III", "I I", "I I", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.BRONZE_LEGGINGS,
+				"III", "I I", "I I", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 	}
 
 	private static void registerSmelting()

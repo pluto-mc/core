@@ -35,6 +35,10 @@ item.bronze_hoe.name=Bronze Hoe
 item.bronze_pickaxe.name=Bronze Pickaxe
 item.bronze_shovel.name=Bronze Shovel
 item.bronze_sword.name=Bronze Sword
+item.bronze_boots.name=Bronze Boots
+item.bronze_chestplate.name=Bronze Chestplate
+item.bronze_helmet.name=Bronze Helmet
+item.bronze_leggings.name=Bronze Leggings
 
 
 tile.alloy_furnace.name=Alloy Furnace
