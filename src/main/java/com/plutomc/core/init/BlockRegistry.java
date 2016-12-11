@@ -45,6 +45,7 @@ public class BlockRegistry
 		private final CreativeTabs tab;
 		private final Material material;
 		private final Class<? extends TileEntity> tileEntity;
+		private int tileEntityID;
 
 		Data(String name, String oreDictName, CreativeTabs tab, Material material, Class<? extends TileEntity> tileEntity)
 		{
@@ -89,6 +90,16 @@ public class BlockRegistry
 		{
 			return Core.MOD_ID + ":" + getRegistryName() + "_tileentity";
 		}
+
+		public void setTileEntityID(int tileEntityID)
+		{
+			this.tileEntityID = tileEntityID;
+		}
+
+		public int getTileEntityID()
+		{
+			return tileEntityID;
+		}
 	}
 
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
@@ -96,6 +107,8 @@ public class BlockRegistry
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockCopperOre());
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockTinBlock());
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockTinOre());
+
+	private static int TILEENTITY_ID = 1;
 
 	public static void preInit()
 	{
@@ -115,6 +128,7 @@ public class BlockRegistry
 		if (data.getTileEntityClass() != null)
 		{
 			GameRegistry.registerTileEntity(data.getTileEntityClass(), data.getTileEntityName());
+			data.setTileEntityID(TILEENTITY_ID++);
 		}
 
 		String oreDictName = block.getBlock().getData().getOreDictName();

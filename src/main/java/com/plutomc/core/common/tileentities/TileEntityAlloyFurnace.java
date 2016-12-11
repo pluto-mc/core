@@ -3,6 +3,7 @@ package com.plutomc.core.common.tileentities;
 import com.plutomc.core.common.blocks.BlockAlloyFurnace;
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
 import com.plutomc.core.common.crafting.AlloySmeltingRecipe;
+import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -356,7 +357,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
-		return new SPacketUpdateTileEntity(getPos(), 1, getUpdateTag());
+		return new SPacketUpdateTileEntity(getPos(), BlockRegistry.Data.ALLOY_FURNACE.getTileEntityID(), getUpdateTag());
 	}
 
 	@Override
