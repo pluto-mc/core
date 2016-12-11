@@ -40,6 +40,8 @@ item.bronze_chestplate.name=Bronze Chestplate
 item.bronze_helmet.name=Bronze Helmet
 item.bronze_leggings.name=Bronze Leggings
 
+item.steel_ingot.name=Steel Ingot
+
 
 tile.alloy_furnace.name=Alloy Furnace
 

@@ -143,5 +143,9 @@ public class RecipeRegistry
 			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
 			add(new ItemStack(ItemRegistry.TIN_INGOT));
 		}}, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
+		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
+			add(new ItemStack(Items.IRON_INGOT, 3));
+			add(new ItemStack(Items.COAL, 1, 1));
+		}}, new ItemStack(ItemRegistry.STEEL_INGOT, 4), 1.2f);
 	}
 }
