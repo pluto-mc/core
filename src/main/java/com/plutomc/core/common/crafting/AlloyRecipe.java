@@ -22,7 +22,7 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class AlloySmeltingRecipe
+public class AlloyRecipe
 {
 	private static class ListSizeException extends IllegalStateException
 	{
@@ -39,17 +39,18 @@ public class AlloySmeltingRecipe
 		}
 	}
 
-	public static final AlloySmeltingRecipe EMPTY = new AlloySmeltingRecipe(new ArrayList<ItemStack>() {{
+	public static final AlloyRecipe EMPTY = new AlloyRecipe(new ArrayList<ItemStack>() {{
 		add(ItemStack.EMPTY);
 		add(ItemStack.EMPTY);
 	}}, ItemStack.EMPTY, 0);
+	public static final int NOT_INGREDIENT = -1;
 
 	private final List<ItemStack> inputs;
 	private final ItemStack output;
 	private final float experience;
 	private final boolean isEmpty;
 
-	public AlloySmeltingRecipe(List<ItemStack> inputs, ItemStack output, float experience)
+	public AlloyRecipe(List<ItemStack> inputs, ItemStack output, float experience)
 	{
 		ListSizeException.checkList(inputs);
 		this.inputs = inputs;
@@ -78,11 +79,48 @@ public class AlloySmeltingRecipe
 		return isEmpty;
 	}
 
+	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
+	{
+		return stack1.getItem() == stack2.getItem()
+				&& (stack1.getMetadata() == 32767 && stack2.getMetadata() == 32767
+				|| stack1.getMetadata() == stack2.getMetadata());
+	}
+
+	public ItemStack getIngredient(ItemStack ingredient)
+	{
+		return getInputs().get(getIngredientIndex(ingredient));
+	}
+
+	public int getIngredientIndex(ItemStack ingredient)
+	{
+		if (compareItemStacks(getInputs().get(0), ingredient))
+		{
+			return 0;
+		}
+		else if (compareItemStacks(getInputs().get(1), ingredient))
+		{
+			return 1;
+		}
+		else
+		{
+			return NOT_INGREDIENT;
+		}
+	}
+
+	public boolean isIngredient(ItemStack ingredient)
+	{
+		return getIngredientIndex(ingredient) != NOT_INGREDIENT;
+	}
+
 	public boolean canSmelt(List<ItemStack> inputs)
 	{
 		if (isEmpty()) return false;
 		ListSizeException.checkList(inputs);
-		return getInputs().get(0).getCount() <= inputs.get(0).getCount()
-				&& getInputs().get(1).getCount() <= inputs.get(1).getCount();
+
+		int index0 = getIngredientIndex(inputs.get(0));
+		int index1 = getIngredientIndex(inputs.get(1));
+		return isIngredient(inputs.get(0)) && isIngredient(inputs.get(1)) && index0 != index1
+				&& getInputs().get(index0).getCount() <= inputs.get(0).getCount()
+				&& getInputs().get(index1).getCount() <= inputs.get(1).getCount();
 	}
 }

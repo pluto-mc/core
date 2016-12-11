@@ -1,6 +1,5 @@
 package com.plutomc.core.common.crafting;
 
-import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,19 +27,11 @@ import java.util.List;
 public class AlloyFurnaceRecipes
 {
 	private static final AlloyFurnaceRecipes INSTANCE = new AlloyFurnaceRecipes();
-	private final List<AlloySmeltingRecipe> smeltingList = new ArrayList<AlloySmeltingRecipe>();
+	private final List<AlloyRecipe> smeltingList = new ArrayList<AlloyRecipe>();
 
 	public static AlloyFurnaceRecipes instance()
 	{
 		return INSTANCE;
-	}
-
-	private AlloyFurnaceRecipes()
-	{
-		addSmeltingRecipe(new ArrayList<ItemStack>() {{
-			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
-			add(new ItemStack(ItemRegistry.TIN_INGOT));
-		}}, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 	}
 
 	public void addSmeltingRecipeForBlock(final List<Block> inputs, ItemStack stack, float experience)
@@ -65,27 +56,28 @@ public class AlloyFurnaceRecipes
 		{
 			return;
 		}
-		smeltingList.add(new AlloySmeltingRecipe(inputs, output, experience));
+
+		smeltingList.add(new AlloyRecipe(inputs, output, experience));
 	}
 
-	public AlloySmeltingRecipe getSmeltingRecipe(List<ItemStack> inputs)
+	public AlloyRecipe getSmeltingRecipe(List<ItemStack> inputs)
 	{
-		for (AlloySmeltingRecipe entry : smeltingList)
+		for (AlloyRecipe entry : smeltingList)
 		{
-			if (compareItemInputs(inputs, entry.getInputs()))
+			if (entry.canSmelt(inputs))
 			{
 				return entry;
 			}
 		}
 
-		return AlloySmeltingRecipe.EMPTY;
+		return AlloyRecipe.EMPTY;
 	}
 
 	public float getSmeltingExperience(List<ItemStack> inputs)
 	{
-		for (AlloySmeltingRecipe entry : smeltingList)
+		for (AlloyRecipe entry : smeltingList)
 		{
-			if (compareItemInputs(inputs, entry.getInputs()))
+			if (entry.canSmelt(inputs))
 			{
 				return entry.getExperience();
 			}
@@ -94,21 +86,7 @@ public class AlloyFurnaceRecipes
 		return 0;
 	}
 
-	private boolean compareItemInputs(List<ItemStack> input1, List<ItemStack> input2)
-	{
-		return input1.size() == 2 && input2.size() == 2
-				&& compareItemStacks(input1.get(0), input2.get(0))
-				&& compareItemStacks(input1.get(1), input2.get(1));
-	}
-
-	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
-	{
-		return stack1.getItem() == stack2.getItem()
-				&& (stack1.getMetadata() == 32767 && stack2.getMetadata() == 32767
-				|| stack1.getMetadata() == stack2.getMetadata());
-	}
-
-	public List<AlloySmeltingRecipe> getSmeltingList()
+	public List<AlloyRecipe> getSmeltingList()
 	{
 		return smeltingList;
 	}

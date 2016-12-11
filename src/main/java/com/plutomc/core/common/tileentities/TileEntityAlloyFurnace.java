@@ -2,10 +2,9 @@ package com.plutomc.core.common.tileentities;
 
 import com.plutomc.core.common.blocks.BlockAlloyFurnace;
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
-import com.plutomc.core.common.crafting.AlloySmeltingRecipe;
+import com.plutomc.core.common.crafting.AlloyRecipe;
 import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -405,7 +404,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 			return false;
 		}
 
-		AlloySmeltingRecipe recipe = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
+		AlloyRecipe recipe = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
 		if (!recipe.canSmelt(inputs))
 		{
 			return false;
@@ -451,7 +450,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		{
 			ItemStack fuel = getFuelItemStack();
 			List<ItemStack> inputs = getInputItemStacks();
-			AlloySmeltingRecipe result = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
+			AlloyRecipe result = AlloyFurnaceRecipes.instance().getSmeltingRecipe(inputs);
 			ItemStack resultOutput = result.getOutput();
 			ItemStack output = getOutputItemStack();
 
@@ -464,15 +463,8 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 				output.grow(resultOutput.getCount());
 			}
 
-			if (((inputs.get(0).getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs.get(0).getMetadata() == 1)
-					|| (inputs.get(1).getItem() == Item.getItemFromBlock(Blocks.SPONGE) && inputs.get(1).getMetadata() == 1))
-					&& !fuel.isEmpty() && fuel.getItem() == Items.BUCKET)
-			{
-				furnaceItemStacks.set(0, new ItemStack(Items.WATER_BUCKET));
-			}
-
-			inputs.get(0).shrink(result.getInputs().get(0).getCount());
-			inputs.get(1).shrink(result.getInputs().get(1).getCount());
+			inputs.get(0).shrink(result.getIngredient(inputs.get(0)).getCount());
+			inputs.get(1).shrink(result.getIngredient(inputs.get(1)).getCount());
 		}
 	}
 }

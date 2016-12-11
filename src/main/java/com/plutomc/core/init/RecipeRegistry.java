@@ -1,11 +1,14 @@
 package com.plutomc.core.init;
 
+import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.ArrayList;
 
 /**
  * plutomc_core
@@ -30,6 +33,7 @@ public class RecipeRegistry
 	{
 		registerRecipes();
 		registerSmelting();
+		registerAlloySmelting();
 	}
 
 	private static void registerRecipes()
@@ -131,5 +135,13 @@ public class RecipeRegistry
 		GameRegistry.addSmelting(ItemRegistry.CRUCIBLE_UNFIRED, new ItemStack(ItemRegistry.CRUCIBLE), 0.4f);
 		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7f);
 		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7f);
+	}
+
+	private static void registerAlloySmelting()
+	{
+		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
+			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
+			add(new ItemStack(ItemRegistry.TIN_INGOT));
+		}}, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 	}
 }
