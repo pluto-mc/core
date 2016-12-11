@@ -39,7 +39,9 @@ public class BlockRegistry
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 
 		TIN_BLOCK("tin_block", "blockTin", CreativeTabs.DECORATIONS, Material.ROCK, null),
-		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null);
+		TIN_ORE("tin_ore", "oreTin", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+
+		BRONZE_BLOCK("bronze_block", "blockBronze", CreativeTabs.DECORATIONS, Material.ROCK, null);
 
 		private final String name;
 		private final String oreDictName;
@@ -97,6 +99,7 @@ public class BlockRegistry
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockOre(Data.COPPER_ORE));
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockOre(Data.TIN_ORE));
+	public static final BaseItemBlock BRONZE_BLOCK = new BaseItemBlock(new BlockMetal(Data.BRONZE_BLOCK));
 
 	public static void preInit()
 	{
@@ -105,6 +108,7 @@ public class BlockRegistry
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
 		register(TIN_ORE);
+		register(BRONZE_BLOCK);
 	}
 
 	private static void register(BaseItemBlock block)
@@ -132,6 +136,7 @@ public class BlockRegistry
 		registerRender(COPPER_ORE);
 		registerRender(TIN_BLOCK);
 		registerRender(TIN_ORE);
+		registerRender(BRONZE_BLOCK);
 	}
 
 	private static void registerRender(BaseItemBlock block)

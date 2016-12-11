@@ -29,6 +29,7 @@ item.tin_helmet.name=Tin Helmet
 item.tin_leggings.name=Tin Leggings
 
 item.bronze_ingot.name=Bronze Ingot
+item.bronze_nugget.name=Bronze Nugget
 
 
 tile.alloy_furnace.name=Alloy Furnace
@@ -38,3 +39,5 @@ tile.copper_ore.name=Copper Ore
 
 tile.tin_block.name=Block of Tin
 tile.tin_ore.name=Tin Ore
+
+tile.bronze_block.name=Block of Bronze

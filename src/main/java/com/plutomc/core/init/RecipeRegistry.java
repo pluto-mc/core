@@ -46,18 +46,26 @@ public class RecipeRegistry
 				"III", "III", "III", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.TIN_BLOCK,
 				"III", "III", "III", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.BRONZE_BLOCK,
+				"III", "III", "III", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.COPPER_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.COPPER_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.TIN_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.BRONZE_INGOT,
+				"NNN", "NNN", "NNN", 'N', ItemRegistry.BRONZE_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_INGOT, 9),
 				BlockRegistry.COPPER_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_INGOT, 9),
 				BlockRegistry.TIN_BLOCK.getBlock().getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.BRONZE_INGOT, 9),
+				BlockRegistry.BRONZE_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9),
 				ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9),
 				ItemRegistry.TIN_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.BRONZE_NUGGET, 9),
+				ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
 
 		// Tools
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_AXE,
