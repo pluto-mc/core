@@ -25,7 +25,8 @@ public class WorldRegistry
 {
 	public enum OreData {
 		COPPER_ORE(BlockRegistry.COPPER_ORE.getBlock(), 1, 63, 8, 10),
-		TIN_ORE(BlockRegistry.TIN_ORE.getBlock(), 1, 63, 8, 6);
+		TIN_ORE(BlockRegistry.TIN_ORE.getBlock(), 1, 63, 8, 6),
+		LEAD_ORE(BlockRegistry.LEAD_ORE.getBlock(), 1, 15, 4, 4);
 
 		private final BaseBlock block;
 		private final int minY;

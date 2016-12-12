@@ -33,11 +33,11 @@ public class GeneratorOre extends BaseGenerator
 	{
 		super();
 
-		worldGens = new ArrayList<WorldGenOre>();
-		for (WorldRegistry.OreData oreData : WorldRegistry.OreData.values())
-		{
-			worldGens.add(new WorldGenOre(oreData));
-		}
+		worldGens = new ArrayList<WorldGenOre>() {{
+			add(new WorldGenOre(WorldRegistry.OreData.COPPER_ORE));
+			add(new WorldGenOre(WorldRegistry.OreData.TIN_ORE));
+			add(new WorldGenLeadOre());
+		}};
 	}
 
 	@Override

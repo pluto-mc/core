@@ -71,7 +71,7 @@ public class BlockLeadOre extends BlockOre
 		ret.add(new ItemStack(this, 1, damageDropped(state)));
 		if (state.getValue(HAS_CROCOITE))
 		{
-			ret.add(new ItemStack(BlockRegistry.CROCOITE, rand.nextInt(1) + 1, 0));
+			ret.add(new ItemStack(BlockRegistry.CROCOITE, rand.nextInt(2) + 1, 0));
 		}
 
 		return ret;
