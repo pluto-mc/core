@@ -56,3 +56,5 @@ tile.tin_ore.name=Tin Ore
 tile.bronze_block.name=Block of Bronze
 
 tile.steel_block.name=Block of Steel
+
+tile.lead_ore.name=Lead Ore
