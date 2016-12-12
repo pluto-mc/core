@@ -46,7 +46,7 @@ public class BlockRegistry
 
 		STEEL_BLOCK("steel_block", "blockSteel", CreativeTabs.DECORATIONS, Material.ROCK, null),
 
-		LEAD_BLOCK("lead_ore", "oreLead", CreativeTabs.DECORATIONS, Material.ROCK, null);
+		LEAD_ORE("lead_ore", "oreLead", CreativeTabs.DECORATIONS, Material.ROCK, null);
 
 		private final String name;
 		private final String oreDictName;
@@ -118,7 +118,7 @@ public class BlockRegistry
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockOre(Data.TIN_ORE));
 	public static final BaseItemBlock BRONZE_BLOCK = new BaseItemBlock(new BlockMetal(Data.BRONZE_BLOCK));
 	public static final BaseItemBlock STEEL_BLOCK = new BaseItemBlock(new BlockMetal(Data.STEEL_BLOCK));
-	public static final BaseItemBlock LEAD_ORE = new BaseItemBlock(new BlockOre(Data.LEAD_BLOCK));
+	public static final BaseItemBlock LEAD_ORE = new BaseItemBlock(new BlockOre(Data.LEAD_ORE));
 
 	private static int TILEENTITY_ID = 1;
 

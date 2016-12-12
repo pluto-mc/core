@@ -10,6 +10,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.Random;
  */
 public class BlockCrocoite extends BaseBlock implements IGrowable
 {
-	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, 3);
+	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, getMaxGrowth());
 
 	private final List<AxisAlignedBB> boundingBoxes = new ArrayList<AxisAlignedBB>() {{
 		add(new AxisAlignedBB(5d * BaseBlock.PIXEL_SIZE, 0d, 5d * BaseBlock.PIXEL_SIZE,
@@ -54,6 +55,7 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 		setDefaultState(getBlockState().getBaseState().withProperty(GROWTH, 0));
 		setHardness(1);
 		setSoundType(SoundType.GLASS);
+		setTickRandomly(true);
 	}
 
 	@Nonnull
@@ -101,9 +103,21 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	}
 
 	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (canGrow(worldIn, pos, state, !worldIn.isRemote)
+				&& ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(31) == 0))
+		{
+			grow(worldIn, rand, pos, state);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+		}
+	}
+
+	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return false;
+		return worldIn.getBlockState(pos.down()).getBlock().getUnlocalizedName().equals(BlockRegistry.LEAD_ORE.getUnlocalizedName())
+				&& state.getValue(GROWTH) < getMaxGrowth();
 	}
 
 	@Override
@@ -115,6 +129,11 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
+		worldIn.setBlockState(pos, state.withProperty(GROWTH, state.getValue(GROWTH) + 1));
+	}
 
+	public static int getMaxGrowth()
+	{
+		return 3;
 	}
 }
