@@ -22,6 +22,8 @@ import net.minecraft.block.Block;
  */
 public class BaseBlock extends Block
 {
+	public static final double PIXEL_SIZE = 0.0625d;
+
 	private final BlockRegistry.Data data;
 
 	public BaseBlock(BlockRegistry.Data data)

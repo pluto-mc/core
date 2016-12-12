@@ -1,0 +1,135 @@
+{
+	"parent": "plutomc_core:block/crocoite",
+	"elements": [
+		{
+			"__comment": "Central crystal",
+			"from": [ 6, 0, 6 ],
+			"to": [ 10, 8, 10 ],
+			"faces": {
+				"north": { "texture": "#sprite", "uv": [ 4, 0, 8, 8 ] },
+				"south": { "texture": "#sprite", "uv": [ 4, 0, 8, 8 ] },
+				"east": { "texture": "#sprite", "uv": [ 4, 0, 8, 8 ] },
+				"west": { "texture": "#sprite", "uv": [ 4, 0, 8, 8 ] },
+				"up": { "texture": "#sprite", "uv": [ 0, 0, 4, 4 ]  },
+				"down": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ], "cullface": "down"  }
+			}
+		},
+		{
+			"__comment": "Central crystal point (x)",
+			"from": [ 6, 6.6, 6.6 ],
+			"to": [ 10, 9.4, 9.4 ],
+			"faces": {
+				"south": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ]  },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ], "rotation": 180  }
+			},
+			"rotation": {
+				"origin": [ 8, 8, 8 ],
+				"axis": "x",
+				"angle": -45
+			}
+		},
+		{
+			"__comment": "Central crystal point (z)",
+			"from": [ 6.6, 6.6, 6 ],
+			"to": [ 9.4, 9.4, 10 ],
+			"faces": {
+				"west": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ]  },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ], "rotation": 270  }
+			},
+			"rotation": {
+				"origin": [ 8, 8, 8 ],
+				"axis": "z",
+				"angle": -45
+			}
+		},
+
+		{
+			"__comment": "Second crystal",
+			"from": [ 8, 0, 8 ],
+			"to": [ 12, 6, 12 ],
+			"faces": {
+				"north": { "texture": "#sprite", "uv": [ 0, 6, 4, 12 ] },
+				"south": { "texture": "#sprite", "uv": [ 0, 6, 4, 12 ] },
+				"east": { "texture": "#sprite", "uv": [ 0, 6, 4, 12 ] },
+				"west": { "texture": "#sprite", "uv": [ 0, 6, 4, 12 ] },
+				"up": { "texture": "#sprite", "uv": [ 0, 0, 4, 4 ]  },
+				"down": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ], "cullface": "down"  }
+			}
+		},
+		{
+			"__comment": "Second crystal point (x)",
+			"from": [ 8, 4.6, 8.6 ],
+			"to": [ 12, 7.4, 11.4 ],
+			"faces": {
+				"south": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ]  },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ], "rotation": 180  }
+			},
+			"rotation": {
+				"origin": [ 10, 6, 10 ],
+				"axis": "x",
+				"angle": -45
+			}
+		},
+		{
+			"__comment": "Second crystal point (z)",
+			"from": [ 8.6, 4.6, 8 ],
+			"to": [ 11.4, 7.4, 12 ],
+			"faces": {
+				"west": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ]  },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ], "rotation": 270  }
+			},
+			"rotation": {
+				"origin": [ 10, 6, 10 ],
+				"axis": "z",
+				"angle": -45
+			}
+		},
+
+		{
+			"__comment": "Third crystal",
+			"from": [ 4, 0, 4 ],
+			"to": [ 8, 4, 8 ],
+			"faces": {
+				"north": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ] },
+				"south": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ] },
+				"east": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ] },
+				"west": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ] },
+				"up": { "texture": "#sprite", "uv": [ 0, 0, 4, 4 ]  },
+				"down": { "texture": "#sprite", "uv": [ 4, 8, 8, 12 ], "cullface": "down"  }
+			},
+			"rotation": {
+				"origin": [ 6, 3, 6 ],
+				"axis": "x",
+				"angle": -22.5
+			}
+		},
+		{
+			"__comment": "Third crystal point (x)",
+			"from": [ 4, 2.35, 4.35 ],
+			"to": [ 8, 5.15, 7.15 ],
+			"faces": {
+				"north": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ] },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ] }
+			},
+			"rotation": {
+				"origin": [ 6, 3.75, 5.75 ],
+				"axis": "x",
+				"angle": 22.5
+			}
+		},
+		{
+			"__comment": "Third crystal point (z)",
+			"from": [ 4.6, 2.35, 3.75 ],
+			"to": [ 7.4, 5.15, 7.75 ],
+			"faces": {
+				"west": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ] },
+				"up": { "texture": "#sprite", "uv": [ 0, 4, 4, 6 ], "rotation": 270 }
+			},
+			"rotation": {
+				"origin": [ 6, 3.75, 5.75 ],
+				"axis": "z",
+				"angle": -45
+			}
+		}
+	]
+}

@@ -1,7 +1,6 @@
 container.alloy_furnace.name=Alloy Furnace
 
 
-item.crocoite.name=Crocoite
 item.crucible.name=Crucible
 item.crucible_unfired.name=Unfired Crucible
 
@@ -46,6 +45,7 @@ item.steel_nugget.name=Steel Nugget
 
 
 tile.alloy_furnace.name=Alloy Furnace
+tile.crocoite.name=Crocoite
 
 tile.copper_block.name=Block of Copper
 tile.copper_ore.name=Copper Ore

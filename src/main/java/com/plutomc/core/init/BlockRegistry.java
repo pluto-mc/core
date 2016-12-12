@@ -34,6 +34,7 @@ public class BlockRegistry
 	public enum Data
 	{
 		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
+		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
 
 		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK, null),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
@@ -108,6 +109,7 @@ public class BlockRegistry
 	}
 
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
+	public static final BaseItemBlock CROCOITE = new BaseItemBlock(new BlockCrocoite());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockMetal(Data.COPPER_BLOCK));
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockOre(Data.COPPER_ORE));
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
@@ -120,6 +122,7 @@ public class BlockRegistry
 	public static void preInit()
 	{
 		register(ALLOY_FURNACE);
+		register(CROCOITE);
 		register(COPPER_BLOCK);
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
@@ -150,6 +153,7 @@ public class BlockRegistry
 	public static void registerRenders()
 	{
 		registerRender(ALLOY_FURNACE);
+		registerRender(CROCOITE);
 		registerRender(COPPER_BLOCK);
 		registerRender(COPPER_ORE);
 		registerRender(TIN_BLOCK);

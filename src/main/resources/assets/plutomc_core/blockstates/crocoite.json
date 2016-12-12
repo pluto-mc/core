@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"growth=0": { "model": "plutomc_core:crocoite_0" },
+		"growth=1": { "model": "plutomc_core:crocoite_1" },
+		"growth=2": { "model": "plutomc_core:crocoite_2" },
+		"growth=3": { "model": "plutomc_core:crocoite_3" }
+    }
+}
