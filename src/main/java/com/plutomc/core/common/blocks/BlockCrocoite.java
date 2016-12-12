@@ -65,6 +65,7 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 		return new BlockStateContainer(this, GROWTH);
 	}
 
+	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{

@@ -118,7 +118,7 @@ public class BlockRegistry
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockOre(Data.TIN_ORE));
 	public static final BaseItemBlock BRONZE_BLOCK = new BaseItemBlock(new BlockMetal(Data.BRONZE_BLOCK));
 	public static final BaseItemBlock STEEL_BLOCK = new BaseItemBlock(new BlockMetal(Data.STEEL_BLOCK));
-	public static final BaseItemBlock LEAD_ORE = new BaseItemBlock(new BlockOre(Data.LEAD_ORE));
+	public static final BaseItemBlock LEAD_ORE = new BaseItemBlock(new BlockLeadOre());
 
 	private static int TILEENTITY_ID = 1;
 
