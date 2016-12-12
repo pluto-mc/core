@@ -104,6 +104,12 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	}
 
 	@Override
+	public int quantityDropped(IBlockState state, int fortune, Random random)
+	{
+		return state.getValue(GROWTH) + 1;
+	}
+
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (canGrow(worldIn, pos, state, !worldIn.isRemote)
