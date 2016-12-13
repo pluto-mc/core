@@ -328,6 +328,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		}
 	}
 
+	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{

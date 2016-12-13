@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+		"top": "plutomc_core:blocks/quern_stone_top",
+		"down": "plutomc_core:blocks/quern_stone_bottom",
+		"front": "plutomc_core:blocks/quern_stone_front",
+		"side": "plutomc_core:blocks/quern_stone_side"
+	}
+}

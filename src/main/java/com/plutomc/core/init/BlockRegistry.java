@@ -4,6 +4,7 @@ import com.plutomc.core.Core;
 import com.plutomc.core.common.blocks.*;
 import com.plutomc.core.common.items.BaseItemBlock;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
+import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -35,6 +36,7 @@ public class BlockRegistry
 	{
 		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
+		QUERN_STONE("quern_stone", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityQuernStone.class),
 
 		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK, null),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
@@ -112,6 +114,7 @@ public class BlockRegistry
 
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace());
 	public static final BaseItemBlock CROCOITE = new BaseItemBlock(new BlockCrocoite());
+	public static final BaseItemBlock QUERN_STONE = new BaseItemBlock(new BlockQuernStone());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockMetal(Data.COPPER_BLOCK));
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockOre(Data.COPPER_ORE));
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
@@ -126,6 +129,7 @@ public class BlockRegistry
 	{
 		register(ALLOY_FURNACE);
 		register(CROCOITE);
+		register(QUERN_STONE);
 		register(COPPER_BLOCK);
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
@@ -158,6 +162,7 @@ public class BlockRegistry
 	{
 		registerRender(ALLOY_FURNACE);
 		registerRender(CROCOITE);
+		registerRender(QUERN_STONE);
 		registerRender(COPPER_BLOCK);
 		registerRender(COPPER_ORE);
 		registerRender(TIN_BLOCK);

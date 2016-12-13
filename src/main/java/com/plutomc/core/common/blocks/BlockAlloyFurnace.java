@@ -57,6 +57,8 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		super(BlockRegistry.Data.ALLOY_FURNACE);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
 		setHardness(3.5f);
+		setHarvestLevel("pickaxe", 1);
+		setResistance(17.5f);
 		setSoundType(SoundType.STONE);
 		isBlockContainer = true;
 	}
@@ -75,6 +77,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(BURNING, false);
 	}
 
+	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
