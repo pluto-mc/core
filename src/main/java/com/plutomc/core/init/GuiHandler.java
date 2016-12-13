@@ -1,8 +1,11 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.client.gui.GuiAlloyFurnace;
+import com.plutomc.core.client.gui.GuiQuernStone;
 import com.plutomc.core.common.gui.ContainerAlloyFurnace;
+import com.plutomc.core.common.gui.ContainerQuernStone;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
+import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +32,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class GuiHandler implements IGuiHandler
 {
 	public static final int ALLOY_FURNACE = 0;
+	public static final int QUERN_STONE = 1;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
@@ -39,6 +43,8 @@ public class GuiHandler implements IGuiHandler
 		{
 			case ALLOY_FURNACE:
 				return tileEntity instanceof TileEntityAlloyFurnace ? new ContainerAlloyFurnace(player.inventory, (TileEntityAlloyFurnace) tileEntity) : null;
+			case QUERN_STONE:
+				return tileEntity instanceof TileEntityQuernStone ? new ContainerQuernStone(player.inventory, (TileEntityQuernStone) tileEntity) : null;
 			default:
 				return null;
 		}
@@ -53,6 +59,8 @@ public class GuiHandler implements IGuiHandler
 		{
 			case ALLOY_FURNACE:
 				return tileEntity instanceof TileEntityAlloyFurnace ? new GuiAlloyFurnace(player.inventory, (TileEntityAlloyFurnace) tileEntity) : null;
+			case QUERN_STONE:
+				return tileEntity instanceof TileEntityQuernStone ? new GuiQuernStone(player.inventory, (TileEntityQuernStone) tileEntity) : null;
 			default:
 				return null;
 		}

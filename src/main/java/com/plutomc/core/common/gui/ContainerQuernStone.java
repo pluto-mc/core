@@ -1,11 +1,14 @@
 package com.plutomc.core.common.gui;
 
-import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
+import com.plutomc.core.common.gui.slots.SlotQuernStoneHand;
+import com.plutomc.core.common.gui.slots.SlotQuernStoneOutput;
+import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 import javax.annotation.Nonnull;
 
@@ -26,21 +29,19 @@ import javax.annotation.Nonnull;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ContainerAlloyFurnace extends Container
+public class ContainerQuernStone extends Container
 {
-	private TileEntityAlloyFurnace tileFurnace;
-	private int burnTime;
-	private int currentItemBurnTime;
-	private int cookTime;
-	private int totalCookTime;
+	private TileEntityQuernStone tileEntity;
+	private int grindTime;
+	private int totalGrindTime;
 
-	public ContainerAlloyFurnace(InventoryPlayer playerInventory, TileEntityAlloyFurnace tileFurnace)
+	public ContainerQuernStone(InventoryPlayer playerInventory, TileEntityQuernStone tileEntity)
 	{
-		this.tileFurnace = tileFurnace;
-		addSlotToContainer(new SlotFurnaceFuel(tileFurnace, 0, 51, 53));
-		addSlotToContainer(new Slot(tileFurnace, 1, 41, 17));
-		addSlotToContainer(new Slot(tileFurnace, 2, 59, 17));
-		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, tileFurnace, 3, 114, 35));
+		this.tileEntity = tileEntity;
+
+		addSlotToContainer(new SlotQuernStoneHand(tileEntity, 0, 47, 17));
+		addSlotToContainer(new Slot(tileEntity, 1, 47, 52));
+		addSlotToContainer(new SlotQuernStoneOutput(tileEntity, 2, 109, 35));
 
 		for (int i = 0; i < 3; ++i)
 		{
@@ -57,16 +58,16 @@ public class ContainerAlloyFurnace extends Container
 	}
 
 	@Override
-	public void addListener(IContainerListener listener)
+	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		super.addListener(listener);
-		listener.sendAllWindowProperties(this, tileFurnace);
+		return tileEntity.isUsableByPlayer(playerIn);
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public void addListener(IContainerListener listener)
 	{
-		return tileFurnace.isUsableByPlayer(playerIn);
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, tileEntity);
 	}
 
 	@Override
@@ -76,37 +77,24 @@ public class ContainerAlloyFurnace extends Container
 
 		for (IContainerListener listener : listeners)
 		{
-			if (burnTime != tileFurnace.getField(0))
+			if (grindTime != tileEntity.getField(0))
 			{
-				listener.sendProgressBarUpdate(this, 0, tileFurnace.getField(0));
+				listener.sendProgressBarUpdate(this, 0, tileEntity.getField(0));
 			}
-
-			if (currentItemBurnTime != tileFurnace.getField(1))
+			if (totalGrindTime != tileEntity.getField(1))
 			{
-				listener.sendProgressBarUpdate(this, 1, tileFurnace.getField(1));
-			}
-
-			if (cookTime != tileFurnace.getField(2))
-			{
-				listener.sendProgressBarUpdate(this, 2, tileFurnace.getField(2));
-			}
-
-			if (totalCookTime != tileFurnace.getField(3))
-			{
-				listener.sendProgressBarUpdate(this, 3, tileFurnace.getField(3));
+				listener.sendProgressBarUpdate(this, 1, tileEntity.getField(1));
 			}
 		}
 
-		burnTime = tileFurnace.getField(0);
-		currentItemBurnTime = tileFurnace.getField(1);
-		cookTime = tileFurnace.getField(2);
-		totalCookTime = tileFurnace.getField(3);
+		grindTime = tileEntity.getField(0);
+		totalGrindTime = tileEntity.getField(1);
 	}
 
 	@Override
 	public void updateProgressBar(int id, int data)
 	{
-		tileFurnace.setField(id, data);
+		tileEntity.setField(id, data);
 	}
 
 	@Nonnull
@@ -121,37 +109,37 @@ public class ContainerAlloyFurnace extends Container
 			ItemStack stack = slot.getStack();
 			defaultStack = stack.copy();
 
-			if (index == 3)
+			if (index == 2)
 			{
-				if (!mergeItemStack(stack, 4, 40, true))
+				if (!mergeItemStack(stack, 3, 39, true))
 				{
 					return ItemStack.EMPTY;
 				}
 
 				slot.onSlotChange(stack, defaultStack);
 			}
-			else if (index > 3)
+			else if (index > 2)
 			{
-				if (TileEntityFurnace.isItemFuel(stack))
+				if (TileEntityQuernStone.isItemHandStone(stack))
 				{
 					if (!mergeItemStack(stack, 0, 1, false))
 					{
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 4 && index < 31)
+				else if (index >= 3 && index < 30)
 				{
-					if (!mergeItemStack(stack, 31, 40, false))
+					if (!mergeItemStack(stack, 30, 39, false))
 					{
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (index >= 31 && index < 40 && !mergeItemStack(stack, 4, 31, false))
+				else if (index >= 30 && index < 39 && !mergeItemStack(stack, 3, 30, false))
 				{
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (!mergeItemStack(stack, 4, 40, false))
+			else if (!mergeItemStack(stack, 3, 39, false))
 			{
 				return ItemStack.EMPTY;
 			}

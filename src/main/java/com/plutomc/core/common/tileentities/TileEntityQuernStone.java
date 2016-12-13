@@ -313,7 +313,12 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 		return 100;
 	}
 
-	private boolean isItemHandStone(ItemStack stack)
+	public boolean isGrinding()
+	{
+		return grindTime > 0;
+	}
+
+	public static boolean isItemHandStone(ItemStack stack)
 	{
 		// TODO: Add handstone item.
 		return false;

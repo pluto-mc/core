@@ -1,13 +1,16 @@
 package com.plutomc.core.common.blocks;
 
+import com.plutomc.core.Core;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.init.GuiHandler;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -94,6 +97,17 @@ public class BlockQuernStone extends BaseBlock implements ITileEntityProvider
 		}
 
 		super.breakBlock(worldIn, pos, state);
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (!worldIn.isRemote)
+		{
+			playerIn.openGui(Core.instance(), GuiHandler.QUERN_STONE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		}
+
+		return true;
 	}
 
 	@Override
