@@ -35,6 +35,7 @@ public class RecipeRegistry
 		registerRecipes();
 		registerSmelting();
 		registerAlloySmelting();
+		registerQuernGrinding();
 	}
 
 	private static void registerRecipes()

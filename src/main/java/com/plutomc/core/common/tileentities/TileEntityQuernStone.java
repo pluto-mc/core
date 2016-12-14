@@ -6,7 +6,6 @@ import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -18,7 +17,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -59,25 +57,20 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	@Override
 	public void update()
 	{
-		if (!world.isRemote)
+		if (!world.isRemote && canGrind())
 		{
 			ItemStack input = getStackInSlot(1);
-
-			if (canGrind())
+			if (!isGrinding())
 			{
-				if (!isGrinding())
-				{
-					totalGrindTime = getGrindTime(input);
-				}
+				totalGrindTime = getGrindTime(input);
+			}
 
-				grindTime++;
-				FMLLog.info("grindTime = %d", grindTime);
+			grindTime++;
 
-				if (grindTime == totalGrindTime)
-				{
-					grindTime = 0;
-					grindItem();
-				}
+			if (grindTime == totalGrindTime)
+			{
+				grindTime = 0;
+				grindItem();
 			}
 		}
 	}
@@ -100,8 +93,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	{
 		if (direction == EnumFacing.UP && index == 0)
 		{
-			Item item = stack.getItem();
-			if (item instanceof ItemHandStone && ((ItemHandStone) item).hasDurability(stack))
+			if (isItemHandStone(stack) && ((ItemHandStone) stack.getItem()).hasDurability(stack))
 			{
 				return false;
 			}
@@ -338,7 +330,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 			return false;
 		}
 
-		if (handstone.getItem() instanceof ItemHandStone)
+		if (isItemHandStone(handstone))
 		{
 			ItemHandStone handstoneItem = (ItemHandStone) handstone.getItem();
 			if (!handstoneItem.hasDurability(handstone))
@@ -361,6 +353,12 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	{
 		if (canGrind())
 		{
+			ItemStack handstone = getStackInSlot(0);
+			if (isItemHandStone(handstone))
+			{
+				((ItemHandStone) handstone.getItem()).use(handstone);
+			}
+
 			ItemStack input = getStackInSlot(1);
 			ItemStack stack = getStackInSlot(2);
 			ItemStack result = QuernStoneRecipes.instance().getResult(input);

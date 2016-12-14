@@ -43,7 +43,7 @@ public class QuernStoneRecipes
 		{
 			if (entry.isItemEqual(input))
 			{
-				return entry;
+				return grindingList.get(entry);
 			}
 		}
 
