@@ -1,5 +1,6 @@
 package com.plutomc.core.common.tileentities;
 
+import com.plutomc.core.common.items.handstone.ItemHandStone;
 import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -320,7 +321,6 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 
 	public static boolean isItemHandStone(ItemStack stack)
 	{
-		// TODO: Add handstone item.
-		return false;
+		return stack.getItem() instanceof ItemHandStone;
 	}
 }
