@@ -1,6 +1,7 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.common.items.*;
+import com.plutomc.core.common.items.handstone.ItemHandStone;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.ModelLoader;
@@ -30,6 +31,11 @@ public class ItemRegistry
 	{
 		CRUCIBLE("crucible", null, CreativeTabs.MATERIALS),
 		CRUCIBLE_UNFIRED("crucible_unfired", null, CreativeTabs.MATERIALS),
+
+		STONE_HANDSTONE("hand_stone", null, CreativeTabs.TOOLS),
+		GRANITE_HANDSTONE("hand_stone_granite", null, CreativeTabs.TOOLS),
+		QUARTZ_HANDSTONE("hand_stone_quartz", null, CreativeTabs.TOOLS),
+		DIAMOND_HANDSTONE("hand_stone_diamond", null, CreativeTabs.TOOLS),
 
 		COPPER_INGOT("copper_ingot", "ingotCopper", CreativeTabs.MATERIALS),
 		COPPER_NUGGET("copper_nugget", "nuggetCopper", CreativeTabs.MATERIALS),
@@ -104,6 +110,10 @@ public class ItemRegistry
 
 	public static final BaseItem CRUCIBLE = new BaseItem(Data.CRUCIBLE);
 	public static final BaseItem CRUCIBLE_UNFIRED = new BaseItem(Data.CRUCIBLE_UNFIRED);
+	public static final BaseItem STONE_HANDSTONE = new ItemHandStone(Data.STONE_HANDSTONE);
+	public static final BaseItem GRANITE_HANDSTONE = new ItemHandStone(Data.GRANITE_HANDSTONE);
+	public static final BaseItem QUARTZ_HANDSTONE = new ItemHandStone(Data.QUARTZ_HANDSTONE);
+	public static final BaseItem DIAMOND_HANDSTONE = new ItemHandStone(Data.DIAMOND_HANDSTONE);
 	public static final BaseItem COPPER_INGOT = new BaseItem(Data.COPPER_INGOT);
 	public static final BaseItem COPPER_NUGGET = new BaseItem(Data.COPPER_NUGGET);
 	public static final BaseItem TIN_INGOT = new BaseItem(Data.TIN_INGOT);
@@ -117,6 +127,10 @@ public class ItemRegistry
 	{
 		register(CRUCIBLE);
 		register(CRUCIBLE_UNFIRED);
+		register(STONE_HANDSTONE);
+		register(GRANITE_HANDSTONE);
+		register(QUARTZ_HANDSTONE);
+		register(DIAMOND_HANDSTONE);
 		register(COPPER_INGOT);
 		register(COPPER_NUGGET);
 		register(TIN_INGOT);
@@ -142,6 +156,10 @@ public class ItemRegistry
 	{
 		registerRender(CRUCIBLE);
 		registerRender(CRUCIBLE_UNFIRED);
+		registerRender(STONE_HANDSTONE);
+		registerRender(GRANITE_HANDSTONE);
+		registerRender(QUARTZ_HANDSTONE);
+		registerRender(DIAMOND_HANDSTONE);
 		registerRender(COPPER_INGOT);
 		registerRender(COPPER_NUGGET);
 		registerRender(TIN_INGOT);

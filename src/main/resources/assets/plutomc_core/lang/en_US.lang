@@ -5,6 +5,11 @@ container.quern_stone.name=Quern Stone
 item.crucible.name=Crucible
 item.crucible_unfired.name=Unfired Crucible
 
+item.hand_stone.name=Hand Stone
+item.hand_stone_granite.name=Granite Hand Stone
+item.hand_stone_quartz.name=Quartz Hand Stone
+item.hand_stone_diamond.name=Diamond Hand Stone
+
 item.copper_ingot.name=Copper Ingot
 item.copper_nugget.name=Copper Nugget
 item.copper_axe.name=Copper Axe
