@@ -1,8 +1,8 @@
 package com.plutomc.core.common.tileentities;
 
+import com.plutomc.core.common.crafting.QuernStoneRecipes;
 import com.plutomc.core.common.items.ItemHandStone;
 import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -13,10 +13,12 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,9 +57,29 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	}
 
 	@Override
-	public void tick()
+	public void update()
 	{
+		if (!world.isRemote)
+		{
+			ItemStack input = getStackInSlot(1);
 
+			if (canGrind())
+			{
+				if (!isGrinding())
+				{
+					totalGrindTime = getGrindTime(input);
+				}
+
+				grindTime++;
+				FMLLog.info("grindTime = %d", grindTime);
+
+				if (grindTime == totalGrindTime)
+				{
+					grindTime = 0;
+					grindItem();
+				}
+			}
+		}
 	}
 
 	@Nonnull
@@ -76,7 +98,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
 	{
-		if (direction == EnumFacing.DOWN && index == 2)
+		if (direction == EnumFacing.UP && index == 0)
 		{
 			Item item = stack.getItem();
 			if (item instanceof ItemHandStone && ((ItemHandStone) item).hasDurability(stack))
@@ -304,6 +326,56 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	public void setCustomName(String customName)
 	{
 		this.customName = customName;
+	}
+
+	public boolean canGrind()
+	{
+		ItemStack handstone = getStackInSlot(0);
+		ItemStack input = getStackInSlot(1);
+		ItemStack result = QuernStoneRecipes.instance().getResult(input);
+		if (handstone.isEmpty() || input.isEmpty() || result.isEmpty())
+		{
+			return false;
+		}
+
+		if (handstone.getItem() instanceof ItemHandStone)
+		{
+			ItemHandStone handstoneItem = (ItemHandStone) handstone.getItem();
+			if (!handstoneItem.hasDurability(handstone))
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+
+		ItemStack stack = getStackInSlot(2);
+		boolean outputReady = stack.isEmpty() || stack.isItemEqual(result);
+		int resultSize = stack.getCount() + result.getCount();
+		return outputReady && resultSize <= getInventoryStackLimit() && resultSize <= stack.getMaxStackSize();
+	}
+
+	public void grindItem()
+	{
+		if (canGrind())
+		{
+			ItemStack input = getStackInSlot(1);
+			ItemStack stack = getStackInSlot(2);
+			ItemStack result = QuernStoneRecipes.instance().getResult(input);
+
+			if (stack.isEmpty())
+			{
+				quernItemStacks.set(2, result.copy());
+			}
+			else if (stack.getItem() == result.getItem())
+			{
+				stack.grow(result.getCount());
+			}
+
+			input.shrink(1);
+		}
 	}
 
 	private int getGrindTime(ItemStack stack)
