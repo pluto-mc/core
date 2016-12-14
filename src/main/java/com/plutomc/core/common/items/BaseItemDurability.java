@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 /**
  * plutomc_core
  * Copyright (C) 2016  Kevin Boxhoorn
@@ -82,25 +84,34 @@ public abstract class BaseItemDurability extends BaseItem
 		}
 	}
 
-	protected int getUses(ItemStack stack)
+	@OverridingMethodsMustInvokeSuper
+	public int getUses(ItemStack stack)
 	{
 		ensureTagCompound(stack);
 		return stack.getTagCompound().getInteger(usesKey);
 	}
 
-	protected int getDurability()
+	@OverridingMethodsMustInvokeSuper
+	public int getDurability()
 	{
 		return durability;
 	}
 
-	protected void setUses(ItemStack stack, int uses)
+	public boolean hasDurability(ItemStack stack)
+	{
+		return getUses(stack) < durability;
+	}
+
+	@OverridingMethodsMustInvokeSuper
+	public void setUses(ItemStack stack, int uses)
 	{
 		ensureTagCompound(stack);
 		stack.getTagCompound().setInteger(usesKey, uses);
 		this.uses = uses;
 	}
 
-	protected void setDurability(int durability)
+	@OverridingMethodsMustInvokeSuper
+	public void setDurability(int durability)
 	{
 		this.durability = durability;
 	}

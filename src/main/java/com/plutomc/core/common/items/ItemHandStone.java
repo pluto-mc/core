@@ -1,6 +1,5 @@
-package com.plutomc.core.common.items.handstone;
+package com.plutomc.core.common.items;
 
-import com.plutomc.core.common.items.BaseItemDurability;
 import com.plutomc.core.init.ItemRegistry;
 
 /**

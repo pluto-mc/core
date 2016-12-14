@@ -1,10 +1,9 @@
 package com.plutomc.core.common.tileentities;
 
-import com.plutomc.core.common.items.handstone.ItemHandStone;
+import com.plutomc.core.common.items.ItemHandStone;
 import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
@@ -77,11 +76,10 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
 	{
-		if (direction == EnumFacing.DOWN && index == 0)
+		if (direction == EnumFacing.DOWN && index == 2)
 		{
 			Item item = stack.getItem();
-			// TODO: Change to ItemRegistry.HAND_STONE that has durability remaining.
-			if (item != Items.WATER_BUCKET && item != Items.BUCKET)
+			if (item instanceof ItemHandStone && ((ItemHandStone) item).hasDurability(stack))
 			{
 				return false;
 			}
@@ -280,7 +278,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	@Override
 	public void clear()
 	{
-
+		quernItemStacks.clear();
 	}
 
 	@Nonnull

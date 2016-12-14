@@ -1,7 +1,7 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.common.items.*;
-import com.plutomc.core.common.items.handstone.ItemHandStone;
+import com.plutomc.core.common.items.ItemHandStone;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.model.ModelLoader;
