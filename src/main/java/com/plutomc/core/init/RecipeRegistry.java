@@ -1,6 +1,7 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
+import com.plutomc.core.common.crafting.QuernStoneRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -155,5 +156,10 @@ public class RecipeRegistry
 			add(new ItemStack(Items.IRON_INGOT, 3));
 			add(new ItemStack(Items.COAL, 1, 1));
 		}}, new ItemStack(ItemRegistry.STEEL_INGOT, 4), 1.2f);
+	}
+
+	private static void registerQuernGrinding()
+	{
+		QuernStoneRecipes.instance().addGrinding(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ASH));
 	}
 }
