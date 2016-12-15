@@ -30,6 +30,7 @@ public class ItemRegistry
 	public enum Data
 	{
 		ASH("ash", null, CreativeTabs.MATERIALS),
+		CROCOITE_DUST("crocoite_dust", null, CreativeTabs.MATERIALS),
 		CRUCIBLE("crucible", null, CreativeTabs.MATERIALS),
 		CRUCIBLE_UNFIRED("crucible_unfired", null, CreativeTabs.MATERIALS),
 
@@ -110,6 +111,7 @@ public class ItemRegistry
 	}
 
 	public static final BaseItem ASH = new BaseItem(Data.ASH);
+	public static final BaseItem CROCOITE_DUST = new BaseItem(Data.CROCOITE_DUST);
 	public static final BaseItem CRUCIBLE = new BaseItem(Data.CRUCIBLE);
 	public static final BaseItem CRUCIBLE_UNFIRED = new BaseItem(Data.CRUCIBLE_UNFIRED);
 	public static final BaseItem STONE_HANDSTONE = new ItemHandStone(Data.STONE_HANDSTONE);
@@ -128,6 +130,7 @@ public class ItemRegistry
 	public static void preInit()
 	{
 		register(ASH);
+		register(CROCOITE_DUST);
 		register(CRUCIBLE);
 		register(CRUCIBLE_UNFIRED);
 		register(STONE_HANDSTONE);
@@ -158,6 +161,7 @@ public class ItemRegistry
 	public static void registerRenders()
 	{
 		registerRender(ASH);
+		registerRender(CROCOITE_DUST);
 		registerRender(CRUCIBLE);
 		registerRender(CRUCIBLE_UNFIRED);
 		registerRender(STONE_HANDSTONE);

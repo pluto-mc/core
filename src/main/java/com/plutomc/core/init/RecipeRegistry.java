@@ -162,5 +162,6 @@ public class RecipeRegistry
 	private static void registerQuernGrinding()
 	{
 		QuernStoneRecipes.instance().addGrinding(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ASH));
+		QuernStoneRecipes.instance().addGrinding(new ItemStack(BlockRegistry.CROCOITE), new ItemStack(ItemRegistry.CROCOITE_DUST));
 	}
 }
