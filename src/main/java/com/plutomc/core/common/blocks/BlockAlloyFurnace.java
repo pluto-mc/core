@@ -188,9 +188,9 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	public static void setBurningAtPos(World worldIn, BlockPos pos, boolean burning)
 	{
 		IBlockState blockState = worldIn.getBlockState(pos);
-		worldIn.setBlockState(pos, blockState.withProperty(BURNING, burning), 3);
-
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+		worldIn.setBlockState(pos, blockState.withProperty(BURNING, burning), 3);
 		if (tileEntity != null)
 		{
 			tileEntity.validate();
