@@ -93,7 +93,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	{
 		if (direction == EnumFacing.UP && index == 0)
 		{
-			if (isItemHandStone(stack) && ((ItemHandStone) stack.getItem()).hasDurability(stack))
+			if (isItemHandStone(stack) && stack.getItemDamage() < stack.getMaxDamage())
 			{
 				return false;
 			}
@@ -332,8 +332,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 
 		if (isItemHandStone(handstone))
 		{
-			ItemHandStone handstoneItem = (ItemHandStone) handstone.getItem();
-			if (!handstoneItem.hasDurability(handstone))
+			if (handstone.getItemDamage() >= handstone.getMaxDamage())
 			{
 				return false;
 			}
@@ -356,7 +355,11 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 			ItemStack handstone = getStackInSlot(0);
 			if (isItemHandStone(handstone))
 			{
-				((ItemHandStone) handstone.getItem()).use(handstone);
+				handstone.setItemDamage(handstone.getItemDamage() + 1);
+				if (handstone.getItemDamage() >= handstone.getMaxDamage())
+				{
+					quernItemStacks.set(0, ItemStack.EMPTY);
+				}
 			}
 
 			ItemStack input = getStackInSlot(1);

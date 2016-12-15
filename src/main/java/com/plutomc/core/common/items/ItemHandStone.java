@@ -1,6 +1,7 @@
 package com.plutomc.core.common.items;
 
 import com.plutomc.core.init.ItemRegistry;
+import net.minecraft.item.ItemStack;
 
 /**
  * plutomc_core
@@ -19,12 +20,18 @@ import com.plutomc.core.init.ItemRegistry;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ItemHandStone extends BaseItemDurability
+public class ItemHandStone extends BaseItem
 {
 	public ItemHandStone(ItemRegistry.Data data)
 	{
 		super(data);
-		setDurability(getHandStoneDurability(data));
+		setMaxDamage(getHandStoneDurability(data));
+	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack)
+	{
+		return 1;
 	}
 
 	public static int getHandStoneDurability(ItemRegistry.Data data)
