@@ -42,6 +42,8 @@ public class RecipeRegistry
 	{
 		// Miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.STEEL_COMPOUND, 3),
+				ItemRegistry.ASH, ItemRegistry.CROCOITE_DUST, ItemRegistry.CROCOITE_DUST);
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.CRUCIBLE_UNFIRED),
 				"   ", "C C", "CCC", 'C', Items.CLAY_BALL);
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ALLOY_FURNACE),
@@ -155,7 +157,7 @@ public class RecipeRegistry
 		}}, new ItemStack(ItemRegistry.BRONZE_INGOT, 9), 0.8f);
 		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
 			add(new ItemStack(Items.IRON_INGOT, 3));
-			add(new ItemStack(Items.COAL, 1, 1));
+			add(new ItemStack(ItemRegistry.STEEL_COMPOUND));
 		}}, new ItemStack(ItemRegistry.STEEL_INGOT, 4), 1.2f);
 	}
 

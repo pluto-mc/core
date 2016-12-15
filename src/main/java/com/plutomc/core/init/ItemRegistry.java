@@ -33,6 +33,7 @@ public class ItemRegistry
 		CROCOITE_DUST("crocoite_dust", null, CreativeTabs.MATERIALS),
 		CRUCIBLE("crucible", null, CreativeTabs.MATERIALS),
 		CRUCIBLE_UNFIRED("crucible_unfired", null, CreativeTabs.MATERIALS),
+		STEEL_COMPOUND("steel_compound", null, CreativeTabs.MATERIALS),
 
 		STONE_HANDSTONE("hand_stone", null, CreativeTabs.TOOLS),
 		GRANITE_HANDSTONE("hand_stone_granite", null, CreativeTabs.TOOLS),
@@ -114,6 +115,7 @@ public class ItemRegistry
 	public static final BaseItem CROCOITE_DUST = new BaseItem(Data.CROCOITE_DUST);
 	public static final BaseItem CRUCIBLE = new BaseItem(Data.CRUCIBLE);
 	public static final BaseItem CRUCIBLE_UNFIRED = new BaseItem(Data.CRUCIBLE_UNFIRED);
+	public static final BaseItem STEEL_COMPOUND = new BaseItem(Data.STEEL_COMPOUND);
 	public static final BaseItem STONE_HANDSTONE = new ItemHandStone(Data.STONE_HANDSTONE);
 	public static final BaseItem GRANITE_HANDSTONE = new ItemHandStone(Data.GRANITE_HANDSTONE);
 	public static final BaseItem QUARTZ_HANDSTONE = new ItemHandStone(Data.QUARTZ_HANDSTONE);
@@ -133,6 +135,7 @@ public class ItemRegistry
 		register(CROCOITE_DUST);
 		register(CRUCIBLE);
 		register(CRUCIBLE_UNFIRED);
+		register(STEEL_COMPOUND);
 		register(STONE_HANDSTONE);
 		register(GRANITE_HANDSTONE);
 		register(QUARTZ_HANDSTONE);
@@ -164,6 +167,7 @@ public class ItemRegistry
 		registerRender(CROCOITE_DUST);
 		registerRender(CRUCIBLE);
 		registerRender(CRUCIBLE_UNFIRED);
+		registerRender(STEEL_COMPOUND);
 		registerRender(STONE_HANDSTONE);
 		registerRender(GRANITE_HANDSTONE);
 		registerRender(QUARTZ_HANDSTONE);
