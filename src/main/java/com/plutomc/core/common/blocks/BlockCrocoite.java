@@ -1,11 +1,16 @@
 package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -110,14 +115,33 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	}
 
 	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		ItemStack heldItem = playerIn.getHeldItem(hand);
+		if (heldItem.isItemEqual(new ItemStack(ItemRegistry.LEAD_NUGGET)) && canGrow(worldIn, pos, state))
+		{
+			heldItem.shrink(1);
+			grow(worldIn, worldIn.rand, pos, state);
+			return true;
+		}
+
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+	}
+
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (canGrow(worldIn, pos, state, !worldIn.isRemote)
-				&& ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(31) == 0))
+				&& ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(16) == 0))
 		{
 			grow(worldIn, rand, pos, state);
 			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
+	}
+
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state)
+	{
+		return canGrow(worldIn, pos, state, !worldIn.isRemote);
 	}
 
 	@Override
@@ -136,7 +160,10 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		worldIn.setBlockState(pos, state.withProperty(GROWTH, state.getValue(GROWTH) + 1));
+		if (rand.nextInt(2) == 0)
+		{
+			worldIn.setBlockState(pos, state.withProperty(GROWTH, state.getValue(GROWTH) + 1));
+		}
 	}
 
 	public static int getMaxGrowth()
