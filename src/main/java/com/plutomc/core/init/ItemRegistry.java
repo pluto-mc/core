@@ -77,7 +77,12 @@ public class ItemRegistry
 		BRONZE_LEGGINGS("bronze_leggings", "leggingsBronze", CreativeTabs.COMBAT),
 
 		STEEL_INGOT("steel_ingot", "ingotSteel", CreativeTabs.MATERIALS),
-		STEEL_NUGGET("steel_nugget", "nuggetSteel", CreativeTabs.MATERIALS);
+		STEEL_NUGGET("steel_nugget", "nuggetSteel", CreativeTabs.MATERIALS),
+		STEEL_AXE("steel_axe", "axeSteel", CreativeTabs.TOOLS),
+		STEEL_HOE("steel_hoe", "hoeSteel", CreativeTabs.TOOLS),
+		STEEL_PICKAXE("steel_pickaxe", "pickaxeSteel", CreativeTabs.TOOLS),
+		STEEL_SHOVEL("steel_shovel", "shovelSteel", CreativeTabs.TOOLS),
+		STEEL_SWORD("steel_sword", "swordSteel", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

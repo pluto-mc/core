@@ -51,6 +51,11 @@ item.bronze_leggings.name=Bronze Leggings
 
 item.steel_ingot.name=Steel Ingot
 item.steel_nugget.name=Steel Nugget
+item.steel_axe.name=Steel Axe
+item.steel_hoe.name=Steel Hoe
+item.steel_pickaxe.name=Steel Pickaxe
+item.steel_shovel.name=Steel Shovel
+item.steel_sword.name=Steel Sword
 
 
 tile.alloy_furnace.name=Alloy Furnace

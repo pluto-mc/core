@@ -102,30 +102,40 @@ public class RecipeRegistry
 				" II", " SI", " S ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.BRONZE_AXE,
 				" II", " SI", " S ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.STEEL_AXE,
+				" II", " SI", " S ", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_HOE,
 				" II", " S ", " S ", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_HOE,
 				" II", " S ", " S ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.BRONZE_HOE,
 				" II", " S ", " S ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.STEEL_HOE,
+				" II", " S ", " S ", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_PICKAXE,
 				"III", " S ", " S ", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_PICKAXE,
 				"III", " S ", " S ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.BRONZE_PICKAXE,
 				"III", " S ", " S ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.STEEL_PICKAXE,
+				"III", " S ", " S ", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_SHOVEL,
 				" I ", " S ", " S ", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_SHOVEL,
 				" I ", " S ", " S ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.BRONZE_SHOVEL,
 				" I ", " S ", " S ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.STEEL_SHOVEL,
+				" I ", " S ", " S ", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.COPPER_SWORD,
 				" I ", " I ", " S ", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.TIN_SWORD,
 				" I ", " I ", " S ", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.BRONZE_SWORD,
 				" I ", " I ", " S ", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName(), 'S', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ToolRegistry.STEEL_SWORD,
+				" I ", " I ", " S ", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName(), 'S', Items.STICK));
 
 		// Armor
 		GameRegistry.addRecipe(new ShapedOreRecipe(ArmorRegistry.COPPER_BOOTS,

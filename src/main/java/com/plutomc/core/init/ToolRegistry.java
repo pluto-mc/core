@@ -29,7 +29,8 @@ public class ToolRegistry
 {
 	public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 132, 4, 1.5f, 14);
 	public static final Item.ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 2, 196, 5, 1.5f, 14);
-	public static final Item.ToolMaterial BRONZE = EnumHelper.addToolMaterial("BRONZE", 2, 364, 6.5f, 2.5f, 14);
+	public static final Item.ToolMaterial BRONZE = EnumHelper.addToolMaterial("BRONZE", 2, 364, 7f, 2.5f, 18);
+	public static final Item.ToolMaterial STEEL = EnumHelper.addToolMaterial("STEEL", 3, 768, 9f, 3.5f, 18);
 
 	public static final BaseItemAxe COPPER_AXE = new BaseItemAxe(ItemRegistry.Data.COPPER_AXE, COPPER);
 	public static final BaseItemHoe COPPER_HOE = new BaseItemHoe(ItemRegistry.Data.COPPER_HOE, COPPER);
@@ -46,6 +47,11 @@ public class ToolRegistry
 	public static final BaseItemPickaxe BRONZE_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.BRONZE_PICKAXE, BRONZE);
 	public static final BaseItemShovel BRONZE_SHOVEL = new BaseItemShovel(ItemRegistry.Data.BRONZE_SHOVEL, BRONZE);
 	public static final BaseItemSword BRONZE_SWORD = new BaseItemSword(ItemRegistry.Data.BRONZE_SWORD, BRONZE);
+	public static final BaseItemAxe STEEL_AXE = new BaseItemAxe(ItemRegistry.Data.STEEL_AXE, STEEL);
+	public static final BaseItemHoe STEEL_HOE = new BaseItemHoe(ItemRegistry.Data.STEEL_HOE, STEEL);
+	public static final BaseItemPickaxe STEEL_PICKAXE = new BaseItemPickaxe(ItemRegistry.Data.STEEL_PICKAXE, STEEL);
+	public static final BaseItemShovel STEEL_SHOVEL = new BaseItemShovel(ItemRegistry.Data.STEEL_SHOVEL, STEEL);
+	public static final BaseItemSword STEEL_SWORD = new BaseItemSword(ItemRegistry.Data.STEEL_SWORD, STEEL);
 
 	public static void preInit()
 	{
@@ -64,6 +70,11 @@ public class ToolRegistry
 		register(BRONZE_PICKAXE.getData(), BRONZE_PICKAXE);
 		register(BRONZE_SHOVEL.getData(), BRONZE_SHOVEL);
 		register(BRONZE_SWORD.getData(), BRONZE_SWORD);
+		register(STEEL_AXE.getData(), STEEL_AXE);
+		register(STEEL_HOE.getData(), STEEL_HOE);
+		register(STEEL_PICKAXE.getData(), STEEL_PICKAXE);
+		register(STEEL_SHOVEL.getData(), STEEL_SHOVEL);
+		register(STEEL_SWORD.getData(), STEEL_SWORD);
 	}
 
 	private static void register(ItemRegistry.Data data, Item item)
@@ -94,6 +105,11 @@ public class ToolRegistry
 		registerRender(BRONZE_PICKAXE);
 		registerRender(BRONZE_SHOVEL);
 		registerRender(BRONZE_SWORD);
+		registerRender(STEEL_AXE);
+		registerRender(STEEL_HOE);
+		registerRender(STEEL_PICKAXE);
+		registerRender(STEEL_SHOVEL);
+		registerRender(STEEL_SWORD);
 	}
 
 	private static void registerRender(Item item)
