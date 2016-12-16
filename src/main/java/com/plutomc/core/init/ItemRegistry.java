@@ -1,5 +1,6 @@
 package com.plutomc.core.init;
 
+import com.plutomc.core.common.data.IDataItem;
 import com.plutomc.core.common.items.*;
 import com.plutomc.core.common.items.ItemHandStone;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -27,7 +28,7 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class ItemRegistry
 {
-	public enum Data
+	public enum Data implements IDataItem
 	{
 		ASH("ash", null, CreativeTabs.MATERIALS),
 		CROCOITE_DUST("crocoite_dust", null, CreativeTabs.MATERIALS),
@@ -99,21 +100,25 @@ public class ItemRegistry
 			this.tab = tab;
 		}
 
+		@Override
 		public String getUnlocalizedName()
 		{
 			return name;
 		}
 
+		@Override
 		public String getRegistryName()
 		{
 			return name;
 		}
 
+		@Override
 		public String getOreDictName()
 		{
 			return oreDictName;
 		}
 
+		@Override
 		public CreativeTabs getCreativeTab()
 		{
 			return tab;
@@ -159,7 +164,7 @@ public class ItemRegistry
 		register(STEEL_NUGGET);
 	}
 
-	private static void register(BaseItem item)
+	public static void register(BaseItem item)
 	{
 		GameRegistry.register(item);
 
@@ -191,7 +196,7 @@ public class ItemRegistry
 		registerRender(STEEL_NUGGET);
 	}
 
-	private static void registerRender(BaseItem item)
+	public static void registerRender(BaseItem item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

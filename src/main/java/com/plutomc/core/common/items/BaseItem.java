@@ -1,6 +1,6 @@
 package com.plutomc.core.common.items;
 
-import com.plutomc.core.init.ItemRegistry;
+import com.plutomc.core.common.data.IDataItem;
 import net.minecraft.item.Item;
 
 /**
@@ -22,9 +22,9 @@ import net.minecraft.item.Item;
  */
 public class BaseItem extends Item
 {
-	private final ItemRegistry.Data data;
+	private final IDataItem data;
 
-	public BaseItem(ItemRegistry.Data data)
+	public BaseItem(IDataItem data)
 	{
 		setUnlocalizedName(data.getUnlocalizedName());
 		setRegistryName(data.getRegistryName());
@@ -32,7 +32,7 @@ public class BaseItem extends Item
 		this.data = data;
 	}
 
-	public ItemRegistry.Data getData()
+	public IDataItem getData()
 	{
 		return data;
 	}

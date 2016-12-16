@@ -1,6 +1,6 @@
 package com.plutomc.core.common.items.armor;
 
-import com.plutomc.core.init.ItemRegistry;
+import com.plutomc.core.common.data.IDataItem;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 
@@ -23,9 +23,9 @@ import net.minecraft.item.ItemArmor;
  */
 public class BaseItemLeggings extends ItemArmor
 {
-	private final ItemRegistry.Data data;
+	private final IDataItem data;
 
-	public BaseItemLeggings(ItemRegistry.Data data, ArmorMaterial materialIn)
+	public BaseItemLeggings(IDataItem data, ArmorMaterial materialIn)
 	{
 		super(materialIn, 2, EntityEquipmentSlot.LEGS);
 		setUnlocalizedName(data.getUnlocalizedName());
@@ -34,7 +34,7 @@ public class BaseItemLeggings extends ItemArmor
 		this.data = data;
 	}
 
-	public ItemRegistry.Data getData()
+	public IDataItem getData()
 	{
 		return data;
 	}

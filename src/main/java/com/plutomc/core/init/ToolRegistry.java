@@ -1,5 +1,6 @@
 package com.plutomc.core.init;
 
+import com.plutomc.core.common.data.IDataItem;
 import com.plutomc.core.common.items.tools.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -77,7 +78,7 @@ public class ToolRegistry
 		register(STEEL_SWORD.getData(), STEEL_SWORD);
 	}
 
-	private static void register(ItemRegistry.Data data, Item item)
+	private static void register(IDataItem data, Item item)
 	{
 		GameRegistry.register(item);
 

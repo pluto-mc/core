@@ -1,6 +1,6 @@
 package com.plutomc.core.common.items.tools;
 
-import com.plutomc.core.init.ItemRegistry;
+import com.plutomc.core.common.data.IDataItem;
 import net.minecraft.item.ItemSword;
 
 /**
@@ -22,9 +22,9 @@ import net.minecraft.item.ItemSword;
  */
 public class BaseItemSword extends ItemSword
 {
-	private final ItemRegistry.Data data;
+	private final IDataItem data;
 
-	public BaseItemSword(ItemRegistry.Data data, ToolMaterial material)
+	public BaseItemSword(IDataItem data, ToolMaterial material)
 	{
 		super(material);
 		setUnlocalizedName(data.getUnlocalizedName());
@@ -33,7 +33,7 @@ public class BaseItemSword extends ItemSword
 		this.data = data;
 	}
 
-	public ItemRegistry.Data getData()
+	public IDataItem getData()
 	{
 		return data;
 	}

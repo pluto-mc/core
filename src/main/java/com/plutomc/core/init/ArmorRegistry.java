@@ -1,6 +1,7 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.Core;
+import com.plutomc.core.common.data.IDataItem;
 import com.plutomc.core.common.items.armor.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
@@ -72,7 +73,7 @@ public class ArmorRegistry
 		register(STEEL_LEGGINGS.getData(), STEEL_LEGGINGS);
 	}
 
-	private static void register(ItemRegistry.Data data, Item item)
+	private static void register(IDataItem data, Item item)
 	{
 		GameRegistry.register(item);
 

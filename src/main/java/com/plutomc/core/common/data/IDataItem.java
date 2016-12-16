@@ -1,8 +1,6 @@
-package com.plutomc.core.common.items.armor;
+package com.plutomc.core.common.data;
 
-import com.plutomc.core.common.data.IDataItem;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.creativetab.CreativeTabs;
 
 /**
  * plutomc_core
@@ -21,21 +19,13 @@ import net.minecraft.item.ItemArmor;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BaseItemHelmet extends ItemArmor
+public interface IDataItem
 {
-	private final IDataItem data;
+	public String getUnlocalizedName();
 
-	public BaseItemHelmet(IDataItem data, ArmorMaterial materialIn)
-	{
-		super(materialIn, 1, EntityEquipmentSlot.HEAD);
-		setUnlocalizedName(data.getUnlocalizedName());
-		setRegistryName(data.getRegistryName());
-		setCreativeTab(data.getCreativeTab());
-		this.data = data;
-	}
+	public String getRegistryName();
 
-	public IDataItem getData()
-	{
-		return data;
-	}
+	public String getOreDictName();
+
+	public CreativeTabs getCreativeTab();
 }
