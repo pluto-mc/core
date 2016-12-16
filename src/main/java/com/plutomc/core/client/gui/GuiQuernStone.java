@@ -61,12 +61,16 @@ public class GuiQuernStone extends GuiContainer
 
 		if (tileEntity.isGrinding())
 		{
-			int k = getGrindingScaled(13);
-			drawTexturedModalRect(i + 52, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
+			drawTexturedModalRect(i + 48, j + 35, 176,  16 + grindingRotation / 4 * 14, 14, 14);
+
+			if (++grindingRotation > 31)
+			{
+				grindingRotation = 0;
+			}
 		}
 
 		int l = getProgressScaled(24);
-		drawTexturedModalRect(i + 73, j + 34, 176, 14, l + 1, 16);
+		drawTexturedModalRect(i + 73, j + 34, 176, 0, l + 1, 16);
 	}
 
 	private int getProgressScaled(int pixels)
@@ -74,15 +78,5 @@ public class GuiQuernStone extends GuiContainer
 		int i = tileEntity.getField(0);
 		int j = tileEntity.getField(1);
 		return j != 0 && i != 0 ? i * pixels / j : 0;
-	}
-
-	private int getGrindingScaled(int pixels)
-	{
-		if (grindingRotation == 0)
-		{
-			grindingRotation = 200;
-		}
-
-		return tileEntity.getField(0) * pixels / grindingRotation;
 	}
 }
