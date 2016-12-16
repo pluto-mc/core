@@ -1,5 +1,6 @@
 package com.plutomc.core.common.gui;
 
+import com.plutomc.core.common.gui.slots.SlotAlloyFurnaceOutput;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -40,7 +41,7 @@ public class ContainerAlloyFurnace extends Container
 		addSlotToContainer(new SlotFurnaceFuel(tileFurnace, 0, 51, 53));
 		addSlotToContainer(new Slot(tileFurnace, 1, 41, 17));
 		addSlotToContainer(new Slot(tileFurnace, 2, 59, 17));
-		addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, tileFurnace, 3, 114, 35));
+		addSlotToContainer(new SlotAlloyFurnaceOutput(playerInventory.player, tileFurnace, 3, 114, 35));
 
 		for (int i = 0; i < 3; ++i)
 		{

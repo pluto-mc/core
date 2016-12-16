@@ -73,11 +73,11 @@ public class AlloyFurnaceRecipes
 		return AlloyRecipe.EMPTY;
 	}
 
-	public float getSmeltingExperience(List<ItemStack> inputs)
+	public float getSmeltingExperience(ItemStack stack)
 	{
 		for (AlloyRecipe entry : smeltingList)
 		{
-			if (entry.canSmelt(inputs))
+			if (entry.getOutput().isItemEqual(stack))
 			{
 				return entry.getExperience();
 			}
