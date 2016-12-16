@@ -82,7 +82,11 @@ public class ItemRegistry
 		STEEL_HOE("steel_hoe", "hoeSteel", CreativeTabs.TOOLS),
 		STEEL_PICKAXE("steel_pickaxe", "pickaxeSteel", CreativeTabs.TOOLS),
 		STEEL_SHOVEL("steel_shovel", "shovelSteel", CreativeTabs.TOOLS),
-		STEEL_SWORD("steel_sword", "swordSteel", CreativeTabs.COMBAT);
+		STEEL_SWORD("steel_sword", "swordSteel", CreativeTabs.COMBAT),
+		STEEL_BOOTS("steel_boots", "bootsSteel", CreativeTabs.COMBAT),
+		STEEL_CHESTPLATE("steel_chestplate", "chestplateSteel", CreativeTabs.COMBAT),
+		STEEL_HELMET("steel_helmet", "helmetSteel", CreativeTabs.COMBAT),
+		STEEL_LEGGINGS("steel_leggings", "leggingsSteel", CreativeTabs.COMBAT);
 
 		private final String name;
 		private final String oreDictName;

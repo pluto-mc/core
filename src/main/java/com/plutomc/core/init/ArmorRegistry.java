@@ -32,7 +32,8 @@ public class ArmorRegistry
 {
 	public static final ItemArmor.ArmorMaterial COPPER = EnumHelper.addArmorMaterial("COPPER", Core.MOD_ID + ":copper", 10, new int[] { 2, 3, 4, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
 	public static final ItemArmor.ArmorMaterial TIN = EnumHelper.addArmorMaterial("TIN", Core.MOD_ID + ":tin", 13, new int[] { 2, 4, 5, 2 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
-	public static final ItemArmor.ArmorMaterial BRONZE = EnumHelper.addArmorMaterial("BRONZE", Core.MOD_ID + ":bronze", 24, new int[] { 2, 5, 6, 2 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
+	public static final ItemArmor.ArmorMaterial BRONZE = EnumHelper.addArmorMaterial("BRONZE", Core.MOD_ID + ":bronze", 18, new int[] { 2, 5, 6, 2 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
+	public static final ItemArmor.ArmorMaterial STEEL = EnumHelper.addArmorMaterial("STEEL", Core.MOD_ID + ":steel", 24, new int[] { 3, 6, 8, 3 }, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0);
 
 	public static final BaseItemBoots COPPER_BOOTS = new BaseItemBoots(ItemRegistry.Data.COPPER_BOOTS, COPPER);
 	public static final BaseItemChestplate COPPER_CHESTPLATE = new BaseItemChestplate(ItemRegistry.Data.COPPER_CHESTPLATE, COPPER);
@@ -46,6 +47,10 @@ public class ArmorRegistry
 	public static final BaseItemChestplate BRONZE_CHESTPLATE = new BaseItemChestplate(ItemRegistry.Data.BRONZE_CHESTPLATE, BRONZE);
 	public static final BaseItemHelmet BRONZE_HELMET = new BaseItemHelmet(ItemRegistry.Data.BRONZE_HELMET, BRONZE);
 	public static final BaseItemLeggings BRONZE_LEGGINGS = new BaseItemLeggings(ItemRegistry.Data.BRONZE_LEGGINGS, BRONZE);
+	public static final BaseItemBoots STEEL_BOOTS = new BaseItemBoots(ItemRegistry.Data.STEEL_BOOTS, STEEL);
+	public static final BaseItemChestplate STEEL_CHESTPLATE = new BaseItemChestplate(ItemRegistry.Data.STEEL_CHESTPLATE, STEEL);
+	public static final BaseItemHelmet STEEL_HELMET = new BaseItemHelmet(ItemRegistry.Data.STEEL_HELMET, STEEL);
+	public static final BaseItemLeggings STEEL_LEGGINGS = new BaseItemLeggings(ItemRegistry.Data.STEEL_LEGGINGS, STEEL);
 
 	public static void preInit()
 	{
@@ -61,6 +66,10 @@ public class ArmorRegistry
 		register(BRONZE_CHESTPLATE.getData(), BRONZE_CHESTPLATE);
 		register(BRONZE_HELMET.getData(), BRONZE_HELMET);
 		register(BRONZE_LEGGINGS.getData(), BRONZE_LEGGINGS);
+		register(STEEL_BOOTS.getData(), STEEL_BOOTS);
+		register(STEEL_CHESTPLATE.getData(), STEEL_CHESTPLATE);
+		register(STEEL_HELMET.getData(), STEEL_HELMET);
+		register(STEEL_LEGGINGS.getData(), STEEL_LEGGINGS);
 	}
 
 	private static void register(ItemRegistry.Data data, Item item)
@@ -88,6 +97,10 @@ public class ArmorRegistry
 		registerRender(BRONZE_CHESTPLATE);
 		registerRender(BRONZE_HELMET);
 		registerRender(BRONZE_LEGGINGS);
+		registerRender(STEEL_BOOTS);
+		registerRender(STEEL_CHESTPLATE);
+		registerRender(STEEL_HELMET);
+		registerRender(STEEL_LEGGINGS);
 	}
 
 	private static void registerRender(Item item)

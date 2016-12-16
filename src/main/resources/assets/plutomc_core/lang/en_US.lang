@@ -56,6 +56,10 @@ item.steel_hoe.name=Steel Hoe
 item.steel_pickaxe.name=Steel Pickaxe
 item.steel_shovel.name=Steel Shovel
 item.steel_sword.name=Steel Sword
+item.steel_boots.name=Steel Boots
+item.steel_chestplate.name=Steel Chestplate
+item.steel_helmet.name=Steel Helmet
+item.steel_leggings.name=Steel Leggings
 
 
 tile.alloy_furnace.name=Alloy Furnace
