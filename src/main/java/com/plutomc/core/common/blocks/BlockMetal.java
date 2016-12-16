@@ -1,6 +1,6 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.common.data.IDataBlock;
 import net.minecraft.block.SoundType;
 
 /**
@@ -22,7 +22,7 @@ import net.minecraft.block.SoundType;
  */
 public class BlockMetal extends BaseBlock
 {
-	public BlockMetal(BlockRegistry.Data data)
+	public BlockMetal(IDataBlock data)
 	{
 		super(data);
 		setHardness(5);

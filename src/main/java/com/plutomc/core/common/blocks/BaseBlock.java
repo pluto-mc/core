@@ -1,6 +1,6 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.common.data.IDataBlock;
 import net.minecraft.block.Block;
 
 /**
@@ -24,9 +24,9 @@ public class BaseBlock extends Block
 {
 	public static final double PIXEL_SIZE = 0.0625d;
 
-	private final BlockRegistry.Data data;
+	private final IDataBlock data;
 
-	public BaseBlock(BlockRegistry.Data data)
+	public BaseBlock(IDataBlock data)
 	{
 		super(data.getMaterial());
 		setUnlocalizedName(data.getUnlocalizedName());
@@ -35,7 +35,7 @@ public class BaseBlock extends Block
 		this.data = data;
 	}
 
-	public BlockRegistry.Data getData()
+	public IDataBlock getData()
 	{
 		return data;
 	}

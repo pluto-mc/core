@@ -2,6 +2,7 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.Core;
 import com.plutomc.core.common.blocks.*;
+import com.plutomc.core.common.data.IDataBlock;
 import com.plutomc.core.common.items.BaseItemBlock;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
@@ -32,7 +33,7 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class BlockRegistry
 {
-	public enum Data
+	public enum Data implements IDataBlock
 	{
 		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
@@ -66,46 +67,55 @@ public class BlockRegistry
 			this.tileEntity = tileEntity;
 		}
 
+		@Override
 		public String getUnlocalizedName()
 		{
 			return name;
 		}
 
+		@Override
 		public String getRegistryName()
 		{
 			return name;
 		}
 
+		@Override
 		public String getOreDictName()
 		{
 			return oreDictName;
 		}
 
+		@Override
 		public CreativeTabs getCreativeTab()
 		{
 			return tab;
 		}
 
+		@Override
 		public Material getMaterial()
 		{
 			return material;
 		}
 
+		@Override
 		public Class<? extends TileEntity> getTileEntityClass()
 		{
 			return tileEntity;
 		}
 
+		@Override
 		public String getTileEntityName()
 		{
 			return Core.MOD_ID + ":" + getRegistryName() + "_tileentity";
 		}
 
+		@Override
 		public void setTileEntityID(int tileEntityID)
 		{
 			this.tileEntityID = tileEntityID;
 		}
 
+		@Override
 		public int getTileEntityID()
 		{
 			return tileEntityID;
@@ -139,9 +149,9 @@ public class BlockRegistry
 		register(LEAD_ORE);
 	}
 
-	private static void register(BaseItemBlock block)
+	public static void register(BaseItemBlock block)
 	{
-		Data data = block.getBlock().getData();
+		IDataBlock data = block.getBlock().getData();
 
 		GameRegistry.register(block);
 		GameRegistry.register(block.getBlock());
@@ -172,7 +182,7 @@ public class BlockRegistry
 		registerRender(LEAD_ORE);
 	}
 
-	private static void registerRender(BaseItemBlock block)
+	public static void registerRender(BaseItemBlock block)
 	{
 		ModelLoader.setCustomModelResourceLocation(block, 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}

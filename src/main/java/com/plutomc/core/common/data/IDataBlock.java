@@ -1,7 +1,8 @@
-package com.plutomc.core.common.blocks;
+package com.plutomc.core.common.data;
 
-import com.plutomc.core.common.data.IDataBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * plutomc_core
@@ -20,14 +21,23 @@ import net.minecraft.block.SoundType;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BlockOre extends BaseBlock
+public interface IDataBlock
 {
-	public BlockOre(IDataBlock data)
-	{
-		super(data);
-		setHardness(3);
-		setHarvestLevel("pickaxe", 1);
-		setResistance(5);
-		setSoundType(SoundType.STONE);
-	}
+	public String getUnlocalizedName();
+
+	public String getRegistryName();
+
+	public String getOreDictName();
+
+	public CreativeTabs getCreativeTab();
+
+	public Material getMaterial();
+
+	public Class<? extends TileEntity> getTileEntityClass();
+
+	public String getTileEntityName();
+
+	public void setTileEntityID(int tileEntityID);
+
+	public int getTileEntityID();
 }
