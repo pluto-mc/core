@@ -1,7 +1,8 @@
-package com.plutomc.core.common.gui;
+package com.plutomc.core.common.containers;
 
-import com.plutomc.core.common.gui.slots.SlotQuernStoneHand;
-import com.plutomc.core.common.gui.slots.SlotQuernStoneOutput;
+import com.plutomc.core.common.containers.slots.SlotQuernStoneHand;
+import com.plutomc.core.common.containers.slots.SlotQuernStoneOutput;
+import com.plutomc.core.common.crafting.QuernStoneRecipes;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -126,6 +127,11 @@ public class ContainerQuernStone extends Container
 					{
 						return ItemStack.EMPTY;
 					}
+				}
+				else if (!QuernStoneRecipes.instance().getResult(stack).isEmpty()
+						&& !mergeItemStack(stack, 1, 2, false))
+				{
+					return ItemStack.EMPTY;
 				}
 				else if (index >= 3 && index < 30)
 				{

@@ -1,4 +1,4 @@
-package com.plutomc.core.common.gui.slots;
+package com.plutomc.core.common.containers.slots;
 
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
 import net.minecraft.entity.item.EntityXPOrb;

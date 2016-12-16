@@ -1,7 +1,7 @@
 package com.plutomc.core.client.gui;
 
 import com.plutomc.core.Core;
-import com.plutomc.core.common.gui.ContainerQuernStone;
+import com.plutomc.core.common.containers.ContainerQuernStone;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

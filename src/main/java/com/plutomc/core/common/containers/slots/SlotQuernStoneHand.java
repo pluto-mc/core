@@ -1,5 +1,6 @@
-package com.plutomc.core.common.gui.slots;
+package com.plutomc.core.common.containers.slots;
 
+import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -21,9 +22,9 @@ import net.minecraft.item.ItemStack;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class SlotQuernStoneOutput extends Slot
+public class SlotQuernStoneHand extends Slot
 {
-	public SlotQuernStoneOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotQuernStoneHand(IInventory inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
 	}
@@ -31,6 +32,12 @@ public class SlotQuernStoneOutput extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return false;
+		return TileEntityQuernStone.isItemHandStone(stack);
+	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack)
+	{
+		return 1;
 	}
 }

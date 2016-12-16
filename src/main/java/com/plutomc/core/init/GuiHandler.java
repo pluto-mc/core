@@ -2,8 +2,8 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.client.gui.GuiAlloyFurnace;
 import com.plutomc.core.client.gui.GuiQuernStone;
-import com.plutomc.core.common.gui.ContainerAlloyFurnace;
-import com.plutomc.core.common.gui.ContainerQuernStone;
+import com.plutomc.core.common.containers.ContainerAlloyFurnace;
+import com.plutomc.core.common.containers.ContainerQuernStone;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import net.minecraft.entity.player.EntityPlayer;
