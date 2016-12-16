@@ -68,6 +68,8 @@ public class RecipeRegistry
 				"III", "III", "III", 'I', ItemRegistry.TIN_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.BRONZE_BLOCK,
 				"III", "III", "III", 'I', ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.LEAD_BLOCK,
+				"III", "III", "III", 'I', ItemRegistry.LEAD_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.STEEL_BLOCK,
 				"III", "III", "III", 'I', ItemRegistry.STEEL_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.COPPER_INGOT,
@@ -76,6 +78,8 @@ public class RecipeRegistry
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.TIN_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.BRONZE_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.BRONZE_NUGGET.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.LEAD_INGOT,
+				"NNN", "NNN", "NNN", 'N', ItemRegistry.LEAD_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.STEEL_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.STEEL_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_INGOT, 9),
@@ -84,6 +88,8 @@ public class RecipeRegistry
 				BlockRegistry.TIN_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.BRONZE_INGOT, 9),
 				BlockRegistry.BRONZE_BLOCK.getBlock().getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.LEAD_INGOT, 9),
+				BlockRegistry.LEAD_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.STEEL_INGOT, 9),
 				BlockRegistry.STEEL_BLOCK.getBlock().getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9),
@@ -92,6 +98,8 @@ public class RecipeRegistry
 				ItemRegistry.TIN_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.BRONZE_NUGGET, 9),
 				ItemRegistry.BRONZE_INGOT.getData().getOreDictName()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.LEAD_NUGGET, 9),
+				ItemRegistry.LEAD_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.STEEL_NUGGET, 9),
 				ItemRegistry.STEEL_INGOT.getData().getOreDictName()));
 
@@ -177,6 +185,7 @@ public class RecipeRegistry
 		GameRegistry.addSmelting(ItemRegistry.CRUCIBLE_UNFIRED, new ItemStack(ItemRegistry.CRUCIBLE), 0.4f);
 		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7f);
 		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7f);
+		GameRegistry.addSmelting(BlockRegistry.LEAD_ORE.getBlock(), new ItemStack(ItemRegistry.LEAD_INGOT), 0.7f);
 	}
 
 	private static void registerAlloySmelting()

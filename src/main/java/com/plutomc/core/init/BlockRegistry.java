@@ -47,9 +47,10 @@ public class BlockRegistry
 
 		BRONZE_BLOCK("bronze_block", "blockBronze", CreativeTabs.DECORATIONS, Material.ROCK, null),
 
-		STEEL_BLOCK("steel_block", "blockSteel", CreativeTabs.DECORATIONS, Material.ROCK, null),
+		LEAD_BLOCK("lead_block", "blockLead", CreativeTabs.DECORATIONS, Material.ROCK, null),
+		LEAD_ORE("lead_ore", "oreLead", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 
-		LEAD_ORE("lead_ore", "oreLead", CreativeTabs.DECORATIONS, Material.ROCK, null);
+		STEEL_BLOCK("steel_block", "blockSteel", CreativeTabs.DECORATIONS, Material.ROCK, null);
 
 		private final String name;
 		private final String oreDictName;
@@ -130,8 +131,9 @@ public class BlockRegistry
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
 	public static final BaseItemBlock TIN_ORE = new BaseItemBlock(new BlockOre(Data.TIN_ORE));
 	public static final BaseItemBlock BRONZE_BLOCK = new BaseItemBlock(new BlockMetal(Data.BRONZE_BLOCK));
-	public static final BaseItemBlock STEEL_BLOCK = new BaseItemBlock(new BlockMetal(Data.STEEL_BLOCK));
+	public static final BaseItemBlock LEAD_BLOCK = new BaseItemBlock(new BlockMetal(Data.LEAD_BLOCK));
 	public static final BaseItemBlock LEAD_ORE = new BaseItemBlock(new BlockLeadOre());
+	public static final BaseItemBlock STEEL_BLOCK = new BaseItemBlock(new BlockMetal(Data.STEEL_BLOCK));
 
 	private static int TILEENTITY_ID = 1;
 
@@ -145,8 +147,9 @@ public class BlockRegistry
 		register(TIN_BLOCK);
 		register(TIN_ORE);
 		register(BRONZE_BLOCK);
-		register(STEEL_BLOCK);
+		register(LEAD_BLOCK);
 		register(LEAD_ORE);
+		register(STEEL_BLOCK);
 	}
 
 	public static void register(BaseItemBlock block)
@@ -178,8 +181,9 @@ public class BlockRegistry
 		registerRender(TIN_BLOCK);
 		registerRender(TIN_ORE);
 		registerRender(BRONZE_BLOCK);
-		registerRender(STEEL_BLOCK);
+		registerRender(LEAD_BLOCK);
 		registerRender(LEAD_ORE);
+		registerRender(STEEL_BLOCK);
 	}
 
 	public static void registerRender(BaseItemBlock block)

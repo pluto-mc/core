@@ -77,6 +77,9 @@ public class ItemRegistry
 		BRONZE_HELMET("bronze_helmet", "helmetBronze", CreativeTabs.COMBAT),
 		BRONZE_LEGGINGS("bronze_leggings", "leggingsBronze", CreativeTabs.COMBAT),
 
+		LEAD_INGOT("lead_ingot", "ingotLead", CreativeTabs.MATERIALS),
+		LEAD_NUGGET("lead_nugget", "nuggetLead", CreativeTabs.MATERIALS),
+		
 		STEEL_INGOT("steel_ingot", "ingotSteel", CreativeTabs.MATERIALS),
 		STEEL_NUGGET("steel_nugget", "nuggetSteel", CreativeTabs.MATERIALS),
 		STEEL_AXE("steel_axe", "axeSteel", CreativeTabs.TOOLS),
@@ -140,6 +143,8 @@ public class ItemRegistry
 	public static final BaseItem TIN_NUGGET = new BaseItem(Data.TIN_NUGGET);
 	public static final BaseItem BRONZE_INGOT = new BaseItem(Data.BRONZE_INGOT);
 	public static final BaseItem BRONZE_NUGGET = new BaseItem(Data.BRONZE_NUGGET);
+	public static final BaseItem LEAD_INGOT = new BaseItem(Data.LEAD_INGOT);
+	public static final BaseItem LEAD_NUGGET = new BaseItem(Data.LEAD_NUGGET);
 	public static final BaseItem STEEL_INGOT = new BaseItem(Data.STEEL_INGOT);
 	public static final BaseItem STEEL_NUGGET = new BaseItem(Data.STEEL_NUGGET);
 
@@ -160,6 +165,8 @@ public class ItemRegistry
 		register(TIN_NUGGET);
 		register(BRONZE_INGOT);
 		register(BRONZE_NUGGET);
+		register(LEAD_INGOT);
+		register(LEAD_NUGGET);
 		register(STEEL_INGOT);
 		register(STEEL_NUGGET);
 	}
@@ -192,6 +199,8 @@ public class ItemRegistry
 		registerRender(TIN_NUGGET);
 		registerRender(BRONZE_INGOT);
 		registerRender(BRONZE_NUGGET);
+		registerRender(LEAD_INGOT);
+		registerRender(LEAD_NUGGET);
 		registerRender(STEEL_INGOT);
 		registerRender(STEEL_NUGGET);
 	}
