@@ -49,6 +49,18 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ALLOY_FURNACE),
 				"SSS", "FCF", "SSS", 'S', Blocks.COBBLESTONE, 'F', Blocks.FURNACE, 'C', ItemRegistry.CRUCIBLE);
 
+		// Quern Stone
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.QUERN_STONE),
+				"SSS", " W ", "SSS", 'S', Blocks.COBBLESTONE, 'W', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.STONE_HANDSTONE),
+				"  W", "SSS", 'S', Blocks.COBBLESTONE, 'W', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.GRANITE_HANDSTONE),
+				"  W", "SSS", 'S', new ItemStack(Blocks.STONE, 1, 1), 'W', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.QUARTZ_HANDSTONE),
+				"  W", "SSS", 'S', Items.QUARTZ, 'W', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(ItemRegistry.DIAMOND_HANDSTONE),
+				"  W", "SSS", 'S', Items.DIAMOND, 'W', Items.STICK);
+
 		// Metals
 		GameRegistry.addRecipe(new ShapedOreRecipe(BlockRegistry.COPPER_BLOCK,
 				"III", "III", "III", 'I', ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
