@@ -2,6 +2,7 @@ package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -115,6 +117,21 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	}
 
 	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	{
+		if (pos.down().equals(fromPos) && worldIn.isAirBlock(fromPos))
+		{
+			worldIn.destroyBlock(pos, true);
+		}
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		return worldIn.getBlockState(pos.down()).isFullCube();
+	}
+
+	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack heldItem = playerIn.getHeldItem(hand);
@@ -131,11 +148,9 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (canGrow(worldIn, pos, state, !worldIn.isRemote)
-				&& ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(16) == 0))
+		if (rand.nextInt(16) == 0 && canGrow(worldIn, pos, state))
 		{
 			grow(worldIn, rand, pos, state);
-			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
 	}
 
@@ -160,9 +175,10 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
 	{
-		if (rand.nextInt(2) == 0)
+		if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(2) == 0))
 		{
 			worldIn.setBlockState(pos, state.withProperty(GROWTH, state.getValue(GROWTH) + 1));
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
 	}
 
