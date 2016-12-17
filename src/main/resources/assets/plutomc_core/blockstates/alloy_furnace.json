@@ -1,12 +1,8 @@
 {
     "variants": {
-        "burning=false,facing=north": { "model": "plutomc_core:alloy_furnace" },
-        "burning=false,facing=south": { "model": "plutomc_core:alloy_furnace", "y": 180 },
-        "burning=false,facing=west":  { "model": "plutomc_core:alloy_furnace", "y": 270 },
-        "burning=false,facing=east":  { "model": "plutomc_core:alloy_furnace", "y": 90 },
-        "burning=true,facing=north": { "model": "plutomc_core:alloy_furnace_lit" },
-        "burning=true,facing=south": { "model": "plutomc_core:alloy_furnace_lit", "y": 180 },
-        "burning=true,facing=west":  { "model": "plutomc_core:alloy_furnace_lit", "y": 270 },
-        "burning=true,facing=east":  { "model": "plutomc_core:alloy_furnace_lit", "y": 90 }
+        "facing=north": { "model": "plutomc_core:alloy_furnace" },
+        "facing=south": { "model": "plutomc_core:alloy_furnace", "y": 180 },
+        "facing=west":  { "model": "plutomc_core:alloy_furnace", "y": 270 },
+        "facing=east":  { "model": "plutomc_core:alloy_furnace", "y": 90 }
     }
 }

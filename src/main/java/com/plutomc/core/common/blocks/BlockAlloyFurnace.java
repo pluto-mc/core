@@ -6,7 +6,6 @@ import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.GuiHandler;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -50,50 +49,49 @@ import java.util.Random;
 public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	public static final PropertyBool BURNING = PropertyBool.create("burning");
 
-	public BlockAlloyFurnace()
+	private final boolean isBurning;
+	private static boolean keepInventory;
+
+	public BlockAlloyFurnace(boolean isBurning)
 	{
-		super(BlockRegistry.Data.ALLOY_FURNACE);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
+		super(isBurning ? BlockRegistry.Data.ALLOY_FURNACE_LIT : BlockRegistry.Data.ALLOY_FURNACE);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setHardness(3.5f);
 		setHarvestLevel("pickaxe", 1);
+		setLightLevel(isBurning ? 0.875f : 0);
 		setResistance(17.5f);
 		setSoundType(SoundType.STONE);
+
 		isBlockContainer = true;
+		this.isBurning = isBurning;
 	}
 
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, FACING, BURNING);
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Nonnull
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
 	{
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(BURNING, false);
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7)).withProperty(BURNING, (meta & 8) > 0);
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int i = 0;
-		i |= state.getValue(FACING).getIndex();
-		if (state.getValue(BURNING))
-		{
-			i |= 8;
-		}
-		return i;
+		return state.getValue(FACING).getIndex();
 	}
 
 	@Nullable
@@ -106,11 +104,14 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
-		if (tileEntity instanceof TileEntityAlloyFurnace)
+		if (!keepInventory)
 		{
-			InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace) tileEntity);
-			worldIn.updateComparatorOutputLevel(pos, this);
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof TileEntityAlloyFurnace)
+			{
+				InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace) tileEntity);
+				worldIn.updateComparatorOutputLevel(pos, this);
+			}
 		}
 
 		super.breakBlock(worldIn, pos, state);
@@ -148,9 +149,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
-		setLightLevel(stateIn.getValue(BURNING) ? 0.875f : 0);
-
-		if (stateIn.getValue(BURNING))
+		if (isBurning)
 		{
 			EnumFacing facing = stateIn.getValue(FACING);
 			double d0 = pos.getX() + 0.5D;
@@ -187,14 +186,17 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 
 	public static void setBurningAtPos(World worldIn, BlockPos pos, boolean burning)
 	{
+		IBlockState targetState = burning ? BlockRegistry.ALLOY_FURNACE_LIT.getBlock().getDefaultState() : BlockRegistry.ALLOY_FURNACE.getBlock().getDefaultState();
 		IBlockState blockState = worldIn.getBlockState(pos);
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-		worldIn.setBlockState(pos, blockState.withProperty(BURNING, burning), 3);
+		keepInventory = true;
+		worldIn.setBlockState(pos, targetState.withProperty(FACING, blockState.getValue(FACING)), 3);
 		if (tileEntity != null)
 		{
 			tileEntity.validate();
 			worldIn.setTileEntity(pos, tileEntity);
 		}
+		keepInventory = false;
 	}
 }
