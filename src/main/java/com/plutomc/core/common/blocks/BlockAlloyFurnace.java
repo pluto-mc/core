@@ -63,7 +63,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		setResistance(17.5f);
 		setSoundType(SoundType.STONE);
 
-		isBlockContainer = true;
+		this.isBlockContainer = true;
 		this.isBurning = isBurning;
 	}
 

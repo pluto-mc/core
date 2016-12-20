@@ -54,7 +54,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 	private NonNullList<ItemStack> furnaceItemStacks;
 	private int burnTime;
-	private int currentItemBurnTime;
+	private int currentBurnTime;
 	private int cookTime;
 	private int totalCookTime;
 	private String customName;
@@ -85,19 +85,18 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 				if (!isBurning() && canSmelt())
 				{
 					burnTime = TileEntityFurnace.getItemBurnTime(fuel);
-					currentItemBurnTime = burnTime;
+					currentBurnTime = burnTime;
 
 					if (isBurning())
 					{
 						flagDirty = true;
+
 						if (!fuel.isEmpty())
 						{
-							Item fuelItem = fuel.getItem();
 							fuel.shrink(1);
-
 							if (fuel.isEmpty())
 							{
-								ItemStack fuelStack = fuelItem.getContainerItem(fuel);
+								ItemStack fuelStack = fuel.getItem().getContainerItem(fuel);
 								furnaceItemStacks.set(0, fuelStack);
 							}
 						}
@@ -187,18 +186,21 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		return true;
 	}
 
+	@Nonnull
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
 		return furnaceItemStacks.get(index);
 	}
 
+	@Nonnull
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
 		return ItemStackHelper.getAndSplit(furnaceItemStacks, index, count);
 	}
 
+	@Nonnull
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
@@ -275,7 +277,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 			case 0:
 				return burnTime;
 			case 1:
-				return currentItemBurnTime;
+				return currentBurnTime;
 			case 2:
 				return cookTime;
 			case 3:
@@ -294,7 +296,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 				burnTime = value;
 				break;
 			case 1:
-				currentItemBurnTime = value;
+				currentBurnTime = value;
 				break;
 			case 2:
 				cookTime = value;
@@ -316,9 +318,9 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	{
 		super.readFromNBT(compound);
 		burnTime = compound.getInteger("BurnTime");
+		currentBurnTime = TileEntityFurnace.getItemBurnTime(getFuelItemStack());
 		cookTime = compound.getInteger("CookTime");
 		totalCookTime = compound.getInteger("CookTimeTotal");
-		currentItemBurnTime = TileEntityFurnace.getItemBurnTime(getFuelItemStack());
 		furnaceItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, furnaceItemStacks);
 
@@ -376,7 +378,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	@Override
 	public String getName()
 	{
-		return hasCustomName() ? customName : "container.alloy_furnace";
+		return hasCustomName() ? customName : "plutomc_core:alloy_furnace";
 	}
 
 	@Override
