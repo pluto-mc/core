@@ -1,6 +1,7 @@
 package com.plutomc.core.common.containers;
 
 import com.plutomc.core.common.containers.slots.SlotAlloyFurnaceOutput;
+import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -140,7 +141,8 @@ public class ContainerAlloyFurnace extends Container
 						return ItemStack.EMPTY;
 					}
 				}
-				else if (!mergeItemStack(stack, 1, 3, false))
+				else if (AlloyFurnaceRecipes.instance().isValidIngredient(stack)
+						&& !mergeItemStack(stack, 1, 3, false))
 				{
 					return ItemStack.EMPTY;
 				}

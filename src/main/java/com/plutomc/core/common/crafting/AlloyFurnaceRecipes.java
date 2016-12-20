@@ -86,6 +86,19 @@ public class AlloyFurnaceRecipes
 		return 0;
 	}
 
+	public boolean isValidIngredient(ItemStack input)
+	{
+		for (AlloyRecipe entry : smeltingList)
+		{
+			if (entry.isIngredient(input))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public List<AlloyRecipe> getSmeltingList()
 	{
 		return smeltingList;
