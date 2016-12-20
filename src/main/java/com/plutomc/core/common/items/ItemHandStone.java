@@ -22,6 +22,8 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemHandStone extends BaseItem
 {
+	private static final float maxEfficiency = 5f;
+
 	public ItemHandStone(ItemRegistry.Data data)
 	{
 		super(data);
@@ -32,6 +34,11 @@ public class ItemHandStone extends BaseItem
 	public int getItemStackLimit(ItemStack stack)
 	{
 		return 1;
+	}
+
+	public float getEfficiencyMultiplier()
+	{
+		return (maxEfficiency - getHandStoneEfficiency((ItemRegistry.Data) getData())) / maxEfficiency;
 	}
 
 	public static int getHandStoneDurability(ItemRegistry.Data data)
@@ -48,6 +55,23 @@ public class ItemHandStone extends BaseItem
 				return 256;
 			default:
 				return 0;
+		}
+	}
+
+	public static float getHandStoneEfficiency(ItemRegistry.Data data)
+	{
+		switch (data)
+		{
+			case STONE_HANDSTONE:
+				return 1f;
+			case GRANITE_HANDSTONE:
+				return 1f;
+			case QUARTZ_HANDSTONE:
+				return 1.75f;
+			case DIAMOND_HANDSTONE:
+				return 2.5f;
+			default:
+				return 1f;
 		}
 	}
 }

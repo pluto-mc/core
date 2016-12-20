@@ -6,6 +6,7 @@ import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -59,10 +60,9 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	{
 		if (!world.isRemote && canGrind())
 		{
-			ItemStack input = getStackInSlot(1);
 			if (!isGrinding())
 			{
-				totalGrindTime = getGrindTime(input);
+				totalGrindTime = getGrindTime();
 			}
 
 			grindTime++;
@@ -155,10 +155,10 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 			stack.setCount(getInventoryStackLimit());
 		}
 
-		if (index == 1 && !flag)
+		if (index == 0 || index == 1 && !flag)
 		{
 			grindTime = 0;
-			totalGrindTime = getGrindTime(stack);
+			totalGrindTime = getGrindTime();
 			markDirty();
 		}
 	}
@@ -379,10 +379,10 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 		}
 	}
 
-	private int getGrindTime(ItemStack stack)
+	private int getGrindTime()
 	{
-		// TODO: Have different grind times for different items.
-		return 100;
+		Item handstone = getStackInSlot(0).getItem();
+		return isItemHandStone(handstone) ? (int) (100 * ((ItemHandStone) handstone).getEfficiencyMultiplier()) : 100;
 	}
 
 	public boolean isGrinding()
@@ -392,6 +392,11 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 
 	public static boolean isItemHandStone(ItemStack stack)
 	{
-		return stack.getItem() instanceof ItemHandStone;
+		return isItemHandStone(stack.getItem());
+	}
+
+	public static boolean isItemHandStone(Item item)
+	{
+		return item instanceof ItemHandStone;
 	}
 }
