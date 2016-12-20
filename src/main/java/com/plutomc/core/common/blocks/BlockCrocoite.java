@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -148,9 +147,13 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (rand.nextInt(16) == 0 && canGrow(worldIn, pos, state))
+		if (canGrow(worldIn, pos, state))
 		{
-			grow(worldIn, rand, pos, state);
+			int num = getDownBlockName(worldIn, pos).equals(BlockRegistry.LEAD_ORE.getUnlocalizedName()) ? 16 : 8;
+			if (rand.nextInt(num) == 0)
+			{
+				grow(worldIn, rand, pos, state);
+			}
 		}
 	}
 
@@ -162,7 +165,8 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return worldIn.getBlockState(pos.down()).getBlock().getUnlocalizedName().equals(BlockRegistry.LEAD_ORE.getUnlocalizedName())
+		return (getDownBlockName(worldIn, pos).equals(BlockRegistry.LEAD_ORE.getUnlocalizedName())
+				|| getDownBlockName(worldIn, pos).equals(BlockRegistry.LEAD_BLOCK.getUnlocalizedName()))
 				&& state.getValue(GROWTH) < getMaxGrowth();
 	}
 
@@ -180,6 +184,11 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 			worldIn.setBlockState(pos, state.withProperty(GROWTH, state.getValue(GROWTH) + 1));
 			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
+	}
+
+	public String getDownBlockName(World worldIn, BlockPos pos)
+	{
+		return worldIn.getBlockState(pos.down()).getBlock().getUnlocalizedName();
 	}
 
 	public static int getMaxGrowth()
