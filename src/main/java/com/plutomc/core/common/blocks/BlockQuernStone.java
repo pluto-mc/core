@@ -1,6 +1,7 @@
 package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.Core;
+import com.plutomc.core.client.init.SoundRegistry;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
 import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.GuiHandler;
@@ -16,11 +17,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /**
  * plutomc_core
@@ -117,6 +122,18 @@ public class BlockQuernStone extends BaseBlock implements ITileEntityProvider
 		if (tileEntity instanceof TileEntityQuernStone)
 		{
 			((TileEntityQuernStone) tileEntity).setCustomName(stack.getDisplayName());
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	{
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (rand.nextDouble() < 0.1d
+			&& tileEntity instanceof TileEntityQuernStone && ((TileEntityQuernStone) tileEntity).isGrinding())
+		{
+			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundRegistry.BLOCK_QUERN_STONE_GRIND, SoundCategory.BLOCKS, 0.1f, 1, false);
 		}
 	}
 }

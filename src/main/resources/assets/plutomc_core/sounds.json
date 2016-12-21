@@ -1,0 +1,7 @@
+{
+	"quern_stone_grind": {
+		"category": "block",
+		"subtitle": "subtitles.block.quern_stone_grind",
+		"sounds": [ "plutomc_core:block/quern_stone_grind" ]
+	}
+}

@@ -1,5 +1,6 @@
 package com.plutomc.core.client;
 
+import com.plutomc.core.client.init.SoundRegistry;
 import com.plutomc.core.common.ICommonProxy;
 import com.plutomc.core.init.*;
 
@@ -35,6 +36,7 @@ public class ClientProxy implements ICommonProxy
 	public void init()
 	{
 		RecipeRegistry.init();
+		SoundRegistry.init();
 	}
 
 	@Override
