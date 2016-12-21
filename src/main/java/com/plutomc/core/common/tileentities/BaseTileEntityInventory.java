@@ -130,6 +130,7 @@ public abstract class BaseTileEntityInventory extends BaseTileEntity implements 
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
+		itemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, itemStacks);
 
 		if (compound.hasKey("CustomName", 8))

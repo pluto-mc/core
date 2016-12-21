@@ -134,7 +134,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileEntityAlloyFurnace)
 		{
-			((TileEntityAlloyFurnace) tileEntity).setCustomInventoryName(stack.getDisplayName());
+			((TileEntityAlloyFurnace) tileEntity).setCustomName(stack.getDisplayName());
 		}
 	}
 

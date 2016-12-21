@@ -186,7 +186,7 @@ public class TileEntityQuernStone extends BaseTileEntityInventory
 	@Override
 	public String getDefaultName()
 	{
-		return "container.quern_stone";
+		return "plutomc_core:quern_stone";
 	}
 
 	public boolean canGrind()

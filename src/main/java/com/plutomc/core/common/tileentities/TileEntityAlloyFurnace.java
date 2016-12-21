@@ -4,28 +4,16 @@ import com.plutomc.core.common.blocks.BlockAlloyFurnace;
 import com.plutomc.core.common.crafting.AlloyFurnaceRecipes;
 import com.plutomc.core.common.crafting.AlloyRecipe;
 import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,22 +34,20 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISidedInventory
+public class TileEntityAlloyFurnace extends BaseTileEntityInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 	private static final int[] SLOTS_SIDES = new int[] { 1, 2 };
 	private static final int[] SLOTS_BOTTOM = new int[] { 3 };
 
-	private NonNullList<ItemStack> furnaceItemStacks;
 	private int burnTime;
 	private int currentBurnTime;
 	private int cookTime;
 	private int totalCookTime;
-	private String customName;
 
 	public TileEntityAlloyFurnace()
 	{
-		furnaceItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		super(BlockRegistry.Data.ALLOY_FURNACE);
 	}
 
 	@Override
@@ -97,7 +83,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 							if (fuel.isEmpty())
 							{
 								ItemStack fuelStack = fuel.getItem().getContainerItem(fuel);
-								furnaceItemStacks.set(0, fuelStack);
+								setStackInSlot(0, fuelStack);
 							}
 						}
 					}
@@ -173,46 +159,11 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 	}
 
 	@Override
-	public boolean isEmpty()
-	{
-		for (ItemStack itemStack : furnaceItemStacks)
-		{
-			if (!itemStack.isEmpty())
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return furnaceItemStacks.get(index);
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack decrStackSize(int index, int count)
-	{
-		return ItemStackHelper.getAndSplit(furnaceItemStacks, index, count);
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack removeStackFromSlot(int index)
-	{
-		return ItemStackHelper.getAndRemove(furnaceItemStacks, index);
-	}
-
-	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		ItemStack itemStack = getStackInSlot(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemStack) && ItemStack.areItemStackTagsEqual(stack, itemStack);
-		furnaceItemStacks.set(index, stack);
+		setStackInSlot(index, stack);
 
 		if (stack.getCount() > getInventoryStackLimit())
 		{
@@ -225,30 +176,6 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 			cookTime = 0;
 			markDirty();
 		}
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return 64;
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer entityPlayer)
-	{
-		return world.getTileEntity(pos) == this && entityPlayer.getDistanceSq(pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d) <= 64d;
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player)
-	{
-
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player)
-	{
-
 	}
 
 	@Override
@@ -321,13 +248,6 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		currentBurnTime = TileEntityFurnace.getItemBurnTime(getFuelItemStack());
 		cookTime = compound.getInteger("CookTime");
 		totalCookTime = compound.getInteger("CookTimeTotal");
-		furnaceItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(compound, furnaceItemStacks);
-
-		if (compound.hasKey("CustomName", 8))
-		{
-			setCustomInventoryName(compound.getString("CustomName"));
-		}
 	}
 
 	@Nonnull
@@ -338,65 +258,13 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 		compound.setInteger("BurnTime", (short) burnTime);
 		compound.setInteger("CookTime", (short) cookTime);
 		compound.setInteger("CookTimeTotal", (short) totalCookTime);
-		ItemStackHelper.saveAllItems(compound, furnaceItemStacks);
-
-		if (hasCustomName())
-		{
-			compound.setString("CustomName", customName);
-		}
-
 		return compound;
 	}
 
-	@Nonnull
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public String getDefaultName()
 	{
-		return writeToNBT(new NBTTagCompound());
-	}
-
-	@Nullable
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), BlockRegistry.Data.ALLOY_FURNACE.getTileEntityID(), getUpdateTag());
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
-	public void clear()
-	{
-		furnaceItemStacks.clear();
-	}
-
-	@Nonnull
-	@Override
-	public String getName()
-	{
-		return hasCustomName() ? customName : "plutomc_core:alloy_furnace";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return customName != null && !customName.isEmpty();
-	}
-
-	public void setCustomInventoryName(String customName)
-	{
-		this.customName = customName;
-	}
-
-	@Nonnull
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
+		return "plutomc_core:alloy_furnace";
 	}
 
 	private boolean canSmelt()
@@ -459,7 +327,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISi
 
 			if (output.isEmpty())
 			{
-				furnaceItemStacks.set(3, resultOutput.copy());
+				setStackInSlot(3, resultOutput.copy());
 			}
 			else if (output.getItem() == resultOutput.getItem())
 			{
