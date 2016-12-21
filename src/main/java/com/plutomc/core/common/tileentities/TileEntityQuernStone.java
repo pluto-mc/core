@@ -3,24 +3,12 @@ package com.plutomc.core.common.tileentities;
 import com.plutomc.core.common.crafting.QuernStoneRecipes;
 import com.plutomc.core.common.items.ItemHandStone;
 import com.plutomc.core.init.BlockRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * plutomc_core
@@ -39,20 +27,18 @@ import javax.annotation.Nullable;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class TileEntityQuernStone extends TileEntity implements ITickable, ISidedInventory
+public class TileEntityQuernStone extends BaseTileEntityInventory
 {
 	private static final int[] SLOTS_TOP = new int[] { 0 };
 	private static final int[] SLOTS_SIDES = new int[] { 1 };
 	private static final int[] SLOTS_BOTTOM = new int[] { 2 };
 
-	private NonNullList<ItemStack> quernItemStacks;
 	private int grindTime;
 	private int totalGrindTime;
-	private String customName;
 
 	public TileEntityQuernStone()
 	{
-		this.quernItemStacks = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+		super(BlockRegistry.Data.QUERN_STONE);
 	}
 
 	@Override
@@ -109,46 +95,11 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 	}
 
 	@Override
-	public boolean isEmpty()
-	{
-		for (ItemStack itemStack : quernItemStacks)
-		{
-			if (!itemStack.isEmpty())
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return quernItemStacks.get(index);
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack decrStackSize(int index, int count)
-	{
-		return ItemStackHelper.getAndSplit(quernItemStacks, index, count);
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack removeStackFromSlot(int index)
-	{
-		return ItemStackHelper.getAndRemove(quernItemStacks, index);
-	}
-
-	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		ItemStack itemStack = getStackInSlot(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemStack) && ItemStack.areItemStackTagsEqual(stack, itemStack);
-		quernItemStacks.set(index, stack);
+		setStackInSlot(index, stack);
 
 		if (stack.getCount() > getInventoryStackLimit())
 		{
@@ -161,30 +112,6 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 			totalGrindTime = getGrindTime();
 			markDirty();
 		}
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return 64;
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
-	{
-		return world.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d) <= 64d;
-	}
-
-	@Override
-	public void openInventory(EntityPlayer player)
-	{
-
-	}
-
-	@Override
-	public void closeInventory(EntityPlayer player)
-	{
-
 	}
 
 	@Override
@@ -245,13 +172,6 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 		super.writeToNBT(compound);
 		compound.setInteger("GrindTime", grindTime);
 		compound.setInteger("TotalGrindTime", totalGrindTime);
-		ItemStackHelper.saveAllItems(compound, quernItemStacks);
-
-		if (hasCustomName())
-		{
-			compound.setString("CustomName", customName);
-		}
-
 		return compound;
 	}
 
@@ -261,63 +181,12 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 		super.readFromNBT(compound);
 		this.grindTime = compound.getInteger("GrindTime");
 		this.totalGrindTime = compound.getInteger("TotalGrindTime");
-		ItemStackHelper.loadAllItems(compound, quernItemStacks);
-
-		if (compound.hasKey("CustomName", 8))
-		{
-			setCustomName(compound.getString("CustomName"));
-		}
-	}
-
-	@Nonnull
-	@Override
-	public NBTTagCompound getUpdateTag()
-	{
-		return writeToNBT(new NBTTagCompound());
-	}
-
-	@Nullable
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(getPos(), BlockRegistry.Data.QUERN_STONE.getTileEntityID(), getUpdateTag());
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
+	public String getDefaultName()
 	{
-		readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
-	public void clear()
-	{
-		quernItemStacks.clear();
-	}
-
-	@Nonnull
-	@Override
-	public String getName()
-	{
-		return hasCustomName() ? customName : "container.quern_stone";
-	}
-
-	@Override
-	public boolean hasCustomName()
-	{
-		return customName != null && !customName.isEmpty();
-	}
-
-	@Nonnull
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
-	}
-
-	public void setCustomName(String customName)
-	{
-		this.customName = customName;
+		return "container.quern_stone";
 	}
 
 	public boolean canGrind()
@@ -358,7 +227,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 				handstone.setItemDamage(handstone.getItemDamage() + 1);
 				if (handstone.getItemDamage() >= handstone.getMaxDamage())
 				{
-					quernItemStacks.set(0, ItemStack.EMPTY);
+					setStackInSlot(0, ItemStack.EMPTY);
 				}
 			}
 
@@ -368,7 +237,7 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 
 			if (stack.isEmpty())
 			{
-				quernItemStacks.set(2, result.copy());
+				setStackInSlot(2, result.copy());
 			}
 			else if (stack.getItem() == result.getItem())
 			{
