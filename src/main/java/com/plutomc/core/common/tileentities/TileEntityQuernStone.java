@@ -381,8 +381,8 @@ public class TileEntityQuernStone extends TileEntity implements ITickable, ISide
 
 	private int getGrindTime()
 	{
-		Item handstone = getStackInSlot(0).getItem();
-		return isItemHandStone(handstone) ? (int) (100 * ((ItemHandStone) handstone).getEfficiencyMultiplier()) : 100;
+		ItemStack handstone = getStackInSlot(0);
+		return isItemHandStone(handstone) ? (int) (100 * ((ItemHandStone) handstone.getItem()).getEfficiencyMultiplier(handstone)) : 100;
 	}
 
 	public boolean isGrinding()

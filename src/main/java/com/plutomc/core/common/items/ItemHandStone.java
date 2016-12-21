@@ -1,6 +1,9 @@
 package com.plutomc.core.common.items;
 
 import com.plutomc.core.init.ItemRegistry;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -31,17 +34,66 @@ public class ItemHandStone extends BaseItem
 	}
 
 	@Override
+	public int getItemEnchantability()
+	{
+		switch ((ItemRegistry.Data) getData())
+		{
+			case STONE_HANDSTONE:
+				return 5;
+			case GRANITE_HANDSTONE:
+				return 5;
+			case QUARTZ_HANDSTONE:
+				return 8;
+			case DIAMOND_HANDSTONE:
+				return 10;
+			default:
+				return 0;
+		}
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
+	{
+		return enchantment.getRegistryName().getResourcePath().equals("efficiency");
+	}
+
+	@Override
 	public int getItemStackLimit(ItemStack stack)
 	{
 		return 1;
 	}
 
-	public float getEfficiencyMultiplier()
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
 	{
-		return (maxEfficiency - getHandStoneEfficiency((ItemRegistry.Data) getData())) / maxEfficiency;
+//		if (book.getItem() instanceof ItemEnchantedBook)
+//		{
+//			ItemEnchantedBook bookItem = (ItemEnchantedBook) book.getItem();
+//			NBTTagList nbtTagList = bookItem.getEnchantments(book);
+//
+//			for (int i = 0; i < nbtTagList.tagCount(); ++i)
+//			{
+//				int id = nbtTagList.getCompoundTagAt(i).getShort("id");
+//				Enchantment enchantment = Enchantment.getEnchantmentByID(id);
+//
+//				if (enchantment != null && canApplyAtEnchantingTable(stack, enchantment))
+//				{
+//					return true;
+//				}
+//			}
+//		}
+//
+//		return false;
+		return super.isBookEnchantable(stack, book);
 	}
 
-	public static int getHandStoneDurability(ItemRegistry.Data data)
+	public float getEfficiencyMultiplier(ItemStack stack)
+	{
+		int enchantmentModifier = EnchantmentHelper.getEnchantmentLevel(Enchantments.EFFICIENCY, stack) + 1;
+		return (maxEfficiency - getHandStoneEfficiency((ItemRegistry.Data) getData())) / (maxEfficiency * enchantmentModifier);
+	}
+
+	public int getHandStoneDurability(ItemRegistry.Data data)
 	{
 		switch (data)
 		{
@@ -58,7 +110,7 @@ public class ItemHandStone extends BaseItem
 		}
 	}
 
-	public static float getHandStoneEfficiency(ItemRegistry.Data data)
+	public float getHandStoneEfficiency(ItemRegistry.Data data)
 	{
 		switch (data)
 		{
