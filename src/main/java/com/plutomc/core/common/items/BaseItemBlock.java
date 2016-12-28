@@ -35,8 +35,8 @@ public class BaseItemBlock extends ItemBlock
 		this.block = block;
 	}
 
-	@Override
 	@Nonnull
+	@Override
 	public BaseBlock getBlock()
 	{
 		return block;

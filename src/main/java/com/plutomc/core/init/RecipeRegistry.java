@@ -42,6 +42,8 @@ public class RecipeRegistry
 	{
 		// Miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_STAIRS, 4),
+				"  B", " BB", "BBB", 'B', BlockRegistry.BASALT);
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.STEEL_COMPOUND, 3),
 				ItemRegistry.ASH, ItemRegistry.CROCOITE_DUST, ItemRegistry.CROCOITE_DUST);
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.CRUCIBLE_UNFIRED),

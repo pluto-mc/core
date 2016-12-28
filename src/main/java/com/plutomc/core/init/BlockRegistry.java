@@ -37,7 +37,8 @@ public class BlockRegistry
 	{
 		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
 		ALLOY_FURNACE_LIT("alloy_furnace_lit", null, null, Material.ROCK, null),
-		BASALT("basalt", null, CreativeTabs.MATERIALS, Material.ROCK, null),
+		BASALT("basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+		BASALT_STAIRS("stairs_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
 		QUERN_STONE("quern_stone", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityQuernStone.class),
 
@@ -128,6 +129,7 @@ public class BlockRegistry
 	public static final BaseItemBlock ALLOY_FURNACE = new BaseItemBlock(new BlockAlloyFurnace(false));
 	public static final BaseItemBlock ALLOY_FURNACE_LIT = new BaseItemBlock(new BlockAlloyFurnace(true));
 	public static final BaseItemBlock BASALT = new BaseItemBlock(new BlockBasalt());
+	public static final BaseItemBlock BASALT_STAIRS = new BaseItemBlock(new BlockStairs(Data.BASALT_STAIRS, BASALT));
 	public static final BaseItemBlock CROCOITE = new BaseItemBlock(new BlockCrocoite());
 	public static final BaseItemBlock QUERN_STONE = new BaseItemBlock(new BlockQuernStone());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockMetal(Data.COPPER_BLOCK));
@@ -146,6 +148,7 @@ public class BlockRegistry
 		register(ALLOY_FURNACE);
 		register(ALLOY_FURNACE_LIT);
 		register(BASALT);
+		register(BASALT_STAIRS);
 		register(CROCOITE);
 		register(QUERN_STONE);
 		register(COPPER_BLOCK);
@@ -182,6 +185,7 @@ public class BlockRegistry
 		registerRender(ALLOY_FURNACE);
 		registerRender(ALLOY_FURNACE_LIT);
 		registerRender(BASALT);
+		registerRender(BASALT_STAIRS);
 		registerRender(CROCOITE);
 		registerRender(QUERN_STONE);
 		registerRender(COPPER_BLOCK);

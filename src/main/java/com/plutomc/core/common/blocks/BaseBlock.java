@@ -2,6 +2,7 @@ package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.common.data.IDataBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 
 /**
  * plutomc_core
@@ -38,5 +39,20 @@ public class BaseBlock extends Block
 	public IDataBlock getData()
 	{
 		return data;
+	}
+
+	public float getBlockHardness()
+	{
+		return blockHardness;
+	}
+
+	public float getBlockResistance()
+	{
+		return blockResistance;
+	}
+
+	public SoundType getBlockSoundType()
+	{
+		return blockSoundType;
 	}
 }
