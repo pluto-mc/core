@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"normal": { "model": "plutomc_core:basalt" }
+	}
+}

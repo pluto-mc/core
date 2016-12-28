@@ -190,6 +190,12 @@ public class RecipeRegistry
 
 	private static void registerAlloySmelting()
 	{
+		// TODO: Migrate Silica from `power` to `core`.
+//		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
+//			add(new ItemStack(Blocks.STONE, 3, 1));
+//			add(new ItemStack(ItemRegistry.SILICA));
+//		}}, new ItemStack(BlockRegistry.BASALT, 4), 0.4f);
+
 		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
 			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
 			add(new ItemStack(ItemRegistry.TIN_INGOT));

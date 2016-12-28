@@ -1,6 +1,6 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.common.data.IDataBlock;
+import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.block.SoundType;
 
 /**
@@ -20,14 +20,14 @@ import net.minecraft.block.SoundType;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class BlockOre extends BaseBlock
+public class BlockBasalt extends BaseBlock
 {
-	public BlockOre(IDataBlock data)
+	public BlockBasalt()
 	{
-		super(data);
-		setHardness(3f);
-		setHarvestLevel("pickaxe", 1);
-		setResistance(5f);
+		super(BlockRegistry.Data.BASALT);
+		setHardness(6f);
+		setHarvestLevel("pickaxe", 2);
+		setResistance(20f);
 		setSoundType(SoundType.STONE);
 	}
 }
