@@ -51,8 +51,8 @@ import java.util.Random;
 public class BlockStairs extends BaseBlock
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
-	public static final PropertyEnum<net.minecraft.block.BlockStairs.EnumHalf> HALF = PropertyEnum.create("half", net.minecraft.block.BlockStairs.EnumHalf.class);
-	public static final PropertyEnum<net.minecraft.block.BlockStairs.EnumShape> SHAPE = PropertyEnum.create("shape", net.minecraft.block.BlockStairs.EnumShape.class);
+	public static final PropertyEnum<net.minecraft.block.BlockStairs.EnumHalf> HALF = net.minecraft.block.BlockStairs.HALF;
+	public static final PropertyEnum<net.minecraft.block.BlockStairs.EnumShape> SHAPE = net.minecraft.block.BlockStairs.SHAPE;
 	/**
 	 * B: .. T: xx
 	 * B: .. T: xx
