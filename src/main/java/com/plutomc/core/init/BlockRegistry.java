@@ -6,11 +6,14 @@ import com.plutomc.core.common.data.IDataBlock;
 import com.plutomc.core.common.items.BaseItemBlock;
 import com.plutomc.core.common.tileentities.TileEntityAlloyFurnace;
 import com.plutomc.core.common.tileentities.TileEntityQuernStone;
+import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
+import com.plutomc.core.client.renderers.RendererUnderworldGate;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -41,6 +44,7 @@ public class BlockRegistry
 		BASALT_STAIRS("stairs_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
 		QUERN_STONE("quern_stone", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityQuernStone.class),
+		UNDERWORLD_GATE("underworld_gate", null, null, Material.PORTAL, TileEntityUnderworldGate.class),
 
 		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK, null),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
@@ -132,6 +136,7 @@ public class BlockRegistry
 	public static final BaseItemBlock BASALT_STAIRS = new BaseItemBlock(new BlockStairs(Data.BASALT_STAIRS, BASALT));
 	public static final BaseItemBlock CROCOITE = new BaseItemBlock(new BlockCrocoite());
 	public static final BaseItemBlock QUERN_STONE = new BaseItemBlock(new BlockQuernStone());
+	public static final BaseItemBlock UNDERWORLD_GATE = new BaseItemBlock(new BlockUnderworldGate());
 	public static final BaseItemBlock COPPER_BLOCK = new BaseItemBlock(new BlockMetal(Data.COPPER_BLOCK));
 	public static final BaseItemBlock COPPER_ORE = new BaseItemBlock(new BlockOre(Data.COPPER_ORE));
 	public static final BaseItemBlock TIN_BLOCK = new BaseItemBlock(new BlockMetal(Data.TIN_BLOCK));
@@ -151,6 +156,7 @@ public class BlockRegistry
 		register(BASALT_STAIRS);
 		register(CROCOITE);
 		register(QUERN_STONE);
+		register(UNDERWORLD_GATE);
 		register(COPPER_BLOCK);
 		register(COPPER_ORE);
 		register(TIN_BLOCK);
@@ -196,6 +202,8 @@ public class BlockRegistry
 		registerRender(LEAD_BLOCK);
 		registerRender(LEAD_ORE);
 		registerRender(STEEL_BLOCK);
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUnderworldGate.class, new RendererUnderworldGate());
 	}
 
 	public static void registerRender(BaseItemBlock block)
