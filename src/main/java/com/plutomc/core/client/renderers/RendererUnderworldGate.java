@@ -50,6 +50,7 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 		EnumFacing.Axis axis = EnumFacing.getFront(te.getBlockMetadata()).getAxis();
 
 		GlStateManager.pushMatrix();
+		GlStateManager.disableLighting();
 		if (axis == EnumFacing.Axis.X)
 		{
 			GlStateManager.translate(0f, 0f, 0.5f);
@@ -61,6 +62,7 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 		}
 		GlStateManager.scale(1f, 1f, 1f);
 		model.renderGate();
+		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
 
 		GlStateManager.popMatrix();
