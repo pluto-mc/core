@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -159,36 +158,40 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 			{
 				worldIn.setBlockToAir(pos);
 
-				EnumFacing.Axis structAxis;
-				BlockPos structPos;
+				EnumFacing structFacing;
+				BlockPos structPos, gatePos;
 				if (worldIn.getBlockState(downPos.north()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.NORTH.getAxis();
+					structFacing = EnumFacing.NORTH;
 					structPos = downPos.south(2).up(4);
+					gatePos = downPos.north().up(2);
 				}
 				else if (worldIn.getBlockState(downPos.south()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.SOUTH.getAxis();
+					structFacing = EnumFacing.SOUTH;
 					structPos = downPos.south(3).up(4);
+					gatePos = downPos.up(2);
 				}
 				else if (worldIn.getBlockState(downPos.east()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.EAST.getAxis();
+					structFacing = EnumFacing.EAST;
 					structPos = downPos.west(2).up(4);
+					gatePos = downPos.up(2);
 				}
 				else if (worldIn.getBlockState(downPos.west()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.WEST.getAxis();
+					structFacing = EnumFacing.WEST;
 					structPos = downPos.west(3).up(4);
+					gatePos = downPos.west().up(2);
 				}
 				else
 				{
 					return;
 				}
 
-				if (StructureUnderworldGate.isDoorComplete(worldIn, structPos, structAxis))
+				if (StructureUnderworldGate.isDoorComplete(worldIn, structPos, structFacing.getAxis()))
 				{
-					FMLLog.info("Found Underworld Door!");
+					worldIn.setBlockState(gatePos, BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState().withProperty(BlockUnderworldGate.FACING, structFacing));
 				}
 			}
 		}
