@@ -5,6 +5,7 @@ import com.plutomc.core.client.renderers.models.ModelUnderworldGate;
 import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,10 +47,19 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 
+		EnumFacing.Axis axis = EnumFacing.getFront(te.getBlockMetadata()).getAxis();
 
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0f, 3f, 0.5f);
-		GlStateManager.scale(1, -1, -1);
+		if (axis == EnumFacing.Axis.X)
+		{
+			GlStateManager.translate(0f, 0f, 0.5f);
+		}
+		else
+		{
+			GlStateManager.translate(0.5f, 0f, 0f);
+			GlStateManager.rotate(-90f, 0f, 1f, 0f);
+		}
+		GlStateManager.scale(1f, 1f, 1f);
 		model.renderGate();
 		GlStateManager.popMatrix();
 
