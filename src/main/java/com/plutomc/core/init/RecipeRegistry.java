@@ -192,11 +192,10 @@ public class RecipeRegistry
 
 	private static void registerAlloySmelting()
 	{
-		// TODO: Migrate Silica from `power` to `core`.
-//		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
-//			add(new ItemStack(Blocks.STONE, 3, 1));
-//			add(new ItemStack(ItemRegistry.SILICA));
-//		}}, new ItemStack(BlockRegistry.BASALT, 4), 0.4f);
+		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
+			add(new ItemStack(Blocks.STONE, 3, 5));
+			add(new ItemStack(ItemRegistry.SILICA));
+		}}, new ItemStack(BlockRegistry.BASALT, 4), 0.4f);
 
 		AlloyFurnaceRecipes.instance().addSmeltingRecipe(new ArrayList<ItemStack>() {{
 			add(new ItemStack(ItemRegistry.COPPER_INGOT, 8));
@@ -212,5 +211,6 @@ public class RecipeRegistry
 	{
 		QuernStoneRecipes.instance().addGrinding(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ASH));
 		QuernStoneRecipes.instance().addGrinding(new ItemStack(BlockRegistry.CROCOITE), new ItemStack(ItemRegistry.CROCOITE_DUST));
+		QuernStoneRecipes.instance().addGrinding(new ItemStack(Items.QUARTZ), new ItemStack(ItemRegistry.SILICA));
 	}
 }
