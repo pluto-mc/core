@@ -80,7 +80,12 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 
 		public BlockPos getRotatedPos(EnumFacing.Axis axis)
 		{
-			return axis == EnumFacing.Axis.X ? getPos() : getPos().rotate(Rotation.CLOCKWISE_90).north();
+			return getRotatedPos(axis, true);
+		}
+
+		public BlockPos getRotatedPos(EnumFacing.Axis axis, boolean translate)
+		{
+			return axis == EnumFacing.Axis.X ? getPos() : getPos().rotate(Rotation.CLOCKWISE_90).north(translate ? 1 : 0);
 		}
 
 		public static EnumSubBlock fromIndex(int index)
@@ -107,8 +112,7 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 		super(BlockRegistry.Data.UNDERWORLD_GATE);
 		setDefaultState(blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.X).withProperty(SUBBLOCK, EnumSubBlock.BOTTOM_LEFT));
 		setBlockUnbreakable();
-		setLightLevel(0.075f);
-		setLightOpacity(0);
+		setLightLevel(1f);
 	}
 
 	@Nonnull
@@ -149,7 +153,7 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntityUnderworldGate(getData());
+		return new TileEntityUnderworldGate();
 	}
 
 	@Nonnull
@@ -170,6 +174,14 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	public AxisAlignedBB getRenderBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		return (state.getValue(AXIS) == EnumFacing.Axis.X ? X_RENDER_AABB : Z_RENDER_AABB).offset(pos);
+	}
+
+	@Nonnull
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	{
+		BlockPos subBlockPos = state.getValue(SUBBLOCK).getRotatedPos(state.getValue(AXIS), false);
+		return getRenderBoundingBox(state, worldIn, pos).offset(-subBlockPos.getX(), -subBlockPos.getY(), -subBlockPos.getZ());
 	}
 
 	@Nonnull

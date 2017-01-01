@@ -1,7 +1,7 @@
 package com.plutomc.core.common.tileentities;
 
 import com.plutomc.core.common.blocks.BaseBlock;
-import com.plutomc.core.common.data.IDataBlock;
+import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,9 +27,9 @@ import javax.annotation.Nonnull;
  */
 public class TileEntityUnderworldGate extends BaseTileEntity
 {
-	public TileEntityUnderworldGate(IDataBlock blockData)
+	public TileEntityUnderworldGate()
 	{
-		super(blockData);
+		super(BlockRegistry.Data.UNDERWORLD_GATE);
 	}
 
 	@Override

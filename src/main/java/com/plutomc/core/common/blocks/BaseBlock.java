@@ -60,13 +60,13 @@ public class BaseBlock extends Block
 		return blockSoundType;
 	}
 
-	public AxisAlignedBB getRenderBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return getCollisionBoundingBox(state, world, pos);
-	}
-
 	public AxisAlignedBB getRenderBoundingBox(int meta, IBlockAccess world, BlockPos pos)
 	{
 		return getRenderBoundingBox(getStateFromMeta(meta), world, pos);
+	}
+
+	public AxisAlignedBB getRenderBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return getCollisionBoundingBox(state, world, pos);
 	}
 }
