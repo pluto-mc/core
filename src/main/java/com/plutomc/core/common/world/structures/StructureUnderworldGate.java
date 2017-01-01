@@ -11,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -199,7 +198,7 @@ public class StructureUnderworldGate implements IWorldStructure
 		BlockPosDirection originPos = WorldRegistry.UNDERWORLD_GATE.getOriginPos(world, pos);
 		if (originPos != null)
 		{
-			world.destroyBlock(originPos.getDirection().getAxis() == EnumFacing.Axis.Z ? originPos.north(2) : originPos.west(2), false);
+			world.destroyBlock(originPos.getDirection().getAxis() == EnumFacing.Axis.Z ? originPos.north(2) : originPos.east(2), false);
 		}
 	}
 }

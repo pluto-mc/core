@@ -1,5 +1,6 @@
 package com.plutomc.core.common.world.util;
 
+import com.google.common.base.Objects;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
@@ -39,6 +40,12 @@ public class WorldStructurePoint
 		setZ(z);
 		setDirection(direction);
 		this.is2D = false;
+	}
+
+	@Override
+	public String toString()
+	{
+		return Objects.toStringHelper(this).add("x", getX()).add("y", getY()).add("z", getZ()).add("direction", getDirection()).toString();
 	}
 
 	public int getX()
