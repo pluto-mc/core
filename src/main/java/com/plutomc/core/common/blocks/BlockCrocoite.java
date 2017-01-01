@@ -1,6 +1,5 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.common.world.structures.StructureUnderworldGate;
 import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.ItemRegistry;
 import net.minecraft.block.Block;
@@ -9,9 +8,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -145,56 +142,6 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 		}
 
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-	}
-
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		if (!worldIn.isRemote)
-		{
-			BlockPos downPos = pos.down();
-			IBlockState downState = worldIn.getBlockState(downPos);
-			if (downState.getBlock() == Blocks.MAGMA)
-			{
-				EnumFacing.Axis structAxis;
-				BlockPos structPos, gatePos;
-				if (worldIn.getBlockState(downPos.north()).getBlock() == Blocks.MAGMA)
-				{
-					structAxis = EnumFacing.Axis.Z;
-					structPos = downPos.south(2).up(4);
-				}
-				else if (worldIn.getBlockState(downPos.south()).getBlock() == Blocks.MAGMA)
-				{
-					structAxis = EnumFacing.Axis.Z;
-					structPos = downPos.south(3).up(4);
-				}
-				else if (worldIn.getBlockState(downPos.east()).getBlock() == Blocks.MAGMA)
-				{
-					structAxis = EnumFacing.Axis.X;
-					structPos = downPos.west(2).up(4);
-				}
-				else if (worldIn.getBlockState(downPos.west()).getBlock() == Blocks.MAGMA)
-				{
-					structAxis = EnumFacing.Axis.X;
-					structPos = downPos.west(3).up(4);
-				}
-				else
-				{
-					return;
-				}
-				gatePos = (structAxis == EnumFacing.Axis.X ? structPos.east(2) : structPos.north(2)).down(2);
-
-				if (StructureUnderworldGate.isGateComplete(worldIn, structPos, structAxis))
-				{
-					worldIn.setBlockToAir(pos);
-					BlockUnderworldGate.create(worldIn, gatePos, structAxis);
-				}
-				else
-				{
-					worldIn.destroyBlock(pos, true);
-				}
-			}
-		}
 	}
 
 	@Override
