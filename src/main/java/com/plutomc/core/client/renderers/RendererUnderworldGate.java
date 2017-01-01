@@ -2,7 +2,9 @@ package com.plutomc.core.client.renderers;
 
 import com.plutomc.core.Core;
 import com.plutomc.core.client.renderers.models.ModelUnderworldGate;
+import com.plutomc.core.common.blocks.BlockUnderworldGate;
 import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
@@ -41,30 +43,30 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 	@Override
 	public void renderTileEntityAt(TileEntityUnderworldGate te, double x, double y, double z, float partialTicks, int destroyStage)
 	{
-		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
+		IBlockState state = te.getWorld().getBlockState(te.getPos());
 
-		bindTexture(TEXTURE_GATE);
-		GlStateManager.pushMatrix();
-		GlStateManager.translate(x, y, z);
-
-		EnumFacing.Axis axis = EnumFacing.getFront(te.getBlockMetadata()).getAxis();
-
-		GlStateManager.pushMatrix();
-		GlStateManager.disableLighting();
-		if (axis == EnumFacing.Axis.X)
+		if (state.getValue(BlockUnderworldGate.SUBBLOCK).isRender())
 		{
-			GlStateManager.translate(0f, 0f, 0.5f);
-		}
-		else
-		{
-			GlStateManager.translate(0.5f, 0f, 0f);
-			GlStateManager.rotate(-90f, 0f, 1f, 0f);
-		}
-		GlStateManager.scale(1f, 1f, 1f);
-		model.renderGate();
-		GlStateManager.enableLighting();
-		GlStateManager.popMatrix();
+			super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
-		GlStateManager.popMatrix();
+			bindTexture(TEXTURE_GATE);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(x, y, z);
+			GlStateManager.disableLighting();
+
+			if (state.getValue(BlockUnderworldGate.AXIS) == EnumFacing.Axis.X)
+			{
+				GlStateManager.translate(0f, 0f, 0.5f);
+			} else
+			{
+				GlStateManager.translate(0.5f, 0f, 0f);
+				GlStateManager.rotate(-90f, 0f, 1f, 0f);
+			}
+			GlStateManager.scale(1f, 1f, 1f);
+			model.renderGate();
+
+			GlStateManager.enableLighting();
+			GlStateManager.popMatrix();
+		}
 	}
 }

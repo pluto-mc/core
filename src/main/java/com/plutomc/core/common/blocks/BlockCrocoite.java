@@ -156,42 +156,42 @@ public class BlockCrocoite extends BaseBlock implements IGrowable
 			IBlockState downState = worldIn.getBlockState(downPos);
 			if (downState.getBlock() == Blocks.MAGMA)
 			{
-				worldIn.setBlockToAir(pos);
-
-				EnumFacing structFacing;
+				EnumFacing.Axis structAxis;
 				BlockPos structPos, gatePos;
 				if (worldIn.getBlockState(downPos.north()).getBlock() == Blocks.MAGMA)
 				{
-					structFacing = EnumFacing.NORTH;
+					structAxis = EnumFacing.Axis.Z;
 					structPos = downPos.south(2).up(4);
-					gatePos = downPos.north().up(2);
 				}
 				else if (worldIn.getBlockState(downPos.south()).getBlock() == Blocks.MAGMA)
 				{
-					structFacing = EnumFacing.SOUTH;
+					structAxis = EnumFacing.Axis.Z;
 					structPos = downPos.south(3).up(4);
-					gatePos = downPos.up(2);
 				}
 				else if (worldIn.getBlockState(downPos.east()).getBlock() == Blocks.MAGMA)
 				{
-					structFacing = EnumFacing.EAST;
+					structAxis = EnumFacing.Axis.X;
 					structPos = downPos.west(2).up(4);
-					gatePos = downPos.up(2);
 				}
 				else if (worldIn.getBlockState(downPos.west()).getBlock() == Blocks.MAGMA)
 				{
-					structFacing = EnumFacing.WEST;
+					structAxis = EnumFacing.Axis.X;
 					structPos = downPos.west(3).up(4);
-					gatePos = downPos.west().up(2);
 				}
 				else
 				{
 					return;
 				}
+				gatePos = (structAxis == EnumFacing.Axis.X ? structPos.east(2) : structPos.north(2)).down(2);
 
-				if (StructureUnderworldGate.isDoorComplete(worldIn, structPos, structFacing.getAxis()))
+				if (StructureUnderworldGate.isGateComplete(worldIn, structPos, structAxis))
 				{
-					worldIn.setBlockState(gatePos, BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState().withProperty(BlockUnderworldGate.FACING, structFacing));
+					worldIn.setBlockToAir(pos);
+					BlockUnderworldGate.create(worldIn, gatePos, structAxis);
+				}
+				else
+				{
+					worldIn.destroyBlock(pos, true);
 				}
 			}
 		}

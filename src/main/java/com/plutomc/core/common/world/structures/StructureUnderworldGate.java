@@ -34,13 +34,14 @@ public class StructureUnderworldGate implements IWorldStructure
 			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.WEST),
 			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.WEST),
 			BlockRegistry.BASALT.getBlock().getDefaultState(),
-			Blocks.MAGMA.getDefaultState()
+			Blocks.MAGMA.getDefaultState(),
+			BlockRegistry.CROCOITE.getBlock().getDefaultState()
 	};
 	private static final int[][] MAP = {
 			{ 1, 3, 0, 0, 1, 3 },
 			{ 5, 0, 0, 0, 0, 5 },
 			{ 2, 3, 0, 0, 1, 4 },
-			{ 9, 5, 0, 0, 5, 9 },
+			{ 9, 5, 7, 7, 5, 9 },
 			{ 9, 5, 6, 6, 5, 9 }
 	};
 
@@ -50,7 +51,7 @@ public class StructureUnderworldGate implements IWorldStructure
 		return false;
 	}
 
-	public static boolean isDoorComplete(World world, BlockPos startPos, EnumFacing.Axis axis)
+	public static boolean isGateComplete(World world, BlockPos startPos, EnumFacing.Axis axis)
 	{
 		if (MAP.length > 0 && MAP[0].length > 0 && axis == EnumFacing.Axis.Z || axis == EnumFacing.Axis.X)
 		{
@@ -75,7 +76,12 @@ public class StructureUnderworldGate implements IWorldStructure
 					BlockPos pos = startPos.east(isAxisZ ? 0 : x).down(y).north(isAxisZ ? x : 0);
 					if (world.getBlockState(pos) != blockState)
 					{
-						return false;
+						// TODO: Wrap my head around what the FUCK is going on here.
+						if (val == 7 && world.isAirBlock(pos)) {}
+						else
+						{
+							return false;
+						}
 					}
 				}
 			}
