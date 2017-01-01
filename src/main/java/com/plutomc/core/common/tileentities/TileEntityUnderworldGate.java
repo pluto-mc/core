@@ -1,6 +1,12 @@
 package com.plutomc.core.common.tileentities;
 
+import com.plutomc.core.common.blocks.BaseBlock;
 import com.plutomc.core.common.data.IDataBlock;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 /**
  * plutomc_core
@@ -30,5 +36,20 @@ public class TileEntityUnderworldGate extends BaseTileEntity
 	public void update()
 	{
 
+	}
+
+	@Nonnull
+	@SideOnly(Side.CLIENT)
+	@Override
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		if (getBlockType() instanceof BaseBlock)
+		{
+			return ((BaseBlock) getBlockType()).getRenderBoundingBox(getBlockMetadata(), getWorld(), getPos());
+		}
+		else
+		{
+			return super.getRenderBoundingBox();
+		}
 	}
 }

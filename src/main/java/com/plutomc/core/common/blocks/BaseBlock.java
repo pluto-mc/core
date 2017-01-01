@@ -3,6 +3,10 @@ package com.plutomc.core.common.blocks;
 import com.plutomc.core.common.data.IDataBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
 /**
  * plutomc_core
@@ -54,5 +58,15 @@ public class BaseBlock extends Block
 	public SoundType getBlockSoundType()
 	{
 		return blockSoundType;
+	}
+
+	public AxisAlignedBB getRenderBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return getCollisionBoundingBox(state, world, pos);
+	}
+
+	public AxisAlignedBB getRenderBoundingBox(int meta, IBlockAccess world, BlockPos pos)
+	{
+		return getRenderBoundingBox(getStateFromMeta(meta), world, pos);
 	}
 }

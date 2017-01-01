@@ -11,10 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -97,6 +94,8 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 
 	private static final AxisAlignedBB X_AABB = new AxisAlignedBB(0d, 0d, 9d * PIXEL_SIZE, 1d, 1d, 7d * PIXEL_SIZE);
 	private static final AxisAlignedBB Z_AABB = new AxisAlignedBB(7d * PIXEL_SIZE, 0d, 1d, 9d * PIXEL_SIZE, 1d, 0d);
+	private static final AxisAlignedBB X_RENDER_AABB = new AxisAlignedBB(0d, 0d, 9d * PIXEL_SIZE, 2d, 3d, 7d * PIXEL_SIZE);
+	private static final AxisAlignedBB Z_RENDER_AABB = new AxisAlignedBB(7d * PIXEL_SIZE, 0d, 2d, 9d * PIXEL_SIZE, 3d, 0d);
 
 	public BlockUnderworldGate()
 	{
@@ -150,14 +149,20 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return (state.getValue(AXIS) == EnumFacing.Axis.X ? X_AABB : Z_AABB);
+		return state.getValue(AXIS) == EnumFacing.Axis.X ? X_AABB : Z_AABB;
 	}
 
 	@Nullable
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
+	}
+
+	@Override
+	public AxisAlignedBB getRenderBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return (state.getValue(AXIS) == EnumFacing.Axis.X ? X_RENDER_AABB : Z_RENDER_AABB).offset(pos);
 	}
 
 	@Nonnull
