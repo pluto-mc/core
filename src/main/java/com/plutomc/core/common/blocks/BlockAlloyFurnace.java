@@ -142,7 +142,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return BlockRegistry.ITEM_ALLOY_FURNACE;
+		return Item.getItemFromBlock(BlockRegistry.ALLOY_FURNACE);
 	}
 
 	@SideOnly(Side.CLIENT)

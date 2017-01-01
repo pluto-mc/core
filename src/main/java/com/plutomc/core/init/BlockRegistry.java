@@ -146,21 +146,21 @@ public class BlockRegistry
 	public static final BaseBlock LEAD_ORE = new BlockLeadOre();
 	public static final BaseBlock STEEL_BLOCK = new BlockMetal(Data.STEEL_BLOCK);
 	
-	public static final BaseItemBlock ITEM_ALLOY_FURNACE = new BaseItemBlock(ALLOY_FURNACE);
-	public static final BaseItemBlock ITEM_ALLOY_FURNACE_LIT = new BaseItemBlock(ALLOY_FURNACE_LIT);
-	public static final BaseItemBlock ITEM_BASALT = new BaseItemBlock(BASALT);
-	public static final BaseItemBlock ITEM_BASALT_STAIRS = new BaseItemBlock(BASALT_STAIRS);
-	public static final BaseItemBlock ITEM_CROCOITE = new BaseItemBlock(CROCOITE);
-	public static final BaseItemBlock ITEM_QUERN_STONE = new BaseItemBlock(QUERN_STONE);
-	public static final BaseItemBlock ITEM_UNDERWORLD_GATE = new BaseItemBlock(UNDERWORLD_GATE);
-	public static final BaseItemBlock ITEM_COPPER_BLOCK = new BaseItemBlock(COPPER_BLOCK);
-	public static final BaseItemBlock ITEM_COPPER_ORE = new BaseItemBlock(COPPER_ORE);
-	public static final BaseItemBlock ITEM_TIN_BLOCK = new BaseItemBlock(TIN_BLOCK);
-	public static final BaseItemBlock ITEM_TIN_ORE = new BaseItemBlock(TIN_ORE);
-	public static final BaseItemBlock ITEM_BRONZE_BLOCK = new BaseItemBlock(BRONZE_BLOCK);
-	public static final BaseItemBlock ITEM_LEAD_BLOCK = new BaseItemBlock(LEAD_BLOCK);
-	public static final BaseItemBlock ITEM_LEAD_ORE = new BaseItemBlock(LEAD_ORE);
-	public static final BaseItemBlock ITEM_STEEL_BLOCK = new BaseItemBlock(STEEL_BLOCK);
+	private static final BaseItemBlock ITEM_ALLOY_FURNACE = new BaseItemBlock(ALLOY_FURNACE);
+	private static final BaseItemBlock ITEM_ALLOY_FURNACE_LIT = new BaseItemBlock(ALLOY_FURNACE_LIT);
+	private static final BaseItemBlock ITEM_BASALT = new BaseItemBlock(BASALT);
+	private static final BaseItemBlock ITEM_BASALT_STAIRS = new BaseItemBlock(BASALT_STAIRS);
+	private static final BaseItemBlock ITEM_CROCOITE = new BaseItemBlock(CROCOITE);
+	private static final BaseItemBlock ITEM_QUERN_STONE = new BaseItemBlock(QUERN_STONE);
+	private static final BaseItemBlock ITEM_UNDERWORLD_GATE = new BaseItemBlock(UNDERWORLD_GATE);
+	private static final BaseItemBlock ITEM_COPPER_BLOCK = new BaseItemBlock(COPPER_BLOCK);
+	private static final BaseItemBlock ITEM_COPPER_ORE = new BaseItemBlock(COPPER_ORE);
+	private static final BaseItemBlock ITEM_TIN_BLOCK = new BaseItemBlock(TIN_BLOCK);
+	private static final BaseItemBlock ITEM_TIN_ORE = new BaseItemBlock(TIN_ORE);
+	private static final BaseItemBlock ITEM_BRONZE_BLOCK = new BaseItemBlock(BRONZE_BLOCK);
+	private static final BaseItemBlock ITEM_LEAD_BLOCK = new BaseItemBlock(LEAD_BLOCK);
+	private static final BaseItemBlock ITEM_LEAD_ORE = new BaseItemBlock(LEAD_ORE);
+	private static final BaseItemBlock ITEM_STEEL_BLOCK = new BaseItemBlock(STEEL_BLOCK);
 
 	private static int TILEENTITY_ID = 1;
 
