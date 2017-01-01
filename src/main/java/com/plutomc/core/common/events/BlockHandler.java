@@ -3,6 +3,7 @@ package com.plutomc.core.common.events;
 import com.plutomc.core.common.blocks.BlockUnderworldGate;
 import com.plutomc.core.common.world.structures.StructureUnderworldGate;
 import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.init.WorldRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -35,7 +36,7 @@ public class BlockHandler
 	@SubscribeEvent
 	public static void handleBreakEvent(BlockEvent.BreakEvent event)
 	{
-		// TODO: Destroy Underworld Gate when any of the structure's blocks are destroyed.
+		StructureUnderworldGate.blockBreak(event.getWorld(), event.getPos());
 	}
 
 	@SubscribeEvent
@@ -50,26 +51,26 @@ public class BlockHandler
 			IBlockState downState = world.getBlockState(downPos);
 			if (downState.getBlock() == Blocks.MAGMA)
 			{
-				EnumFacing.Axis structAxis;
+				EnumFacing structDirection;
 				BlockPos structPos;
 				if (world.getBlockState(downPos.north()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.Axis.Z;
+					structDirection = EnumFacing.NORTH;
 					structPos = downPos.south(2).up(4);
 				}
 				else if (world.getBlockState(downPos.south()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.Axis.Z;
+					structDirection = EnumFacing.SOUTH;
 					structPos = downPos.south(3).up(4);
 				}
 				else if (world.getBlockState(downPos.east()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.Axis.X;
+					structDirection = EnumFacing.EAST;
 					structPos = downPos.west(2).up(4);
 				}
 				else if (world.getBlockState(downPos.west()).getBlock() == Blocks.MAGMA)
 				{
-					structAxis = EnumFacing.Axis.X;
+					structDirection = EnumFacing.WEST;
 					structPos = downPos.west(3).up(4);
 				}
 				else
@@ -77,13 +78,13 @@ public class BlockHandler
 					world.destroyBlock(pos, true);
 					return;
 				}
-				BlockPos gatePos = (structAxis == EnumFacing.Axis.X ? structPos.east(2) : structPos.north(2)).down(2);
+				BlockPos gatePos = (structDirection.getAxis() == EnumFacing.Axis.X ? structPos.east(2) : structPos.north(2)).down(2);
 
-				if (StructureUnderworldGate.isGateComplete(world, structPos, structAxis))
+				if (WorldRegistry.UNDERWORLD_GATE.isComplete(world, structPos, structDirection))
 				{
 					event.setCanceled(true);
 					event.getItemInHand().shrink(1);
-					BlockUnderworldGate.create(world, gatePos, structAxis);
+					BlockUnderworldGate.create(world, gatePos, structDirection.getAxis());
 				}
 				else
 				{

@@ -1,9 +1,12 @@
 package com.plutomc.core.common.world.structures;
 
+import com.plutomc.core.common.blocks.util.BlockPosDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 /**
  * plutomc_core
@@ -24,7 +27,12 @@ import net.minecraft.world.World;
  */
 public interface IWorldStructure
 {
-	boolean canGenerate(World world, BlockPos startPos, EnumFacing direction);
+	boolean canGenerate(World world, BlockPos originPos, EnumFacing direction);
 
 	boolean containsState(IBlockState state);
+
+	@Nullable
+	BlockPosDirection getOriginPos(World world, BlockPos pos);
+
+	boolean isComplete(World world, BlockPos originPos, EnumFacing direction);
 }

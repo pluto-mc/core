@@ -1,13 +1,21 @@
 package com.plutomc.core.common.world.structures;
 
 import com.plutomc.core.common.blocks.BlockStairs;
+import com.plutomc.core.common.blocks.BlockUnderworldGate;
+import com.plutomc.core.common.blocks.util.BlockPosDirection;
+import com.plutomc.core.common.world.util.WorldStructurePoint;
 import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.init.WorldRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * plutomc_core
@@ -30,6 +38,7 @@ public class StructureUnderworldGate implements IWorldStructure
 {
 	private static final IBlockState AIR_STATE = Blocks.AIR.getDefaultState();
 	private static final IBlockState CROCOITE_STATE = BlockRegistry.CROCOITE.getBlock().getDefaultState();
+	private static final IBlockState GATE_STATE = BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState();
 	private static final IBlockState[] MAP_STATES = {
 			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.EAST),
 			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.EAST),
@@ -39,15 +48,17 @@ public class StructureUnderworldGate implements IWorldStructure
 			Blocks.MAGMA.getDefaultState()
 	};
 	private static final int[][] MAP = {
-			{ 1, 3, 0, 0, 1, 3 },
-			{ 5, 0, 0, 0, 0, 5 },
-			{ 2, 3, 0, 0, 1, 4 },
-			{ 9, 5, 0, 0, 5, 9 },
-			{ 9, 5, 6, 6, 5, 9 }
+			{ 1, 3, -5, -6, 1, 3 },
+			{ 5, 0, -3, -4, 0, 5 },
+			{ 2, 3, -1, -2, 1, 4 },
+			{ 9, 5, 0,  0,  5, 9 },
+			{ 9, 5, 6,  6,  5, 9 }
 	};
 
+	private static final EnumFacing[] AXIS_HORIZONTALS = { EnumFacing.NORTH, EnumFacing.EAST };
+
 	@Override
-	public boolean canGenerate(World world, BlockPos startPos, EnumFacing direction)
+	public boolean canGenerate(World world, BlockPos originPos, EnumFacing direction)
 	{
 		return false;
 	}
@@ -55,36 +66,56 @@ public class StructureUnderworldGate implements IWorldStructure
 	@Override
 	public boolean containsState(IBlockState state)
 	{
+		if (state.getBlock() instanceof BlockStairs && state.getValue(BlockStairs.FACING).getAxis() == EnumFacing.Axis.Z)
+		{
+			state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
+		}
 		return Arrays.asList(MAP_STATES).contains(state);
 	}
 
-	public static boolean isGateComplete(World world, BlockPos startPos, EnumFacing.Axis axis)
+	@Nullable
+	@Override
+	public BlockPosDirection getOriginPos(World world, BlockPos pos)
 	{
-		if (MAP.length > 0 && MAP[0].length > 0 && axis == EnumFacing.Axis.Z || axis == EnumFacing.Axis.X)
+		IBlockState state = world.getBlockState(pos);
+		if (containsState(state))
 		{
-			boolean isAxisZ = axis == EnumFacing.Axis.Z;
+			for (EnumFacing direction : AXIS_HORIZONTALS)
+			{
+				for (WorldStructurePoint point : getPointListForState(state, direction))
+				{
+					BlockPos originPos = point.subtractFromPos(pos);
+					if (isComplete(world, originPos, direction))
+					{
+						return new BlockPosDirection(originPos, direction);
+					}
+				}
+			}
+		}
 
+		return null;
+	}
+
+	@Override
+	public boolean isComplete(World world, BlockPos originPos, EnumFacing direction)
+	{
+		if (MAP.length > 0 && MAP[0].length > 0 && direction.getAxis().isHorizontal())
+		{
 			for (int y = 0; y < MAP.length; y++)
 			{
 				for (int x = 0; x < MAP[0].length; x++)
 				{
 					int val = MAP[y][x];
-					if (val >= MAP_STATES.length)
+					if (val > MAP_STATES.length)
 					{
 						continue;
 					}
 
-					boolean isCrocoiteBlock = y == 3 && (x == 2 || x == 3);
-					IBlockState state = !isCrocoiteBlock ? val == 0 ? AIR_STATE : MAP_STATES[val - 1] : CROCOITE_STATE;
-					if (isAxisZ && val >= 1 && val <= 4 )
+					WorldStructurePoint point = new WorldStructurePoint(x, y, direction);
+					BlockPos pos = point.addToPos(originPos);
+					if (world.getBlockState(pos) != getStateFromPoint(point))
 					{
-						state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
-					}
-
-					BlockPos pos = startPos.east(isAxisZ ? 0 : x).down(y).north(isAxisZ ? x : 0);
-					if (world.getBlockState(pos) != state)
-					{
-						if (isCrocoiteBlock && world.isAirBlock(pos)) {}
+						if ((isCrocoiteBlock(x, y) || val < 0) && world.isAirBlock(pos)) {}
 						else
 						{
 							return false;
@@ -97,5 +128,77 @@ public class StructureUnderworldGate implements IWorldStructure
 		}
 
 		return false;
+	}
+
+	private List<WorldStructurePoint> getPointListForState(IBlockState state, EnumFacing direction)
+	{
+		List<WorldStructurePoint> points = new ArrayList<WorldStructurePoint>();
+		if (!containsState(state)) return points;
+
+		if (MAP.length > 0 && MAP[0].length > 0)
+		{
+			for (int y = 0; y < MAP.length; y++)
+			{
+				for (int x = 0; x < MAP[0].length; x++)
+				{
+					WorldStructurePoint point = new WorldStructurePoint(x, y, direction);
+					IBlockState pointState = getStateFromPoint(point);
+					if (pointState == state)
+					{
+						points.add(point);
+					}
+				}
+			}
+		}
+
+		return points;
+	}
+
+	private IBlockState getStateFromPoint(WorldStructurePoint point)
+	{
+		int val = MAP[point.getY()][point.getX()];
+		IBlockState state;
+		if (isCrocoiteBlock(point.getX(), point.getY()))
+		{
+			state = CROCOITE_STATE;
+		}
+		else if (val < 0)
+		{
+			int index = Math.abs(val) - 1;
+			if (point.isAxisZ())
+			{
+				// Swap indexes on the z-axis.
+				index = index % 2 == 0 ? index + 1 : index - 1;
+			}
+			state = GATE_STATE.withProperty(BlockUnderworldGate.AXIS, point.getDirection().getAxis())
+					.withProperty(BlockUnderworldGate.SUBBLOCK, BlockUnderworldGate.EnumSubBlock.fromIndex(index));
+		}
+		else if (val == 0 || val > MAP_STATES.length)
+		{
+			state = AIR_STATE;
+		}
+		else
+		{
+			state = MAP_STATES[val - 1];
+			if (state.getBlock() instanceof BlockStairs && point.isAxisZ())
+			{
+				state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
+			}
+		}
+		return state;
+	}
+
+	private boolean isCrocoiteBlock(int x, int y)
+	{
+		return (x == 2 || x == 3) && y == 3;
+	}
+
+	public static void blockBreak(World world, BlockPos pos)
+	{
+		BlockPosDirection originPos = WorldRegistry.UNDERWORLD_GATE.getOriginPos(world, pos);
+		if (originPos != null)
+		{
+			world.destroyBlock(originPos.getDirection().getAxis() == EnumFacing.Axis.Z ? originPos.north(2) : originPos.west(2), false);
+		}
 	}
 }

@@ -2,6 +2,8 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.common.blocks.BaseBlock;
 import com.plutomc.core.common.world.GeneratorOre;
+import com.plutomc.core.common.world.structures.IWorldStructure;
+import com.plutomc.core.common.world.structures.StructureUnderworldGate;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -75,6 +77,8 @@ public class WorldRegistry
 			return spawnChance;
 		}
 	}
+
+	public static final IWorldStructure UNDERWORLD_GATE = new StructureUnderworldGate();
 
 	public static void init()
 	{
