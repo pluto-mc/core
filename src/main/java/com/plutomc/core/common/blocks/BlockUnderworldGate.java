@@ -78,6 +78,11 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 			return pos;
 		}
 
+		public BlockPos getRotatedPos(EnumFacing.Axis axis)
+		{
+			return axis == EnumFacing.Axis.X ? getPos() : getPos().rotate(Rotation.CLOCKWISE_90).north();
+		}
+
 		public static EnumSubBlock fromIndex(int index)
 		{
 			return values()[MathHelper.abs(index % values().length)];
@@ -136,6 +141,8 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 		{
 			worldIn.removeTileEntity(pos);
 		}
+
+		BlockUnderworldGate.destroy(worldIn, pos, state);
 	}
 
 	@Nullable
@@ -200,11 +207,22 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	public static void create(World world, BlockPos pos, EnumFacing.Axis axis)
 	{
 		IBlockState state = BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState().withProperty(AXIS, axis);
-
 		for (EnumSubBlock subBlock : EnumSubBlock.values())
 		{
-			BlockPos subBlockPos = axis == EnumFacing.Axis.X ? subBlock.getPos() : subBlock.getPos().rotate(Rotation.CLOCKWISE_90).north();
-			world.setBlockState(pos.add(subBlockPos), state.withProperty(SUBBLOCK, subBlock), 3);
+			world.setBlockState(pos.add(subBlock.getRotatedPos(axis)), state.withProperty(SUBBLOCK, subBlock), 3);
+		}
+	}
+
+	public static void destroy(World world, BlockPos pos, IBlockState state)
+	{
+		BlockPos startPos = pos.subtract(state.getValue(SUBBLOCK).getRotatedPos(state.getValue(AXIS)));
+		for (EnumSubBlock subBlock : EnumSubBlock.values())
+		{
+			BlockPos subBlockPos = startPos.add(subBlock.getRotatedPos(state.getValue(AXIS)));
+			if (world.getBlockState(subBlockPos) == state.withProperty(SUBBLOCK, subBlock))
+			{
+				world.setBlockToAir(subBlockPos);
+			}
 		}
 	}
 }
