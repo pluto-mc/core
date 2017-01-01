@@ -1,16 +1,16 @@
 {
     "variants": {
-        "axis=x,subblock=bottom_left": { "model": "block" },
-        "axis=z,subblock=bottom_left": { "model": "block" },
-        "axis=x,subblock=bottom_right": { "model": "block" },
-        "axis=z,subblock=bottom_right": { "model": "block" },
-        "axis=x,subblock=center_left": { "model": "block" },
-        "axis=z,subblock=center_left": { "model": "block" },
-        "axis=x,subblock=center_right": { "model": "block" },
-        "axis=z,subblock=center_right": { "model": "block" },
-        "axis=x,subblock=top_left": { "model": "block" },
-        "axis=z,subblock=top_left": { "model": "block" },
-        "axis=x,subblock=top_right": { "model": "block" },
-        "axis=z,subblock=top_right": { "model": "block" }
+        "axis=x,subblock=bottom_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=bottom_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=x,subblock=bottom_right": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=bottom_right": { "model": "plutomc_core:underworld_gate" },
+        "axis=x,subblock=center_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=center_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=x,subblock=center_right": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=center_right": { "model": "plutomc_core:underworld_gate" },
+        "axis=x,subblock=top_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=top_left": { "model": "plutomc_core:underworld_gate" },
+        "axis=x,subblock=top_right": { "model": "plutomc_core:underworld_gate" },
+        "axis=z,subblock=top_right": { "model": "plutomc_core:underworld_gate" }
     }
 }

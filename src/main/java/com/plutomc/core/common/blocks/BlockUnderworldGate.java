@@ -233,7 +233,7 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 			BlockPos subBlockPos = startPos.add(subBlock.getRotatedPos(state.getValue(AXIS)));
 			if (world.getBlockState(subBlockPos) == state.withProperty(SUBBLOCK, subBlock))
 			{
-				world.setBlockToAir(subBlockPos);
+				world.destroyBlock(subBlockPos, false);
 			}
 		}
 	}

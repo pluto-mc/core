@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "plutomc_core:blocks/crocoite"
+    }
+}
