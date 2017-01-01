@@ -45,7 +45,7 @@ public class BlockHandler
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 
-		if (event.getPlacedBlock().getBlock() == BlockRegistry.CROCOITE.getBlock())
+		if (event.getPlacedBlock().getBlock() == BlockRegistry.CROCOITE)
 		{
 			BlockPos downPos = pos.down();
 			IBlockState downState = world.getBlockState(downPos);

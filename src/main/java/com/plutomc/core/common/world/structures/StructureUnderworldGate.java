@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLLog;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -37,14 +38,14 @@ import java.util.List;
 public class StructureUnderworldGate implements IWorldStructure
 {
 	private static final IBlockState AIR_STATE = Blocks.AIR.getDefaultState();
-	private static final IBlockState CROCOITE_STATE = BlockRegistry.CROCOITE.getBlock().getDefaultState();
-	private static final IBlockState GATE_STATE = BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState();
+	private static final IBlockState CROCOITE_STATE = BlockRegistry.CROCOITE.getDefaultState();
+	private static final IBlockState GATE_STATE = BlockRegistry.UNDERWORLD_GATE.getDefaultState();
 	private static final IBlockState[] MAP_STATES = {
-			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.EAST),
-			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.EAST),
-			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.WEST),
-			BlockRegistry.BASALT_STAIRS.getBlock().getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.WEST),
-			BlockRegistry.BASALT.getBlock().getDefaultState(),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.EAST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.EAST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.WEST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.WEST),
+			BlockRegistry.BASALT.getDefaultState(),
 			Blocks.MAGMA.getDefaultState()
 	};
 	private static final int[][] MAP = {
@@ -66,7 +67,7 @@ public class StructureUnderworldGate implements IWorldStructure
 	@Override
 	public boolean containsState(IBlockState state)
 	{
-		if (state.getBlock() instanceof BlockStairs && state.getValue(BlockStairs.FACING).getAxis() == EnumFacing.Axis.Z)
+		if (state.getBlock() == BlockRegistry.BASALT_STAIRS && state.getValue(BlockStairs.FACING).getAxis() == EnumFacing.Axis.Z)
 		{
 			state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
 		}
@@ -180,7 +181,7 @@ public class StructureUnderworldGate implements IWorldStructure
 		else
 		{
 			state = MAP_STATES[val - 1];
-			if (state.getBlock() instanceof BlockStairs && point.isAxisZ())
+			if (state.getBlock() == BlockRegistry.BASALT_STAIRS && point.isAxisZ())
 			{
 				state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
 			}

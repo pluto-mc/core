@@ -218,7 +218,7 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 
 	public static void create(World world, BlockPos pos, EnumFacing.Axis axis)
 	{
-		IBlockState state = BlockRegistry.UNDERWORLD_GATE.getBlock().getDefaultState().withProperty(AXIS, axis);
+		IBlockState state = BlockRegistry.UNDERWORLD_GATE.getDefaultState().withProperty(AXIS, axis);
 		for (EnumSubBlock subBlock : EnumSubBlock.values())
 		{
 			world.setBlockState(pos.add(subBlock.getRotatedPos(axis)), state.withProperty(SUBBLOCK, subBlock), 3);

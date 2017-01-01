@@ -85,15 +85,15 @@ public class RecipeRegistry
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.STEEL_INGOT,
 				"NNN", "NNN", "NNN", 'N', ItemRegistry.STEEL_NUGGET.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_INGOT, 9),
-				BlockRegistry.COPPER_BLOCK.getBlock().getData().getOreDictName()));
+				BlockRegistry.COPPER_BLOCK.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_INGOT, 9),
-				BlockRegistry.TIN_BLOCK.getBlock().getData().getOreDictName()));
+				BlockRegistry.TIN_BLOCK.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.BRONZE_INGOT, 9),
-				BlockRegistry.BRONZE_BLOCK.getBlock().getData().getOreDictName()));
+				BlockRegistry.BRONZE_BLOCK.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.LEAD_INGOT, 9),
-				BlockRegistry.LEAD_BLOCK.getBlock().getData().getOreDictName()));
+				BlockRegistry.LEAD_BLOCK.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.STEEL_INGOT, 9),
-				BlockRegistry.STEEL_BLOCK.getBlock().getData().getOreDictName()));
+				BlockRegistry.STEEL_BLOCK.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.COPPER_NUGGET, 9),
 				ItemRegistry.COPPER_INGOT.getData().getOreDictName()));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemRegistry.TIN_NUGGET, 9),
@@ -185,9 +185,9 @@ public class RecipeRegistry
 	private static void registerSmelting()
 	{
 		GameRegistry.addSmelting(ItemRegistry.CRUCIBLE_UNFIRED, new ItemStack(ItemRegistry.CRUCIBLE), 0.4f);
-		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE.getBlock(), new ItemStack(ItemRegistry.COPPER_INGOT), 0.7f);
-		GameRegistry.addSmelting(BlockRegistry.TIN_ORE.getBlock(), new ItemStack(ItemRegistry.TIN_INGOT), 0.7f);
-		GameRegistry.addSmelting(BlockRegistry.LEAD_ORE.getBlock(), new ItemStack(ItemRegistry.LEAD_INGOT), 0.7f);
+		GameRegistry.addSmelting(BlockRegistry.COPPER_ORE, new ItemStack(ItemRegistry.COPPER_INGOT), 0.7f);
+		GameRegistry.addSmelting(BlockRegistry.TIN_ORE, new ItemStack(ItemRegistry.TIN_INGOT), 0.7f);
+		GameRegistry.addSmelting(BlockRegistry.LEAD_ORE, new ItemStack(ItemRegistry.LEAD_INGOT), 0.7f);
 	}
 
 	private static void registerAlloySmelting()

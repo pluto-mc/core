@@ -142,7 +142,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return BlockRegistry.ALLOY_FURNACE;
+		return BlockRegistry.ITEM_ALLOY_FURNACE;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -186,7 +186,7 @@ public class BlockAlloyFurnace extends BaseBlock implements ITileEntityProvider
 
 	public static void setBurningAtPos(World worldIn, BlockPos pos, boolean burning)
 	{
-		IBlockState targetState = burning ? BlockRegistry.ALLOY_FURNACE_LIT.getBlock().getDefaultState() : BlockRegistry.ALLOY_FURNACE.getBlock().getDefaultState();
+		IBlockState targetState = burning ? BlockRegistry.ALLOY_FURNACE_LIT.getDefaultState() : BlockRegistry.ALLOY_FURNACE.getDefaultState();
 		IBlockState blockState = worldIn.getBlockState(pos);
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 

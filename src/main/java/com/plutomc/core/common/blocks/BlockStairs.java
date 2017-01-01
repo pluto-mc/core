@@ -2,7 +2,6 @@ package com.plutomc.core.common.blocks;
 
 import com.google.common.collect.Lists;
 import com.plutomc.core.common.data.IDataBlock;
-import com.plutomc.core.common.items.BaseItemBlock;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyDirection;
@@ -146,11 +145,11 @@ public class BlockStairs extends BaseBlock
 	private final BaseBlock modelBlock;
 	private final IBlockState modelState;
 
-	public BlockStairs(IDataBlock data, BaseItemBlock modelItemBlock)
+	public BlockStairs(IDataBlock data, BaseBlock modelBlock)
 	{
 		super(data);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(SHAPE, net.minecraft.block.BlockStairs.EnumShape.STRAIGHT));
-		this.modelBlock = modelItemBlock.getBlock();
+		this.modelBlock = modelBlock;
 		this.modelState = modelBlock.getDefaultState();
 		this.setHardness(this.modelBlock.getBlockHardness());
 		String harvestTool;
