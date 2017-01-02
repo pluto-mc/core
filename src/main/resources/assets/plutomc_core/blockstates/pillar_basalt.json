@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"base_bottom=false,base_top=false": { "model": "plutomc_core:pillar_basalt_none" },
+		"base_bottom=false,base_top=true": { "model": "plutomc_core:pillar_basalt_base", "x": 180, "uvlock": true },
+		"base_bottom=true,base_top=false": { "model": "plutomc_core:pillar_basalt_base" },
+		"base_bottom=true,base_top=true": { "model": "plutomc_core:pillar_basalt_both" }
+	}
+}

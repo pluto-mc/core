@@ -1,0 +1,38 @@
+{
+	"parent": "plutomc_core:block/pillar",
+    "elements": [
+        {   "from": [ 2, 2, 2 ],
+            "to": [ 14, 16, 14 ],
+            "faces": {
+                "down":  { "texture": "#face" },
+                "up":    { "texture": "#face", "cullface": "up" },
+                "north": { "texture": "#pillar" },
+                "south": { "texture": "#pillar" },
+                "west":  { "texture": "#pillar" },
+                "east":  { "texture": "#pillar" }
+            }
+        },
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 1, 16 ],
+            "faces": {
+				"down":  { "texture": "#face", "cullface": "down" },
+				"up":    { "texture": "#face" },
+				"north": { "texture": "#face" },
+				"south": { "texture": "#face" },
+				"west":  { "texture": "#face" },
+				"east":  { "texture": "#face" }
+            }
+        },
+        {   "from": [ 1, 1, 1 ],
+            "to": [ 15, 2, 15 ],
+            "faces": {
+				"down":  { "texture": "#face" },
+				"up":    { "texture": "#face" },
+				"north": { "texture": "#face" },
+				"south": { "texture": "#face" },
+				"west":  { "texture": "#face" },
+				"east":  { "texture": "#face" }
+            }
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "plutomc_core:block/pillar_none",
+    "textures": {
+        "face": "plutomc_core:blocks/basalt",
+        "pillar": "plutomc_core:blocks/pillar_basalt"
+    }
+}
