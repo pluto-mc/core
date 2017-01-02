@@ -40,10 +40,10 @@ public class StructureUnderworldGate implements IWorldStructure
 	private static final IBlockState CROCOITE_STATE = BlockRegistry.CROCOITE.getDefaultState();
 	private static final IBlockState GATE_STATE = BlockRegistry.UNDERWORLD_GATE.getDefaultState();
 	private static final IBlockState[] MAP_STATES = {
-			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.EAST),
-			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.EAST),
-			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.WEST),
-			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, net.minecraft.block.BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.WEST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.EAST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.EAST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM).withProperty(BlockStairs.FACING, EnumFacing.WEST),
+			BlockRegistry.BASALT_STAIRS.getDefaultState().withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP).withProperty(BlockStairs.FACING, EnumFacing.WEST),
 			BlockRegistry.BASALT.getDefaultState(),
 			Blocks.MAGMA.getDefaultState()
 	};
