@@ -42,14 +42,22 @@ public class RecipeRegistry
 	{
 		// Miscellaneous
 		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS), Blocks.DIRT, Items.WHEAT_SEEDS);
-		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_STAIRS, 4),
-				"  B", " BB", "BBB", 'B', BlockRegistry.BASALT);
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.STEEL_COMPOUND, 3),
 				ItemRegistry.ASH, ItemRegistry.CROCOITE_DUST, ItemRegistry.CROCOITE_DUST);
 		GameRegistry.addRecipe(new ItemStack(ItemRegistry.CRUCIBLE_UNFIRED),
 				"   ", "C C", "CCC", 'C', Items.CLAY_BALL);
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ALLOY_FURNACE),
 				"SSS", "FCF", "SSS", 'S', Blocks.COBBLESTONE, 'F', Blocks.FURNACE, 'C', ItemRegistry.CRUCIBLE);
+
+		// Basalt
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_BRICK, 4),
+				"BB", "BB", 'B', BlockRegistry.BASALT);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_PILLAR, 2),
+				"BB", "BB", "BB", 'B', BlockRegistry.BASALT_BRICK);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_STAIRS, 4),
+				"  B", " BB", "BBB", 'B', BlockRegistry.BASALT);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_BRICK_STAIRS, 4),
+				"  B", " BB", "BBB", 'B', BlockRegistry.BASALT_BRICK);
 
 		// Quern Stone
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.QUERN_STONE),
