@@ -50,7 +50,7 @@ public class WorldGenNecromanteion extends WorldGenerator
 		BlockPos size = template.transformedSize(rotation);
 		int x = random.nextInt(16 - size.getX() % 16);
 		int z = random.nextInt(16 - size.getZ() % 16);
-		int y = pos.getY() + size.getY();
+		int y = pos.getY();
 		ChunkPos chunkPos = new ChunkPos(pos);
 
 		StructureBoundingBox structureBB = new StructureBoundingBox(chunkPos.getXStart() + x, 0, chunkPos.getZStart() + z, chunkPos.getXEnd() + x + size.getX(), 255, chunkPos.getZEnd() + z + size.getZ());

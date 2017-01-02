@@ -27,8 +27,7 @@ public class GeneratorNecromanteion extends BaseGenerator
 	private static final WorldGenNecromanteion WORLD_GEN = new WorldGenNecromanteion();
 	private static final int MIN_Y = 4;
 	private static final int MAX_Y = 8;
-	// TODO: Increase to decrease number of spawns.
-	private static final int CHUNK_COUNT = 4;
+	private static final int CHUNK_COUNT = 64;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, int dimension)
@@ -43,10 +42,8 @@ public class GeneratorNecromanteion extends BaseGenerator
 	{
 		if (random.nextInt(CHUNK_COUNT) == 0)
 		{
-			int x = chunkX * 16 + random.nextInt(16);
 			int y = MIN_Y + random.nextInt(MAX_Y - MIN_Y);
-			int z = chunkZ * 16 + random.nextInt(16);
-			WORLD_GEN.generate(world, random, new BlockPos(x, y, z));
+			WORLD_GEN.generate(world, random, new BlockPos(chunkX * 16, y, chunkZ * 16));
 		}
 	}
 }
