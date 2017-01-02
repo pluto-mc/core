@@ -4,6 +4,7 @@ import com.plutomc.core.Core;
 import com.plutomc.core.client.renderers.models.ModelUnderworldGate;
 import com.plutomc.core.common.blocks.BlockUnderworldGate;
 import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
+import com.plutomc.core.init.BlockRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -45,7 +46,7 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 	{
 		IBlockState state = te.getWorld().getBlockState(te.getPos());
 
-		if (state.getValue(BlockUnderworldGate.SUBBLOCK).isRender())
+		if (state.getBlock() == BlockRegistry.UNDERWORLD_GATE && state.getValue(BlockUnderworldGate.SUBBLOCK).isRender())
 		{
 			super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
