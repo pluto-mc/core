@@ -2,6 +2,7 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.common.blocks.BaseBlock;
 import com.plutomc.core.common.data.IDataOre;
+import com.plutomc.core.common.world.GeneratorNecromanteion;
 import com.plutomc.core.common.world.GeneratorOre;
 import com.plutomc.core.common.world.structures.IWorldStructure;
 import com.plutomc.core.common.world.structures.StructureUnderworldGate;
@@ -90,6 +91,7 @@ public class WorldRegistry
 
 	public static void init()
 	{
+		GameRegistry.registerWorldGenerator(new GeneratorNecromanteion(), 0);
 		GameRegistry.registerWorldGenerator(new GeneratorOre(), 99);
 	}
 }

@@ -28,21 +28,14 @@ import java.util.Random;
  */
 public class GeneratorOre extends BaseGenerator
 {
-	private List<WorldGenOre> worldGens;
-
-	public GeneratorOre()
-	{
-		super();
-
-		worldGens = new ArrayList<WorldGenOre>() {{
-			add(new WorldGenOre(WorldRegistry.OreData.COPPER_ORE));
-			add(new WorldGenOre(WorldRegistry.OreData.TIN_ORE));
-			add(new WorldGenLeadOre());
-		}};
-	}
+	private static List<WorldGenOre> worldGens = new ArrayList<WorldGenOre>() {{
+		add(new WorldGenOre(WorldRegistry.OreData.COPPER_ORE));
+		add(new WorldGenOre(WorldRegistry.OreData.TIN_ORE));
+		add(new WorldGenLeadOre());
+	}};
 
 	@Override
-	public void run(Random random, int chunkX, int chunkZ, World world, int dimension)
+	public void generate(Random random, int chunkX, int chunkZ, World world, int dimension)
 	{
 		switch (dimension)
 		{

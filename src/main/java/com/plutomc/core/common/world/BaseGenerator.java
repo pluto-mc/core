@@ -29,8 +29,8 @@ public abstract class BaseGenerator implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		run(random, chunkX, chunkZ, world, world.provider.getDimension());
+		generate(random, chunkX, chunkZ, world, world.provider.getDimension());
 	}
 
-	public abstract void run(Random random, int chunkX, int chunkZ, World world, int dimension);
+	public abstract void generate(Random random, int chunkX, int chunkZ, World world, int dimension);
 }
