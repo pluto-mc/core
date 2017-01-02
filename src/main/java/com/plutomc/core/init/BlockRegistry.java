@@ -40,12 +40,15 @@ public class BlockRegistry
 	{
 		ALLOY_FURNACE("alloy_furnace", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityAlloyFurnace.class),
 		ALLOY_FURNACE_LIT("alloy_furnace_lit", null, null, Material.ROCK, null),
-		BASALT("basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
-		BASALT_PILLAR("pillar_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
-		BASALT_STAIRS("stairs_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
 		QUERN_STONE("quern_stone", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityQuernStone.class),
 		UNDERWORLD_GATE("underworld_gate", null, null, Material.PORTAL, TileEntityUnderworldGate.class),
+
+		BASALT("basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+		BASALT_STAIRS("stairs_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+		BASALT_BRICK("basalt_brick", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+		BASALT_BRICK_STAIRS("stairs_basalt_brick", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
+		BASALT_PILLAR("pillar_basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
 
 		COPPER_BLOCK("copper_block", "blockCopper", CreativeTabs.DECORATIONS, Material.ROCK, null),
 		COPPER_ORE("copper_ore", "oreCopper", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
@@ -133,12 +136,14 @@ public class BlockRegistry
 
 	public static final BaseBlock ALLOY_FURNACE = new BlockAlloyFurnace(false);
 	public static final BaseBlock ALLOY_FURNACE_LIT = new BlockAlloyFurnace(true);
-	public static final BaseBlock BASALT = new BlockBasalt();
-	public static final BaseBlock BASALT_PILLAR = new BlockPillar(Data.BASALT_PILLAR, BASALT);
-	public static final BaseBlock BASALT_STAIRS = new BlockStairs(Data.BASALT_STAIRS, BASALT);
 	public static final BaseBlock CROCOITE = new BlockCrocoite();
 	public static final BaseBlock QUERN_STONE = new BlockQuernStone();
 	public static final BaseBlock UNDERWORLD_GATE = new BlockUnderworldGate();
+	public static final BaseBlock BASALT = new BlockBasalt(Data.BASALT);
+	public static final BaseBlock BASALT_STAIRS = new BlockStairs(Data.BASALT_STAIRS, BASALT);
+	public static final BaseBlock BASALT_BRICK = new BlockBasalt(Data.BASALT_BRICK);
+	public static final BaseBlock BASALT_BRICK_STAIRS = new BlockStairs(Data.BASALT_BRICK_STAIRS, BASALT_BRICK);
+	public static final BaseBlock BASALT_PILLAR = new BlockPillar(Data.BASALT_PILLAR, BASALT);
 	public static final BaseBlock COPPER_BLOCK = new BlockMetal(Data.COPPER_BLOCK);
 	public static final BaseBlock COPPER_ORE = new BlockOre(Data.COPPER_ORE);
 	public static final BaseBlock TIN_BLOCK = new BlockMetal(Data.TIN_BLOCK);
@@ -150,12 +155,14 @@ public class BlockRegistry
 	
 	private static final BaseItemBlock ITEM_ALLOY_FURNACE = new BaseItemBlock(ALLOY_FURNACE);
 	private static final BaseItemBlock ITEM_ALLOY_FURNACE_LIT = new BaseItemBlock(ALLOY_FURNACE_LIT);
-	private static final BaseItemBlock ITEM_BASALT = new BaseItemBlock(BASALT);
-	private static final BaseItemBlock ITEM_BASALT_PILLAR = new BaseItemBlock(BASALT_PILLAR);
-	private static final BaseItemBlock ITEM_BASALT_STAIRS = new BaseItemBlock(BASALT_STAIRS);
 	private static final BaseItemBlock ITEM_CROCOITE = new BaseItemBlock(CROCOITE);
 	private static final BaseItemBlock ITEM_QUERN_STONE = new BaseItemBlock(QUERN_STONE);
 	private static final BaseItemBlock ITEM_UNDERWORLD_GATE = new BaseItemBlock(UNDERWORLD_GATE);
+	private static final BaseItemBlock ITEM_BASALT = new BaseItemBlock(BASALT);
+	private static final BaseItemBlock ITEM_BASALT_STAIRS = new BaseItemBlock(BASALT_STAIRS);
+	private static final BaseItemBlock ITEM_BASALT_BRICK = new BaseItemBlock(BASALT_BRICK);
+	private static final BaseItemBlock ITEM_BASALT_BRICK_STAIRS = new BaseItemBlock(BASALT_BRICK_STAIRS);
+	private static final BaseItemBlock ITEM_BASALT_PILLAR = new BaseItemBlock(BASALT_PILLAR);
 	private static final BaseItemBlock ITEM_COPPER_BLOCK = new BaseItemBlock(COPPER_BLOCK);
 	private static final BaseItemBlock ITEM_COPPER_ORE = new BaseItemBlock(COPPER_ORE);
 	private static final BaseItemBlock ITEM_TIN_BLOCK = new BaseItemBlock(TIN_BLOCK);
@@ -171,12 +178,14 @@ public class BlockRegistry
 	{
 		register(ITEM_ALLOY_FURNACE);
 		register(ITEM_ALLOY_FURNACE_LIT);
-		register(ITEM_BASALT);
-		register(ITEM_BASALT_PILLAR);
-		register(ITEM_BASALT_STAIRS);
 		register(ITEM_CROCOITE);
 		register(ITEM_QUERN_STONE);
 		register(ITEM_UNDERWORLD_GATE);
+		register(ITEM_BASALT);
+		register(ITEM_BASALT_STAIRS);
+		register(ITEM_BASALT_BRICK);
+		register(ITEM_BASALT_BRICK_STAIRS);
+		register(ITEM_BASALT_PILLAR);
 		register(ITEM_COPPER_BLOCK);
 		register(ITEM_COPPER_ORE);
 		register(ITEM_TIN_BLOCK);
@@ -210,12 +219,14 @@ public class BlockRegistry
 	{
 		registerRender(ITEM_ALLOY_FURNACE);
 		registerRender(ITEM_ALLOY_FURNACE_LIT);
-		registerRender(ITEM_BASALT);
-		registerRender(ITEM_BASALT_PILLAR);
-		registerRender(ITEM_BASALT_STAIRS);
 		registerRender(ITEM_CROCOITE);
 		registerRender(ITEM_QUERN_STONE);
 		registerRender(ITEM_COPPER_BLOCK);
+		registerRender(ITEM_BASALT);
+		registerRender(ITEM_BASALT_STAIRS);
+		registerRender(ITEM_BASALT_BRICK);
+		registerRender(ITEM_BASALT_BRICK_STAIRS);
+		registerRender(ITEM_BASALT_PILLAR);
 		registerRender(ITEM_COPPER_ORE);
 		registerRender(ITEM_TIN_BLOCK);
 		registerRender(ITEM_TIN_ORE);

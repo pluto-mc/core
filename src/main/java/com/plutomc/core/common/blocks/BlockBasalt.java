@@ -1,6 +1,6 @@
 package com.plutomc.core.common.blocks;
 
-import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.common.data.IDataBlock;
 import net.minecraft.block.SoundType;
 
 /**
@@ -22,9 +22,9 @@ import net.minecraft.block.SoundType;
  */
 public class BlockBasalt extends BaseBlock
 {
-	public BlockBasalt()
+	public BlockBasalt(IDataBlock data)
 	{
-		super(BlockRegistry.Data.BASALT);
+		super(data);
 		setHardness(6f);
 		setHarvestLevel("pickaxe", 2);
 		setResistance(20f);

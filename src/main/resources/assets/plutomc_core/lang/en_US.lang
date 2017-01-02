@@ -67,11 +67,14 @@ item.steel_leggings.name=Steel Leggings
 
 
 tile.alloy_furnace.name=Alloy Furnace
-tile.basalt.name=Basalt
-tile.stairs_basalt.name=Basalt Stairs
-tile.pillar_basalt.name=Basalt Pillar
 tile.crocoite.name=Crocoite
 tile.quern_stone.name=Quern Stone
+
+tile.basalt.name=Basalt
+tile.stairs_basalt.name=Basalt Stairs
+tile.basalt_brick.name=Basalt Bricks
+tile.stairs_basalt_brick.name=Basalt Brick Stairs
+tile.pillar_basalt.name=Basalt Pillar
 
 tile.copper_block.name=Block of Copper
 tile.copper_ore.name=Copper Ore
