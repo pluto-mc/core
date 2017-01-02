@@ -73,6 +73,12 @@ public class StructureUnderworldGate implements IWorldStructure
 		return Arrays.asList(MAP_STATES).contains(state);
 	}
 
+	@Override
+	public void generate(World world, BlockPos originPos, EnumFacing direction)
+	{
+		// TODO: Implement method.
+	}
+
 	@Nullable
 	@Override
 	public BlockPosDirection getOriginPos(World world, BlockPos pos)

@@ -1,6 +1,7 @@
 package com.plutomc.core.init;
 
 import com.plutomc.core.common.blocks.BaseBlock;
+import com.plutomc.core.common.data.IDataOre;
 import com.plutomc.core.common.world.GeneratorOre;
 import com.plutomc.core.common.world.structures.IWorldStructure;
 import com.plutomc.core.common.world.structures.StructureUnderworldGate;
@@ -25,7 +26,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class WorldRegistry
 {
-	public enum OreData {
+	public enum OreData implements IDataOre
+	{
 		COPPER_ORE(BlockRegistry.COPPER_ORE, 1, 63, 8, 10),
 		TIN_ORE(BlockRegistry.TIN_ORE, 1, 63, 8, 6),
 		LEAD_ORE(BlockRegistry.LEAD_ORE, 1, 15, 4, 2);
@@ -47,31 +49,37 @@ public class WorldRegistry
 			this.spawnChance = spawnChance;
 		}
 
+		@Override
 		public BaseBlock getBlock()
 		{
 			return block;
 		}
 
+		@Override
 		public int getMinY()
 		{
 			return minY;
 		}
 
+		@Override
 		public int getMaxY()
 		{
 			return maxY;
 		}
 
+		@Override
 		public int getDiffY()
 		{
 			return diffY;
 		}
 
+		@Override
 		public int getBlockCount()
 		{
 			return blockCount;
 		}
 
+		@Override
 		public int getSpawnChance()
 		{
 			return spawnChance;
@@ -82,6 +90,6 @@ public class WorldRegistry
 
 	public static void init()
 	{
-		GameRegistry.registerWorldGenerator(new GeneratorOre(), 0);
+		GameRegistry.registerWorldGenerator(new GeneratorOre(), 99);
 	}
 }

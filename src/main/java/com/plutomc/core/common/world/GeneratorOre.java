@@ -1,5 +1,6 @@
 package com.plutomc.core.common.world;
 
+import com.plutomc.core.common.data.IDataOre;
 import com.plutomc.core.init.WorldRegistry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -65,7 +66,7 @@ public class GeneratorOre extends BaseGenerator
 
 	private void generateOre(WorldGenOre worldGen, Random random, int chunkX, int chunkZ, World world)
 	{
-		WorldRegistry.OreData oreData = worldGen.oreData;
+		IDataOre oreData = worldGen.getOreData();
 		for (int i = 0; i < oreData.getSpawnChance(); i ++) {
 			double x = chunkX * 16 + random.nextInt(16);
 			double y = oreData.getMinY() + random.nextInt(oreData.getDiffY());

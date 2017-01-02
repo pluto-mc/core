@@ -31,6 +31,8 @@ public interface IWorldStructure
 
 	boolean containsState(IBlockState state);
 
+	void generate(World world, BlockPos originPos, EnumFacing direction);
+
 	@Nullable
 	BlockPosDirection getOriginPos(World world, BlockPos pos);
 
