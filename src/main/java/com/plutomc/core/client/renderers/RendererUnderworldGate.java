@@ -33,12 +33,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntityUnderworldGate>
 {
-	private static final ResourceLocation TEXTURE_GATE = new ResourceLocation(Core.MOD_ID, "textures/entity/underworld_gate.png");
+	private static final ResourceLocation[] TEXTURES_GATE = {
+			new ResourceLocation(Core.MOD_ID, "textures/entity/underworld_gate_0.png"),
+			new ResourceLocation(Core.MOD_ID, "textures/entity/underworld_gate_1.png"),
+			new ResourceLocation(Core.MOD_ID, "textures/entity/underworld_gate_2.png"),
+			new ResourceLocation(Core.MOD_ID, "textures/entity/underworld_gate_3.png")
+	};
+	private static final long MAX_TIME = 23999;
 	private ModelUnderworldGate model;
+	private int textureIndex;
+	private long textureTime;
 
 	public RendererUnderworldGate()
 	{
 		this.model = new ModelUnderworldGate();
+		this.textureIndex = 0;
+		this.textureTime = -1;
 	}
 
 	@Override
@@ -50,7 +60,16 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 		{
 			super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
-			bindTexture(TEXTURE_GATE);
+			if (textureTime == -1 || textureTime < getWorld().getTotalWorldTime())
+			{
+				textureTime = getNextTextureTime();
+				if (++textureIndex >= TEXTURES_GATE.length)
+				{
+					textureIndex = 0;
+				}
+			}
+			bindTexture(TEXTURES_GATE[textureIndex]);
+
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(x, y, z);
 			GlStateManager.disableLighting();
@@ -69,5 +88,11 @@ public class RendererUnderworldGate extends TileEntitySpecialRenderer<TileEntity
 			GlStateManager.enableLighting();
 			GlStateManager.popMatrix();
 		}
+	}
+
+	private long getNextTextureTime()
+	{
+		long nextTime = getWorld().getTotalWorldTime() + 2;
+		return nextTime > MAX_TIME ? 0 : nextTime;
 	}
 }
