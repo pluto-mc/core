@@ -7,9 +7,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeHellDecorator;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * plutomc_core
  * Copyright (C) 2017  Kevin Boxhoorn
@@ -45,18 +42,14 @@ public class BiomeRottingFields extends BaseBiome
 	}
 
 	@Override
-	public Set<BiomeDictionary.Type> getTypesAsSet()
+	public BiomeDictionary.Type[] getTypes()
 	{
-		Set<BiomeDictionary.Type> types = new HashSet<BiomeDictionary.Type>();
-		types.add(BiomeDictionary.Type.WET);
-		types.add(BiomeDictionary.Type.SPOOKY);
-		types.add(BiomeDictionary.Type.DEAD);
-		return types;
+		return new BiomeDictionary.Type[] { BiomeDictionary.Type.WET, BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.DEAD };
 	}
 
 	@Override
 	public boolean isSpawnBiome()
 	{
-		return false;
+		return true;
 	}
 }

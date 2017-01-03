@@ -22,21 +22,27 @@ import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
  */
 public class ContextUnderworld extends InitNoiseGensEvent.Context
 {
-	private NoiseGeneratorOctaves boneBlocks;
+	private NoiseGeneratorOctaves perlin2;
 
-	public ContextUnderworld(NoiseGeneratorOctaves lperlin1, NoiseGeneratorOctaves lperlin2, NoiseGeneratorOctaves perlin, NoiseGeneratorOctaves scale, NoiseGeneratorOctaves depth, NoiseGeneratorOctaves boneBlocks)
+	public ContextUnderworld(NoiseGeneratorOctaves lperlin1, NoiseGeneratorOctaves lperlin2, NoiseGeneratorOctaves perlin, NoiseGeneratorOctaves perlin2, NoiseGeneratorOctaves scale, NoiseGeneratorOctaves depth)
 	{
 		super(lperlin1, lperlin2, perlin, scale, depth);
-		this.boneBlocks = boneBlocks;
+		this.perlin2 = perlin2;
 	}
 
-	public NoiseGeneratorOctaves getBoneBlocks()
+	@Override
+	public InitNoiseGensEvent.Context clone()
 	{
-		return boneBlocks;
+		return new ContextUnderworld(getLPerlin1(), getLPerlin2(), getPerlin(), getPerlin2(), getScale(), getDepth());
 	}
 
-	public void setBoneBlocks(NoiseGeneratorOctaves boneBlocks)
+	public NoiseGeneratorOctaves getPerlin2()
 	{
-		this.boneBlocks = boneBlocks;
+		return perlin2;
+	}
+
+	public void setPerlin2(NoiseGeneratorOctaves perlin2)
+	{
+		this.perlin2 = perlin2;
 	}
 }

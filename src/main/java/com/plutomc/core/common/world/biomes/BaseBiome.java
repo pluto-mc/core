@@ -3,8 +3,6 @@ package com.plutomc.core.common.world.biomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.Set;
-
 /**
  * plutomc_core
  * Copyright (C) 2017  Kevin Boxhoorn
@@ -29,12 +27,7 @@ public abstract class BaseBiome extends Biome
 		super(properties);
 	}
 
-	public abstract Set<BiomeDictionary.Type> getTypesAsSet();
-
-	public BiomeDictionary.Type[] getTypes()
-	{
-		return (BiomeDictionary.Type[]) getTypesAsSet().toArray();
-	}
+	public abstract BiomeDictionary.Type[] getTypes();
 
 	public abstract boolean isSpawnBiome();
 }

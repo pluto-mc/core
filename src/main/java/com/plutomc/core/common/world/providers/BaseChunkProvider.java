@@ -52,7 +52,7 @@ public abstract class BaseChunkProvider implements IChunkGenerator
 	protected double[] lperlinBuffer2;
 	protected double[] perlinBuffer;
 	protected double[] scaleBuffer;
-	protected double[] depthBuffer;
+	protected double[] depthBuffer = new double[256];
 	protected double[] noiseField;
 
 	public BaseChunkProvider(World world, boolean generateStructures)

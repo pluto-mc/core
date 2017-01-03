@@ -34,6 +34,8 @@ public class BiomeRegistry
 
 	public static void register(BaseBiome biome)
 	{
+		// TODO: Create biome IDs dynamically.
+		Biome.registerBiome(99, biome.getBiomeName(), biome);
 		if (biome.isSpawnBiome())
 		{
 			BiomeManager.addSpawnBiome(biome);

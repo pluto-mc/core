@@ -38,10 +38,11 @@ import javax.annotation.Nullable;
  */
 public class ChunkProviderUnderworld extends BaseChunkProvider
 {
-	private static final IBlockState STATE_AIR = Blocks.AIR.getDefaultState();
-	private static final IBlockState STATE_BEDROCK = Blocks.BEDROCK.getDefaultState();
-	private static final IBlockState STATE_BONE_BLOCK = Blocks.BONE_BLOCK.getDefaultState();
-	private static final IBlockState STATE_SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
+	private static final IBlockState AIR = Blocks.AIR.getDefaultState();
+	private static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
+	private static final IBlockState BONE_BLOCK = Blocks.BONE_BLOCK.getDefaultState();
+	private static final IBlockState SOUL_SAND = Blocks.SOUL_SAND.getDefaultState();
+	private static final IBlockState WATER = Blocks.WATER.getDefaultState();
 
 	private NoiseGeneratorOctaves boneBlockNoise;
 	private double[] boneBlockBuffer = new double[256];
@@ -53,10 +54,10 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 
 		this.boneBlockNoise = new NoiseGeneratorOctaves(rand, 8);
 
-		ContextUnderworld context = new ContextUnderworld(lperlinNoise1, lperlinNoise2, perlinNoise, scaleNoise, depthNoise, boneBlockNoise);
+		ContextUnderworld context = new ContextUnderworld(lperlinNoise1, lperlinNoise2, perlinNoise, boneBlockNoise, scaleNoise, depthNoise);
 		context = TerrainGen.getModdedNoiseGenerators(world, rand, context);
 		getModdedNoiseGenerators(context);
-		this.boneBlockNoise = context.getBoneBlocks();
+		this.boneBlockNoise = context.getPerlin2();
 	}
 
 	@Override
@@ -88,11 +89,12 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 		perlinBuffer = perlinNoise.generateNoiseOctaves(perlinBuffer, x, y, z, i, j, k, 8.555150000000001D, 34.2206D, 8.555150000000001D);
 		lperlinBuffer1 = lperlinNoise1.generateNoiseOctaves(lperlinBuffer1, x, y, z, i, j, k, d0, d1, d0);
 		lperlinBuffer2 = lperlinNoise2.generateNoiseOctaves(lperlinBuffer2, x, y, z, i, j, k, d0, d1, d0);
-		double[] yBuffer = new double[j];
+		double[] bufferY = new double[j];
+		int i1 = 0;
 
 		for (int j1 = 0; j1 < j; j1++)
 		{
-			yBuffer[j1] = Math.cos((double) j1 * Math.PI * 6D / (double) j) * 2D;
+			bufferY[j1] = Math.cos((double) j1 * Math.PI * 6D / (double) j) * 2D;
 			double d2 = (double) j1;
 
 			if (j1 > j / 2)
@@ -103,20 +105,20 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 			if (d2 < 4D)
 			{
 				d2 = 4D - d2;
-				yBuffer[j1] -= d2 * d2 * d2 * 10D;
+				bufferY[j1] -= d2 * d2 * d2 * 10D;
 			}
 		}
 
-		for (int l = 0; l < i; ++l)
+		for (int i2 = 0; i2 < i; i2++)
 		{
-			for (int i1 = 0; i1 < k; ++i1)
+			for (int k1 = 0; k1 < k; k1++)
 			{
-				for (int k1 = 0; k1 < j; ++k1)
+				for (int j1 = 0; j1 < j; j1++)
 				{
-					double d4 = yBuffer[k1];
-					double d5 = lperlinBuffer1[i] / 512D;
-					double d6 = lperlinBuffer2[i] / 512D;
-					double d7 = (perlinBuffer[i] / 10D + 1D) / 2D;
+					double d4 = bufferY[j1];
+					double d5 = lperlinBuffer1[i1] / 512D;
+					double d6 = lperlinBuffer2[i1] / 512D;
+					double d7 = (perlinBuffer[i1] / 10D + 1D) / 2D;
 					double d8;
 
 					if (d7 < 0D)
@@ -134,21 +136,21 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 
 					d8 = d8 - d4;
 
-					if (k1 > j - 4)
+					if (j1 > j - 4)
 					{
-						double d9 = (double) ((float) (k1 - (j - 4)) / 3F);
+						double d9 = (double) ((float) (j1 - (j - 4)) / 3F);
 						d8 = d8 * (1D - d9) + -10D * d9;
 					}
 
-					if ((double) k1 < 0D)
+					if ((double) j1 < 0D)
 					{
-						double d10 = (0D - (double) k1) / 4D;
+						double d10 = (0D - (double) j1) / 4D;
 						d10 = MathHelper.clamp(d10, 0D, 1D);
 						d8 = d8 * (1D - d10) + -10D * d10;
 					}
 
-					noiseField[i] = d8;
-					++i;
+					noiseField[i1] = d8;
+					i1++;
 				}
 			}
 		}
@@ -198,12 +200,12 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 
 								if (l1 * 8 + i2 < j)
 								{
-									state = STATE_BONE_BLOCK;
+									state = BONE_BLOCK;
 								}
 
 								if (d15 > 0.0D)
 								{
-									state = STATE_SOUL_SAND;
+									state = SOUL_SAND;
 								}
 
 								int l2 = j2 + j1 * 4;
@@ -233,73 +235,78 @@ public class ChunkProviderUnderworld extends BaseChunkProvider
 		int j = world.getSeaLevel() + 1;
 		double d0 = 0.03125D;
 		boneBlockBuffer = boneBlockNoise.generateNoiseOctaves(boneBlockBuffer, x * 16, z * 16, 0, 16, 16, 1, d0, d0, 1);
-		depthBuffer = depthNoise.generateNoiseOctaves(depthBuffer, x * 16, z * 16, 0, 16, 16, 1, d0 * 2D, d0 * 2D, d0 * 2D);
+		depthBuffer = depthNoise.generateNoiseOctaves(depthBuffer, x * 16, z * 16, 0, 16, 16, 1, d0 * 2, d0 * 2, d0 * 2);
 
 		for (int i = 0; i < 16; i++)
 		{
 			for (int k = 0; k < 16; k++)
 			{
-				boolean flag = boneBlockBuffer[j + k * 16] + rand.nextDouble() * 0.2D > 0D;
-				int l = (int) (depthBuffer[j + k * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
-				int j1 = -1;
-				IBlockState state1 = STATE_SOUL_SAND;
-				IBlockState state2 = STATE_SOUL_SAND;
+				boolean flag = boneBlockBuffer[i + k * 16] + rand.nextDouble() * 0.2D > 0.0D;
+				int l = (int)(depthBuffer[i + k * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+				int i1 = -1;
+				IBlockState state1 = SOUL_SAND;
+				IBlockState state2 = SOUL_SAND;
 
-				for (int i1 = 127; i1 >= 0; i1--)
+				for (int j1 = 127; j1 >= 0; j1--)
 				{
-					if (i1 < 127 - rand.nextInt(5) && i1 > rand.nextInt(5))
+					if (j1 < 127 - this.rand.nextInt(5) && j1 > this.rand.nextInt(5))
 					{
-						IBlockState state3 = primer.getBlockState(k, i1, j);
+						IBlockState state3 = primer.getBlockState(k, j1, i);
 
 						if (state3.getBlock() != null && state3.getMaterial() != Material.AIR)
 						{
-							if (state3.getBlock() == Blocks.NETHERRACK)
+							if (state3.getBlock() == Blocks.SOUL_SAND)
 							{
-								if (j1 == -1)
+								if (i1 == -1)
 								{
 									if (l <= 0)
 									{
-										state1 = STATE_AIR;
-										state2 = STATE_SOUL_SAND;
+										state1 = AIR;
+										state2 = SOUL_SAND;
 									}
-									else if (i1 >= i - 4 && i1 <= i + 1)
+									else if (j1 >= j - 4 && j1 <= j + 1)
 									{
-										state1 = STATE_SOUL_SAND;
-										state2 = STATE_SOUL_SAND;
+										state1 = SOUL_SAND;
+										state2 = SOUL_SAND;
 
 										if (flag)
 										{
-											state1 = STATE_BONE_BLOCK;
-											state2 = STATE_BONE_BLOCK;
+											state1 = BONE_BLOCK;
+											state2 = BONE_BLOCK;
 										}
 									}
 
-									j1 = l;
-
-									if (i1 >= i - 1)
+									if (j1 < j && (state1 == null || state1.getMaterial() == Material.AIR))
 									{
-										primer.setBlockState(k, i1, j, state1);
+										state1 = WATER;
+									}
+
+									i1 = l;
+
+									if (j1 >= j - 1)
+									{
+										primer.setBlockState(k, j1, i, state1);
 									}
 									else
 									{
-										primer.setBlockState(k, i1, j, state2);
+										primer.setBlockState(k, j1, i, state2);
 									}
 								}
-								else if (j1 > 0)
+								else if (i1 > 0)
 								{
-									j1--;
-									primer.setBlockState(k, i1, j, state2);
+									i1--;
+									primer.setBlockState(k, j1, i, state2);
 								}
 							}
 						}
 						else
 						{
-							j1 = -1;
+							i1 = -1;
 						}
 					}
 					else
 					{
-						primer.setBlockState(k, i1, j, STATE_BEDROCK);
+						primer.setBlockState(k, j1, i, BEDROCK);
 					}
 				}
 			}

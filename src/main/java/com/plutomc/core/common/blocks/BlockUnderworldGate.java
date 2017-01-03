@@ -3,15 +3,20 @@ package com.plutomc.core.common.blocks;
 import com.plutomc.core.common.blocks.properties.PredicateAxisOrientation;
 import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
 import com.plutomc.core.init.BlockRegistry;
+import com.plutomc.core.init.DimensionRegistry;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -106,6 +111,8 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	private static final AxisAlignedBB Z_AABB = new AxisAlignedBB(7d * PIXEL_SIZE, 0d, 1d, 9d * PIXEL_SIZE, 1d, 0d);
 	private static final AxisAlignedBB X_RENDER_AABB = new AxisAlignedBB(0d, 0d, 9d * PIXEL_SIZE, 2d, 3d, 7d * PIXEL_SIZE);
 	private static final AxisAlignedBB Z_RENDER_AABB = new AxisAlignedBB(7d * PIXEL_SIZE, 0d, 2d, 9d * PIXEL_SIZE, 3d, 0d);
+
+	private static final int DIMENSION = DimensionRegistry.UNDERWORLD.getId();
 
 	public BlockUnderworldGate()
 	{
@@ -213,7 +220,32 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
-		// TODO: Teleport to Underworld dimension.
+		if (!worldIn.isRemote && !entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
+		{
+			int toDimension;
+			if (entityIn.dimension == 0)
+			{
+				toDimension = DIMENSION;
+			}
+			else if (entityIn.dimension == DIMENSION)
+			{
+				toDimension = 0;
+			}
+			else
+			{
+				return;
+			}
+
+			if (entityIn instanceof EntityPlayerMP)
+			{
+				// TODO: Create custom Teleporter.
+				entityIn.changeDimension(toDimension);
+			}
+			else
+			{
+				// TODO: Teleport other entities to Underworld.
+			}
+		}
 	}
 
 	public static void create(World world, BlockPos pos, EnumFacing.Axis axis)
