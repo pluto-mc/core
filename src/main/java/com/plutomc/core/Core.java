@@ -58,6 +58,8 @@ public class Core
 	public void init(FMLInitializationEvent event)
 	{
 		WorldRegistry.init();
+		BiomeRegistry.init();
+		DimensionRegistry.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		proxy.init();

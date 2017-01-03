@@ -1,4 +1,4 @@
-package com.plutomc.core.common.world;
+package com.plutomc.core.common.world.gen;
 
 import com.plutomc.core.common.data.IDataOre;
 import com.plutomc.core.init.WorldRegistry;

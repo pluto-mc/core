@@ -2,8 +2,8 @@ package com.plutomc.core.init;
 
 import com.plutomc.core.common.blocks.BaseBlock;
 import com.plutomc.core.common.data.IDataOre;
-import com.plutomc.core.common.world.GeneratorNecromanteion;
-import com.plutomc.core.common.world.GeneratorOre;
+import com.plutomc.core.common.world.gen.GeneratorNecromanteion;
+import com.plutomc.core.common.world.gen.GeneratorOre;
 import com.plutomc.core.common.world.structures.IWorldStructure;
 import com.plutomc.core.common.world.structures.StructureUnderworldGate;
 import net.minecraftforge.fml.common.registry.GameRegistry;

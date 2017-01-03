@@ -1,4 +1,4 @@
-package com.plutomc.core.common.world;
+package com.plutomc.core.common.world.gen;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;

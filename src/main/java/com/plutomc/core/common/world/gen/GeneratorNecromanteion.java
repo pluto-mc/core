@@ -1,4 +1,4 @@
-package com.plutomc.core.common.world;
+package com.plutomc.core.common.world.gen;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
