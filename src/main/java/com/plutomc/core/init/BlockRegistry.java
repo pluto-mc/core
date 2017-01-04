@@ -42,6 +42,7 @@ public class BlockRegistry
 		ALLOY_FURNACE_LIT("alloy_furnace_lit", null, null, Material.ROCK, null),
 		CROCOITE("crocoite", null, CreativeTabs.MATERIALS, Material.GLASS, null),
 		QUERN_STONE("quern_stone", null, CreativeTabs.DECORATIONS, Material.ROCK, TileEntityQuernStone.class),
+		ROTTEN_FLESH_BLOCK("rotten_flesh_block", null, CreativeTabs.BUILDING_BLOCKS, Materials.FLESH, null),
 		UNDERWORLD_GATE("underworld_gate", null, null, Material.PORTAL, TileEntityUnderworldGate.class),
 
 		BASALT("basalt", null, CreativeTabs.BUILDING_BLOCKS, Material.ROCK, null),
@@ -138,6 +139,7 @@ public class BlockRegistry
 	public static final BaseBlock ALLOY_FURNACE_LIT = new BlockAlloyFurnace(true);
 	public static final BaseBlock CROCOITE = new BlockCrocoite();
 	public static final BaseBlock QUERN_STONE = new BlockQuernStone();
+	public static final BaseBlock ROTTEN_FLESH_BLOCK = new BlockRottenFlesh();
 	public static final BaseBlock UNDERWORLD_GATE = new BlockUnderworldGate();
 	public static final BaseBlock BASALT = new BlockBasalt(Data.BASALT);
 	public static final BaseBlock BASALT_STAIRS = new BlockStairs(Data.BASALT_STAIRS, BASALT);
@@ -157,6 +159,7 @@ public class BlockRegistry
 	private static final BaseItemBlock ITEM_ALLOY_FURNACE_LIT = new BaseItemBlock(ALLOY_FURNACE_LIT);
 	private static final BaseItemBlock ITEM_CROCOITE = new BaseItemBlock(CROCOITE);
 	private static final BaseItemBlock ITEM_QUERN_STONE = new BaseItemBlock(QUERN_STONE);
+	private static final BaseItemBlock ITEM_ROTTEN_FLESH_BLOCK = new BaseItemBlock(ROTTEN_FLESH_BLOCK);
 	private static final BaseItemBlock ITEM_UNDERWORLD_GATE = new BaseItemBlock(UNDERWORLD_GATE);
 	private static final BaseItemBlock ITEM_BASALT = new BaseItemBlock(BASALT);
 	private static final BaseItemBlock ITEM_BASALT_STAIRS = new BaseItemBlock(BASALT_STAIRS);
@@ -180,6 +183,7 @@ public class BlockRegistry
 		register(ITEM_ALLOY_FURNACE_LIT);
 		register(ITEM_CROCOITE);
 		register(ITEM_QUERN_STONE);
+		register(ITEM_ROTTEN_FLESH_BLOCK);
 		register(ITEM_UNDERWORLD_GATE);
 		register(ITEM_BASALT);
 		register(ITEM_BASALT_STAIRS);
@@ -221,6 +225,7 @@ public class BlockRegistry
 		registerRender(ITEM_ALLOY_FURNACE_LIT);
 		registerRender(ITEM_CROCOITE);
 		registerRender(ITEM_QUERN_STONE);
+		registerRender(ITEM_ROTTEN_FLESH_BLOCK);
 		registerRender(ITEM_COPPER_BLOCK);
 		registerRender(ITEM_BASALT);
 		registerRender(ITEM_BASALT_STAIRS);

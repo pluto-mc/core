@@ -69,6 +69,7 @@ item.steel_leggings.name=Steel Leggings
 tile.alloy_furnace.name=Alloy Furnace
 tile.crocoite.name=Crocoite
 tile.quern_stone.name=Quern Stone
+tile.rotten_flesh_block.name=Block of Rotten Flesh
 
 tile.basalt.name=Basalt
 tile.stairs_basalt.name=Basalt Stairs
