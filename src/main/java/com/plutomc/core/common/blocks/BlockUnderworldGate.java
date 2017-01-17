@@ -2,6 +2,7 @@ package com.plutomc.core.common.blocks;
 
 import com.plutomc.core.common.blocks.properties.PredicateAxisOrientation;
 import com.plutomc.core.common.tileentities.TileEntityUnderworldGate;
+import com.plutomc.core.common.world.TeleporterUnderworld;
 import com.plutomc.core.init.BlockRegistry;
 import com.plutomc.core.init.DimensionRegistry;
 import net.minecraft.block.ITileEntityProvider;
@@ -12,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.server.management.PlayerList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -22,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -236,14 +239,17 @@ public class BlockUnderworldGate extends BaseBlock implements ITileEntityProvide
 				return;
 			}
 
+			PlayerList players = worldIn.getMinecraftServer().getPlayerList();
+			WorldServer fromWorldServer = worldIn.getMinecraftServer().worldServerForDimension(entityIn.dimension);
+			WorldServer toWorldServer = worldIn.getMinecraftServer().worldServerForDimension(toDimension);
+			TeleporterUnderworld teleporter = new TeleporterUnderworld(fromWorldServer, toWorldServer, pos);
 			if (entityIn instanceof EntityPlayerMP)
 			{
-				// TODO: Create custom Teleporter.
-				entityIn.changeDimension(toDimension);
+				players.transferPlayerToDimension((EntityPlayerMP) entityIn, toDimension, teleporter);
 			}
 			else
 			{
-				// TODO: Teleport other entities to Underworld.
+				players.transferEntityToWorld(entityIn, entityIn.dimension, fromWorldServer, toWorldServer, teleporter);
 			}
 		}
 	}

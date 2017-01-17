@@ -31,10 +31,14 @@ public interface IWorldStructure
 
 	boolean containsState(IBlockState state);
 
-	void generate(World world, BlockPos originPos, EnumFacing direction);
+	boolean generate(World world, BlockPos originPos, EnumFacing direction, int xMod, int zMod);
 
 	@Nullable
 	BlockPosDirection getOriginPos(World world, BlockPos pos);
+
+	int getWidth();
+
+	int getHeight();
 
 	boolean isComplete(World world, BlockPos originPos, EnumFacing direction);
 }

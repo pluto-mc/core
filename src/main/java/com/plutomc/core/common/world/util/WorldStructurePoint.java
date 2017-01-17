@@ -29,7 +29,7 @@ public class WorldStructurePoint
 
 	public WorldStructurePoint(int x, int y, EnumFacing direction)
 	{
-		this(x, y, 0, direction);
+		this(x, y, x, direction);
 		this.is2D = true;
 	}
 
@@ -60,6 +60,7 @@ public class WorldStructurePoint
 
 	public int getZ()
 	{
+		if (is2D) return x;
 		return z;
 	}
 
@@ -80,7 +81,7 @@ public class WorldStructurePoint
 
 	public void setZ(int z)
 	{
-		if (is2D) return;
+		if (is2D) this.x = z;
 		this.z = z;
 	}
 
@@ -106,11 +107,16 @@ public class WorldStructurePoint
 
 	public BlockPos addToPos(BlockPos pos)
 	{
-		return pos.east(isAxisZ() ? 0 : getX()).down(getY()).north(isAxisZ() ? getX() : 0);
+		return pos.east(isAxisZ() ? 0 : getX()).down(getY()).north(isAxisZ() ? getZ() : 0);
+	}
+
+	public BlockPos addToPos(BlockPos pos, int xMod, int zMod)
+	{
+		return pos.east(isAxisZ() ? 0 : (getX() - 1) * xMod).down(getY()).north(isAxisZ() ? (getZ() - 1) * xMod : 0);
 	}
 
 	public BlockPos subtractFromPos(BlockPos pos)
 	{
-		return pos.west(isAxisZ() ? 0 : getX()).up(getY()).south(isAxisZ() ? getX() : 0);
+		return pos.west(isAxisZ() ? 0 : getX()).up(getY()).south(isAxisZ() ? getZ() : 0);
 	}
 }

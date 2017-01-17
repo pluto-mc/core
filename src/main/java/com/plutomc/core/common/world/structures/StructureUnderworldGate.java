@@ -55,7 +55,7 @@ public class StructureUnderworldGate implements IWorldStructure
 			{ 9, 5, 6,  6,  5, 9 }
 	};
 
-	private static final EnumFacing[] AXIS_HORIZONTALS = { EnumFacing.NORTH, EnumFacing.EAST };
+	public static final EnumFacing[] AXIS_HORIZONTALS = { EnumFacing.NORTH, EnumFacing.EAST };
 
 	@Override
 	public boolean canGenerate(World world, BlockPos originPos, EnumFacing direction)
@@ -70,13 +70,43 @@ public class StructureUnderworldGate implements IWorldStructure
 		{
 			state = state.withProperty(BlockStairs.FACING, state.getValue(BlockStairs.FACING).rotateY().getOpposite());
 		}
-		return Arrays.asList(MAP_STATES).contains(state);
+		return Arrays.asList(MAP_STATES).contains(state) || state.getBlock() == BlockRegistry.UNDERWORLD_GATE;
 	}
 
 	@Override
-	public void generate(World world, BlockPos originPos, EnumFacing direction)
+	public boolean generate(World world, BlockPos originPos, EnumFacing direction, int xMod, int zMod)
 	{
-		// TODO: Implement method.
+		if (getHeight() > 0 && getWidth() > 0 && direction.getAxis().isHorizontal())
+		{
+			for (int y = 0; y < getHeight(); y++)
+			{
+				for (int x = 0; x < getWidth(); x++)
+				{
+					int val = MAP[y][x];
+					if (val > MAP_STATES.length)
+					{
+						continue;
+					}
+
+					if (val != 9) {
+						WorldStructurePoint point = new WorldStructurePoint(x, y, direction);
+						BlockPos pos = point.addToPos(originPos, xMod, zMod);
+						IBlockState state = getStateFromPoint(point);
+						if (isCrocoiteBlock(x, y))
+						{
+							state = Blocks.AIR.getDefaultState();
+						}
+
+						world.setBlockState(pos, state, 2);
+						world.notifyNeighborsOfStateChange(pos, world.getBlockState(pos).getBlock(), false);
+					}
+				}
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Nullable
@@ -103,13 +133,25 @@ public class StructureUnderworldGate implements IWorldStructure
 	}
 
 	@Override
+	public int getWidth()
+	{
+		return getHeight() > 0 ? MAP[0].length : 0;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return MAP.length;
+	}
+
+	@Override
 	public boolean isComplete(World world, BlockPos originPos, EnumFacing direction)
 	{
-		if (MAP.length > 0 && MAP[0].length > 0 && direction.getAxis().isHorizontal())
+		if (getHeight() > 0 && getWidth() > 0 && direction.getAxis().isHorizontal())
 		{
-			for (int y = 0; y < MAP.length; y++)
+			for (int y = 0; y < getHeight(); y++)
 			{
-				for (int x = 0; x < MAP[0].length; x++)
+				for (int x = 0; x < getWidth(); x++)
 				{
 					int val = MAP[y][x];
 					if (val > MAP_STATES.length)
