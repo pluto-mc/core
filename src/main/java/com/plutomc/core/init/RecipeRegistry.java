@@ -48,6 +48,10 @@ public class RecipeRegistry
 				"   ", "C C", "CCC", 'C', Items.CLAY_BALL);
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ALLOY_FURNACE),
 				"SSS", "FCF", "SSS", 'S', Blocks.COBBLESTONE, 'F', Blocks.FURNACE, 'C', ItemRegistry.CRUCIBLE);
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.ROTTEN_FLESH_BLOCK),
+				"FF", "FF", 'F', Items.ROTTEN_FLESH);
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.ROTTEN_FLESH, 4),
+				BlockRegistry.ROTTEN_FLESH_BLOCK);
 
 		// Basalt
 		GameRegistry.addRecipe(new ItemStack(BlockRegistry.BASALT_BRICK, 4),
