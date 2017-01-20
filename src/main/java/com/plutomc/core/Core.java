@@ -50,6 +50,7 @@ public class Core
 		ItemRegistry.preInit();
 		ArmorRegistry.preInit();
 		ToolRegistry.preInit();
+		MobRegistry.preInit();
 
 		proxy.preInit();
 	}

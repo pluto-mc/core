@@ -1,12 +1,11 @@
-package com.plutomc.core.client;
+package com.plutomc.core.common.data;
 
-import com.plutomc.core.client.init.SoundRegistry;
-import com.plutomc.core.common.ICommonProxy;
-import com.plutomc.core.init.*;
+import com.plutomc.core.common.entities.mobs.BaseAnimal;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * plutomc_core
- * Copyright (C) 2016  Kevin Boxhoorn
+ * Copyright (C) 2017  Kevin Boxhoorn
  *
  * plutomc_core is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,28 +20,17 @@ import com.plutomc.core.init.*;
  * You should have received a copy of the GNU General Public License
  * along with plutomc_core.  If not, see <http://www.gnu.org/licenses/>.
  */
-public class ClientProxy implements ICommonProxy
+public interface IDataEntity
 {
-	@Override
-	public void preInit()
-	{
-		BlockRegistry.registerRenders();
-		ItemRegistry.registerRenders();
-		ArmorRegistry.registerRenders();
-		ToolRegistry.registerRenders();
-		MobRegistry.registerRenders();
-	}
+	int getID();
 
-	@Override
-	public void init()
-	{
-		RecipeRegistry.init();
-		SoundRegistry.init();
-	}
+	ResourceLocation getRegistryLocation();
 
-	@Override
-	public void postInit()
-	{
+	Class<? extends BaseAnimal> getEntityClass();
 
-	}
+	String getEntityName();
+
+	int getEggPrimary();
+
+	int getEggSecondary();
 }

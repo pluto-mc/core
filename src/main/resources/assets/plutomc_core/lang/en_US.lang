@@ -2,6 +2,9 @@ container.alloy_furnace.name=Alloy Furnace
 container.quern_stone.name=Quern Stone
 
 
+entity.crested_crow.name=Crested Crow
+
+
 item.ash.name=Ash
 item.crocoite_dust.name=Crocoite Dust
 item.crucible.name=Crucible
